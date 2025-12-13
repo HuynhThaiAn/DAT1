@@ -1,0 +1,109 @@
+:root{
+  --sidebar-w: 260px;   /* phải khớp sidebar */
+  --header-h: 78px;
+  --bg: #f6f8fc;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: rgba(15, 23, 42, 0.10);
+  --shadow: 0 10px 24px rgba(0,0,0,.08);
+}
+
+html, body{
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  background: var(--bg);
+}
+
+/* App layout */
+.app{
+  min-height: 100vh;
+}
+
+/* Main content: chừa chỗ cho sidebar + header fixed */
+main.main-content{
+  margin-left: var(--sidebar-w);
+  width: calc(100% - var(--sidebar-w));
+  padding: 24px;
+  padding-top: calc(var(--header-h) + 20px);
+}
+
+/* Page wrapper */
+.page{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-title{
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: .2px;
+  margin: 8px 0 18px;
+}
+
+/* Stats grid responsive */
+.stats-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.stat-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 16px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-title{
+  font-weight: 700;
+  color: rgba(17,24,39,.75);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.stat-value{
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+/* Màu accent (nhìn xịn hơn bootstrap bg-*) */
+.stat-secondary::before,
+.stat-success::before,
+.stat-warning::before,
+.stat-danger::before{
+  content:"";
+  position:absolute;
+  left:0; top:0; bottom:0;
+  width: 6px;
+  border-radius: 16px 0 0 16px;
+}
+
+.stat-secondary::before{ background: #64748b; }
+.stat-success::before{ background: #22c55e; }
+.stat-warning::before{ background: #f59e0b; }
+.stat-danger::before{ background: #ef4444; }
+
+/* Responsive */
+@media (max-width: 1200px){
+  .stats-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 576px){
+  .stats-grid{ grid-template-columns: 1fr; }
+}
+
+
+@media (max-width: 992px){
+  main.main-content{
+    margin-left: 0;
+    width: 100%;
+  }
+}
