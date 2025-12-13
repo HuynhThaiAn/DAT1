@@ -1,3 +1,9 @@
+<%-- 
+    Document   : error
+    Created on : Aug 3, 2025, 5:02:04 PM
+    Author     : Tai
+    Updated    : Modern TShop error page
+--%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>

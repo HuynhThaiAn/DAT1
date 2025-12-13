@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <%
     String selectedCartItemIds = (String) session.getAttribute("selectedCartItemIds");
-    // Nếu không có trong session, thử lấy từ request parameter
+    
     if (selectedCartItemIds == null || selectedCartItemIds.trim().isEmpty()) {
         selectedCartItemIds = request.getParameter("selectedCartItemIds");
     }
@@ -38,7 +38,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
         <style>
-            /* Token màu từ homepage */
+            
             :root {
                 --primary-500: #2563eb;
                 --primary-400: #3b82f6;
@@ -65,7 +65,7 @@
                 padding: 0;
             }
 
-            /* ====== WRAPPER CHÍNH ====== */
+            /* ====== WRAPPER====== */
             .checkout-wrapper {
                 width: min(1240px, 94%);
                 margin: 28px auto 40px;
@@ -100,7 +100,7 @@
                 margin-bottom: 20px;
             }
 
-            /* Layout 2 cột: trái info, phải summary */
+           
             .checkout-layout {
                 display: grid;
                 grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
@@ -143,7 +143,7 @@
                 background: var(--primary-500);
             }
 
-            /* ====== CART TABLE TRONG CHECKOUT ====== */
+            /* ====== CART TABLE ====== */
             .checkout-wrapper .cart-table {
                 background: var(--white);
                 border-radius: var(--radius-sm);
@@ -263,7 +263,7 @@
                 color: var(--slate-900);
             }
 
-            /* ====== ORDER SUMMARY (BÊN PHẢI) ====== */
+            /* ====== ORDER SUMMARY====== */
             .info-section {
                 padding: 18px 18px 20px;
                 background: var(--white);
@@ -446,17 +446,7 @@
                 }
             %>
 
-<!--             Apply voucher 
-            <form action="${pageContext.request.contextPath}/VoucherOrder" class="mb-3">
-                <input type="hidden" name="selectedCartItemIds"
-                       value="<%= selectedCartItemIds != null ? selectedCartItemIds
-                                : request.getParameter("selectedCartItemIds") != null
-                                    ? request.getParameter("selectedCartItemIds")
-                                    : ""%>">
-                <button type="submit" class="btn-apply-voucher">
-                    <i class="fa-solid fa-ticket"></i> Apply Voucher
-                </button>
-            </form>-->
+
 
             <form action="${pageContext.request.contextPath}/CheckoutServlet" method="post">
                 <input type="hidden" name="selectedCartItemIds"

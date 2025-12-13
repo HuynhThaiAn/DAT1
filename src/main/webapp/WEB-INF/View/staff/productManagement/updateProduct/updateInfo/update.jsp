@@ -1,3 +1,8 @@
+<%-- 
+    Document   : update
+    Created on : Jun 22, 2025, 2:00:49 PM
+    Author     : HP - Gia Khiêm
+--%>
 
 <%@page import="model.Brand"%>
 <%@page import="model.Category"%>

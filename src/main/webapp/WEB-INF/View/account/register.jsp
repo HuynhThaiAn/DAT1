@@ -259,9 +259,9 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-            // Wait for DOM to be fully loaded
+          
             document.addEventListener('DOMContentLoaded', function () {
-                // Password strength indicator
+               
                 const passwordInput = document.getElementById('password');
                 const strengthBar = document.getElementById('strengthBar');
 
@@ -281,12 +281,12 @@
                         if (password.match(/[^a-zA-Z0-9]/))
                             strength++;
 
-                        // Reset classes
+                      
                         strengthBar.className = 'password-strength-bar';
 
-                        // Add appropriate strength class
+                     
                         if (password.length === 0) {
-                            // No password, no bar
+                          
                         } else if (strength <= 2) {
                             strengthBar.classList.add('strength-weak');
                         } else if (strength <= 4) {
@@ -297,7 +297,7 @@
                     });
                 }
 
-                // Form validation
+            
                 const form = document.querySelector('form');
                 if (form) {
                     form.addEventListener('submit', function (e) {
@@ -314,7 +314,7 @@
                     });
                 }
 
-                // Real-time password match validation
+             
                 const confirmPasswordInput = document.getElementById('confirmPassword');
                 if (confirmPasswordInput && passwordInput) {
                     confirmPasswordInput.addEventListener('input', function () {

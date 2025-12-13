@@ -1,4 +1,3 @@
-
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,7 +13,7 @@
 
     </head>
     <body>
-        <!-- Khung ảnh cố định không bị nhảy -->
+     
         <div style="
              width: 100%;
              height: 300px;
@@ -91,7 +90,7 @@
 
             if (detailGroup.classList.contains("hidden")) {
                 detailGroup.classList.remove("hidden");
-                arrowIcon.innerText = "▲"; // hoặc dùng ▾ nếu thích
+                arrowIcon.innerText = "▲";
             } else {
                 detailGroup.classList.add("hidden");
                 arrowIcon.innerText = "▼";

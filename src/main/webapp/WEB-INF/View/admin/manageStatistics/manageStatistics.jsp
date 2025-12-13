@@ -90,12 +90,12 @@
                 <main class="main-content">
                     <h1>Manage Statistic</h1>
 
-                    <!-- Nút INVENTORY/REVENUE, không margin-bottom -->
+                    
                     <div class="text-end" style="margin-bottom:0;">
                         <a href="InventoryStatistic" class="btn btn-inventory me-2">INVENTORY</a>
                         <a href="RevenueStatistic" class="btn btn-revenue">REVENUE</a>
                     </div>
-                    <!-- Search form đúng chuẩn khoảng cách -->
+                   
                     <form class="search-form" action="ManageStatistic" method="get" autocomplete="off" style="margin-bottom:21.5px; margin-top:11px;">
                         <input type="text" class="form-control" name="keyword" placeholder="Search product..." />
                         <button type="submit" class="search-btn">Search</button>

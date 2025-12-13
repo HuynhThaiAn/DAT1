@@ -19,7 +19,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <style>
-            /* ===== Layout chung ===== */
+            
             body {
                 background: #f4f6fb;
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -28,7 +28,7 @@
 
             main.main-content {
                 flex: 1;
-                margin-left: 220px; /* khớp với sidebar */
+                margin-left: 220px; 
                 min-height: 100vh;
                 box-sizing: border-box;
                 padding: 24px 28px;
@@ -41,7 +41,7 @@
                 background: transparent;
             }
 
-            /* ===== Tiêu đề trang ===== */
+           
             h1 {
                 color: #111827;
                 margin-top: 4px;
@@ -57,7 +57,7 @@
                 margin-bottom: 18px;
             }
 
-            /* ===== Thanh trên: search + create ===== */
+            
             .top-bar {
                 display: flex;
                 justify-content: space-between;
@@ -67,7 +67,7 @@
                 flex-wrap: wrap;
             }
 
-            /* Nút "Create" bên phải */
+            
             button.create-btn {
                 background: linear-gradient(135deg, #22c55e, #16a34a);
                 color: #fff;
@@ -88,7 +88,7 @@
                 box-shadow: 0 6px 14px rgba(34, 197, 94, 0.35);
             }
 
-            /* ===== Form tìm kiếm ===== */
+            
             form.search-form {
                 display: flex;
                 gap: 10px;
@@ -145,7 +145,7 @@
                 box-shadow: 0 5px 12px rgba(37, 99, 235, 0.4);
             }
 
-            /* ===== Table danh sách ===== */
+           
             .table-wrapper {
                 margin-top: 8px;
             }
@@ -210,7 +210,7 @@
                 box-shadow: 0 4px 10px rgba(148, 163, 184, 0.35);
             }
 
-            /* ===== Cột action ===== */
+        
             td.action-col {
                 display: flex;
                 gap: 8px;
@@ -225,7 +225,7 @@
                 margin: 0;
             }
 
-            /* ===== Nút chi tiết / sửa / xóa ===== */
+            
             .btn-detail,
             .btn-edit,
             .btn-delete {

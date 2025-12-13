@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/sidebar-admin.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/supplierList5.css">
         <style>
-            /* 2 nút giống Manage Statistic */
+            
             .btn-inventory {
                 background: #22c55e;
                 color: #fff;
@@ -38,10 +38,10 @@
             }
             .btn-revenue:hover { background: #0bbdd8; }
 
-            /* Ẩn 2 nút nếu chưa dùng */
+           
             .btn-inventory, .btn-revenue { visibility: hidden; }
 
-            /* ====== TABLE STYLE MỚI ====== */
+            
             .stats-table-card {
                 background: #ffffff;
                 border-radius: 18px;

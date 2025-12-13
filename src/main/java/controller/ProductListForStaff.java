@@ -7,7 +7,6 @@ package controller;
 import dao.BrandDAO;
 import dao.CategoryDAO;
 import dao.ProductDAO;
-import dao.SupplierDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,7 +21,6 @@ import model.CategoryDetail;
 import model.CategoryDetailGroup;
 import model.Product;
 import model.ProductDetail;
-import model.Suppliers;
 
 @WebServlet(name = "ProductListForStaff", urlPatterns = {"/ProductListForStaff"})
 public class ProductListForStaff extends HttpServlet {
@@ -87,14 +85,12 @@ public class ProductListForStaff extends HttpServlet {
                 if (id != -1) {
                     ProductDAO proDAO = new ProductDAO();
                     CategoryDAO cateDAO = new CategoryDAO();
-                    SupplierDAO supDAO = new SupplierDAO();
                     BrandDAO brandDAO = new BrandDAO();
 
                     Product product = proDAO.getProductById(id);
                     List<ProductDetail> productDetailList = proDAO.getProductDetailById(id);
                     List<CategoryDetailGroup> categporyGroupList = cateDAO.getCategoryDetailGroupById(product.getCategoryId());
                     List<CategoryDetail> categporyDetailList = cateDAO.getCategoryDetailById(product.getCategoryId());
-                    List<Suppliers> supList = supDAO.getAllSuppliers();
                     List<Brand> brandList = brandDAO.getAllBrand();
 
                     List<Category> categoryList = cateDAO.getAllCategory();
@@ -104,7 +100,6 @@ public class ProductListForStaff extends HttpServlet {
                     request.setAttribute("categoryGroupList", categporyGroupList);
                     request.setAttribute("categoryDetailList", categporyDetailList);
                     request.setAttribute("productId", id);
-                    request.setAttribute("supList", supList);
                     request.setAttribute("categoryList", categoryList);
                     request.setAttribute("brandList", brandList);
                     request.getRequestDispatcher("/WEB-INF/View/staff/productManagement/updateProduct/updateInfo/update.jsp").forward(request, response);

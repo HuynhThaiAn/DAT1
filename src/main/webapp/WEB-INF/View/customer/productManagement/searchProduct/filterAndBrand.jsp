@@ -316,7 +316,7 @@
 <div id="filterModal" class="filter-modal-overlay">
     <div class="filter-modal">
         <div class="filter-modal-header">
-            <h3>Chọn hãng &amp; khoảng giá</h3>
+            <h3>Choose &amp; Price</h3>
             <button type="button" onclick="closeFilterModal()">&times;</button>
         </div>
 

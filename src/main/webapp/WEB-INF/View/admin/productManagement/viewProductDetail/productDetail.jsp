@@ -1,4 +1,3 @@
-
 <%@page import="model.Product"%>
 <%@page import="model.ProductDetail"%>
 <%@page import="model.CategoryDetail"%>
@@ -17,9 +16,7 @@
     <meta charset="UTF-8">
     <title>Product Detail</title>
 
-    <!-- Nếu đã có CSS ngoài thì vẫn có thể giữ -->
-    <%-- <link rel="stylesheet" href="Css/productDetail1.css"> --%>
-
+  
     <style>
         body {
             background: #f4f6fb;
@@ -32,7 +29,7 @@
             padding: 0 16px;
         }
 
-        /* Header trang */
+      
         .page-header {
             display: flex;
             align-items: flex-end;
@@ -54,7 +51,7 @@
             margin-bottom: 4px;
         }
 
-        /* Card chứa bảng thuộc tính */
+       
         .detail-card {
             background: #ffffff;
             border-radius: 16px;
@@ -75,11 +72,11 @@
             color: #6b7280;
         }
 
-        /* ===== BẢNG TỔNG ===== */
+        
         .category-table {
             width: 100%;
             border-collapse: separate;
-            border-spacing: 0 10px; /* khoảng cách giữa các card */
+            border-spacing: 0 10px; 
             background-color: transparent;
             padding: 4px 0;
         }
@@ -96,7 +93,7 @@
             font-size: 13px;
         }
 
-        /* ===== NHÓM TIÊU ĐỀ (GROUP HEADER) ===== */
+       
         .group-header {
             background-color: transparent;
             cursor: pointer;
@@ -145,12 +142,12 @@
             color: #ffffff;
         }
 
-        /* Khi thu gọn: xoay mũi tên */
+       
         .group-header.collapsed .arrow-icon {
             transform: rotate(-90deg);
         }
 
-        /* ===== BODY HÀNG DETAIL (CARD) ===== */
+        
         .group-details {
             transition: all 0.25s ease;
         }
@@ -217,7 +214,7 @@
             background-color: #bbf7d0;
         }
 
-        /* No data chip */
+      
         .attribute-item.attribute-empty {
             background-color: #e5e7eb;
             color: #6b7280;
@@ -237,7 +234,7 @@
             border-radius: 10px;
         }
 
-        /* Nút back / save nếu có dùng */
+       
         .btn-back {
             color: #fff;
             background-color: #6c757d;
@@ -304,7 +301,7 @@
             <span>View Product Detail</span>
         </div>
 
-        <!-- Card chính -->
+     
         <div class="detail-card">
             <h2 class="product-title"><%= product != null ? product.getProductName() : "Product Detail" %></h2>
             <p class="product-subtitle">Technical specifications & attributes</p>
@@ -315,7 +312,7 @@
                         int groupIndex = 0;
                         for (CategoryDetailGroup cateGroup : categoryDetailGroupList) {
                 %>
-                <!-- Tên nhóm -->
+              
                 <tr class="group-header collapsed" id="groupHeader<%= groupIndex %>" onclick="toggleDetails(<%= groupIndex %>)">
                     <td colspan="2" class="group-cell">
                         <div class="group-header-content">

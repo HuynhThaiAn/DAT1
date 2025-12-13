@@ -1,4 +1,3 @@
-
 <%@page import="model.ProductDetail"%>
 <%@page import="model.Suppliers"%>
 <%@page import="model.Brand"%>

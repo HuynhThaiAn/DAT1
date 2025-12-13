@@ -1,9 +1,10 @@
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String selectedFilter = (String) request.getAttribute("selectedFilter");
     if (selectedFilter == null) {
-        selectedFilter = "All"; // giá trị mặc định
+        selectedFilter = "All"; 
     }
 %>
 <!DOCTYPE html>
@@ -12,7 +13,30 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/supplierList5.css">
+ <style>
 
+        .create-btn {
+            background: #22c55e;
+            color: #fff;
+            margin-bottom: 12px;
+            float: right;
+            min-width: 110px;
+            border: 1.5px solid #1e9c46;
+            padding: 8px 16px;
+text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+            text-align: center;
+            transition: background 0.2s ease;
+        }
+
+        .create-btn:hover {
+            background: #1e9c46;
+            color: #fff;
+        }
+
+    </style>
     </head>
 
     <body>
@@ -22,7 +46,7 @@
             </h1>
         </div>
         <div style="display: flex; justify-content: flex-end; gap: 12px;">
-            <a class="create-btn" href="AddPromotionServlet">Set Promotion</a>
+           
             <a class="create-btn" href="AdminCreateProduct">Create</a>
         </div>
 
@@ -56,28 +80,5 @@
 
     </body>
 
-    <style>
-
-        .create-btn {
-            background: #22c55e;
-            color: #fff;
-            margin-bottom: 12px;
-            float: right;
-            min-width: 110px;
-            border: 1.5px solid #1e9c46;
-            padding: 8px 16px;
-text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            display: inline-block;
-            text-align: center;
-            transition: background 0.2s ease;
-        }
-
-        .create-btn:hover {
-            background: #1e9c46;
-            color: #fff;
-        }
-
-    </style>
+   
 </html>

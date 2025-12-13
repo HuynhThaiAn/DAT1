@@ -1,4 +1,3 @@
-
 <%@page import="model.Product"%>
 <%@page import="model.ProductDetail"%>
 <%@page import="model.CategoryDetail"%>
@@ -25,7 +24,7 @@
 
                 if (detailGroup.classList.contains("hidden")) {
                     detailGroup.classList.remove("hidden");
-                    arrowIcon.innerText = "▲"; // hoặc dùng ▾ nếu thích
+                    arrowIcon.innerText = "▲"; 
                 } else {
                     detailGroup.classList.add("hidden");
                     arrowIcon.innerText = "▼";

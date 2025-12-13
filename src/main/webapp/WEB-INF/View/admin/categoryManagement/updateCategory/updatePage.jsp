@@ -1,4 +1,3 @@
-
 <%@page import="model.CategoryDetailGroup"%>
 <%@page import="model.CategoryDetail"%>
 <%@page import="java.util.List"%>
@@ -52,11 +51,7 @@
             </div>
             <% } %>
 
-            <!--            <== Category name==>-->
-
-            <!--            <== Category detail==>-->
-            <!-- Vùng hiển thị tổng -->
-
+           
 
             <div class="category-container" style = "width: 75%; margin-top: 1%">
                 <h2 style = "font-size: 140%">Technical Specifications</h2>
@@ -68,19 +63,19 @@
                         for (CategoryDetailGroup cateGroup : categoryDetailGroup) {
                 %>
 
-                <!-- Nhóm tiêu đề -->
+               
                 <div class="group-header" onclick="toggleDetails(<%= groupIndex%>)">
-                    <!-- ID ẩn để gửi về Servlet -->
+                    
                     <input type="hidden" name="groupId" value="<%= cateGroup.getCategoryDetailsGroupID()%>" />
 
-                    <!-- Tên nhóm có thể chỉnh sửa -->
+                    
                     <input type="text"
                            name="groupName"
                            value="<%= cateGroup.getNameCategoryDetailsGroup()%>"
                            class="group-name-input" required/>
                 </div>
 
-                <!-- Chi tiết, ẩn ban đầu -->
+               
                 <div class="group-details" id="detailGroup<%= groupIndex%>">
                     <%
                         if (categoryDetailList != null && !categoryDetailList.isEmpty()) {
@@ -131,8 +126,7 @@
             %>
         </form>
 
-        <!--            <== Category detail==>-->
-
+        
     </body>
 </html>
 

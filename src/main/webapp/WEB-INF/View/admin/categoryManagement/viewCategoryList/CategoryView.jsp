@@ -1,4 +1,3 @@
-
 <%@page import="java.util.List"%>
 <%@page import="model.Category"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

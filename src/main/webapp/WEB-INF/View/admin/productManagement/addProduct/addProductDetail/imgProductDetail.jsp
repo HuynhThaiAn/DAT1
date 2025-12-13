@@ -1,4 +1,3 @@
-
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
@@ -76,12 +75,12 @@
             display: block;
         }
 
-        /* Ẩn input file */
+       
         .file-input-hidden {
             display: none;
         }
 
-        /* Responsive nhẹ */
+       
         @media (max-width: 992px) {
             .thumb-card {
                 width: 48%;
@@ -113,9 +112,9 @@
                    onchange="previewSelectedImage(this, 'previewMainImage')">
         </div>
 
-        <!-- Ảnh nhỏ -->
+        
         <div class="thumb-grid">
-            <!-- Ảnh nhỏ 1 -->
+           
             <div class="thumb-card text-center">
                 <label for="fileInput1">
                     <img id="previewImage1"
@@ -131,7 +130,7 @@
                        onchange="previewSelectedImage(this, 'previewImage1')">
             </div>
 
-            <!-- Ảnh nhỏ 2 -->
+            
             <div class="thumb-card text-center">
                 <label for="fileInput2">
                     <img id="previewImage2"
@@ -147,7 +146,7 @@
                        onchange="previewSelectedImage(this, 'previewImage2')">
             </div>
 
-            <!-- Ảnh nhỏ 3 -->
+          
             <div class="thumb-card text-center">
                 <label for="fileInput3">
                     <img id="previewImage3"
@@ -163,7 +162,7 @@
                        onchange="previewSelectedImage(this, 'previewImage3')">
             </div>
 
-            <!-- Ảnh nhỏ 4 -->
+         
             <div class="thumb-card text-center">
                 <label for="fileInput4">
                     <img id="previewImage4"

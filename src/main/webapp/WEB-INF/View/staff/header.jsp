@@ -13,7 +13,7 @@
 
 <style>
   :root{
-    --sidebar-w: 260px;                 /* ??NG B? v?i sidebar (260px) */
+    --sidebar-w: 260px;               
     --header-h: 78px;
 
     --bg: #f6f8fc;
@@ -144,7 +144,7 @@
     min-height: 100vh;
   }
 
-  /* Responsive: khi màn nh? thì header full width */
+  
   @media (max-width: 992px){
     .header-container{
       left: 0;

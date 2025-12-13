@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import model.ImportStock;
-import model.Suppliers;
 
 @WebServlet(name="ViewImportStockServlet", urlPatterns={"/ImportStockHistory"})
 public class ViewImportStockServlet extends HttpServlet {
@@ -70,12 +69,10 @@ public class ViewImportStockServlet extends HttpServlet {
         } catch (Exception e) {}
 
         // Lấy danh sách lịch sử lọc theo filter
-        ArrayList<ImportStock> history = importStockDAO.getImportHistoryFiltered(from, to, supplierId);
+        ArrayList<ImportStock> history = importStockDAO.getImportHistoryFiltered(from, to);
         // Lấy danh sách supplier cho select filter
-        ArrayList<Suppliers> suppliers = importStockDAO.getAllActiveSuppliers();
 
         request.setAttribute("importHistory", history);
-        request.setAttribute("suppliers", suppliers);
         request.setAttribute("from", from);
         request.setAttribute("to", to);
         request.setAttribute("supplierId", supplierId);

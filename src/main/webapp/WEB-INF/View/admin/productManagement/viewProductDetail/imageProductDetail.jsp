@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Chi tiết hình ảnh sản phẩm</title>
+        <title>Product Image Detail</title>
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Bootstrap JS -->
@@ -54,7 +54,7 @@
                 }
             } else {
             %>
-            <div class="alert alert-warning">Không có dữ liệu sản phẩm!</div>
+            <div class="alert alert-warning">Null</div>
             <% }
             %>
         </div>

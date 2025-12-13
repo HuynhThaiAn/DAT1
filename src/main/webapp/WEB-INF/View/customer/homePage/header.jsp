@@ -118,7 +118,7 @@
 
 <div class="main-header">
     <div class="header-top d-flex align-items-center justify-content-between">
-        <!-- (1) TRÁI: LOGO & NÚT DANH MỤC -->
+        
         <div class="d-flex align-items-center gap-3">
             <!-- Logo -->
             <a href="${pageContext.request.contextPath}/Home" class="me-3">
@@ -128,7 +128,7 @@
                      style="height: 40px; object-fit: contain;" />
             </a>
 
-            <!-- Danh mục: Dropdown -->
+           
             <div class="dropdown">
                 <button class="category-btn"
                         type="button"
@@ -158,7 +158,7 @@
 
         </div>
 
-        <!-- (2) GIỮA: THANH TÌM KIẾM -->
+        
         <div class="search-wrapper mx-3 position-relative flex-grow-1">
             <form action="SearchProduct" method="get" class="search-bar position-relative">
                 <input type="text"
@@ -173,14 +173,14 @@
             </form>
         </div>
 
-        <!-- (3) PHẢI: TÀI KHOẢN & GIỎ HÀNG -->
+       
         <div class="header-right d-flex align-items-center gap-2">
             <% if (user == null) { %>
             <a style = "border-radius: 15px;" href="${pageContext.request.contextPath}/Login" class="btn btn-outline-dark me-2" title="Tài khoản">
                 <i class="bi bi-person"></i>
             </a>
             <% } else {%>
-            <!-- Đã đăng nhập -->
+           
             <div class="user-dropdown">
                 <button type="button" style="border-radius: 15px;" class="btn btn-outline-dark me-2" title="Tài khoản">
                     <i class="bi bi-person"></i>
@@ -198,12 +198,7 @@
                             <span>Order</span>
                         </a>
                     </li>
-<!--                    <li>
-                        <a class="user-dropdown-item" href="${pageContext.request.contextPath}/ViewCustomerVoucher">
-                            <i class="bi bi-ticket-perforated"></i>
-                            <span>Voucher</span>
-                        </a>
-                    </li>-->
+
 
                     <li><hr class="user-dropdown-divider"></li>
                     <li>
@@ -223,7 +218,7 @@
     </div>
 </div>
 
-<!-- ================== GÓI JS, JQUERY, POPPER, BOOTSTRAP ================== -->
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -234,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const btn = userDropdown.querySelector(".btn");
     const menu = userDropdown.querySelector(".user-dropdown-menu");
 
-    // Click vào nút user
+    
     btn.addEventListener("click", function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -242,14 +237,14 @@ document.addEventListener("DOMContentLoaded", function() {
         const isOpen = menu.style.display === "block";
         
         if (isOpen) {
-            // Đóng menu
+            
             menu.style.opacity = "0";
             menu.style.transform = "translateY(-6px)";
             setTimeout(() => {
                 menu.style.display = "none";
             }, 180);
         } else {
-            // Mở menu
+            
             menu.style.display = "block";
             setTimeout(() => {
                 menu.style.opacity = "1";
@@ -258,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Click bên ngoài để đóng
+    
     document.addEventListener("click", function(e) {
         if (!userDropdown.contains(e.target)) {
             menu.style.opacity = "0";
