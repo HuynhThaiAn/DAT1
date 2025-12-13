@@ -4,10 +4,6 @@
  */
 package utils;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 public class testDB {
     public static void main(String[] args) {
         DBContext db = new DBContext(); // Tạo kết nối

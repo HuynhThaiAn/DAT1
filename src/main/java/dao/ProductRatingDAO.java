@@ -13,10 +13,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author
- */
 public class ProductRatingDAO extends DBContext {
 
     public List<ProductRating> getAllProductRating(int productID) {

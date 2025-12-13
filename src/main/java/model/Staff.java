@@ -6,10 +6,6 @@ package model;
 
 import java.util.Date;
 
-/**
- *
- * @author pc
- */
 public class Staff {
 
     private int staffID;

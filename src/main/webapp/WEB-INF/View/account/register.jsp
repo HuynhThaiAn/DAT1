@@ -1,8 +1,3 @@
-<%-- 
-    Document   : register
-    Created on : Jun 11, 2025, 4:10:00 PM
-    Author     : pc
---%>
 <!DOCTYPE html>
 <html>
     <head>

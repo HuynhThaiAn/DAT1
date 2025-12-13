@@ -9,10 +9,6 @@ import java.sql.ResultSet;
 import model.Customer;
 import utils.DBContext;
 
-/**
- *
- * @author pc
- */
 public class ProfileDAO extends DBContext {
 
     public ProfileDAO() {

@@ -7,10 +7,6 @@ package model;
 import java.sql.Timestamp;
 import java.util.List;
 
-/**
- *
- * @author HP
- */
 public class ImportStock {
 
     private int ioid;

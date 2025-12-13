@@ -6,10 +6,6 @@ package model;
 
 import java.sql.Date;
 
-/**
- *
- * @author HP
- */
 public class PurchaseOrder {
     private int purchaseOrderId;
     private int supplierId;

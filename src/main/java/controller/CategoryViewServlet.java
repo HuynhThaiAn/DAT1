@@ -17,10 +17,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Category;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 @WebServlet(name="CategoryViewServlet", urlPatterns={"/CategoryView"})
 public class CategoryViewServlet extends HttpServlet {
    

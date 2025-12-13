@@ -17,10 +17,6 @@ import model.Account;
 import model.Staff;
 import utils.DBContext;
 
-/**
- *
- * @author pc
- */
 public class StaffDAO extends DBContext {
 
     public StaffDAO() {

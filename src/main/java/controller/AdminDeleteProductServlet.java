@@ -15,10 +15,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 @WebServlet(name="StaffDeleteProductServlet", urlPatterns={"/StaffDeleteProduct"})
 public class AdminDeleteProductServlet extends HttpServlet {
    

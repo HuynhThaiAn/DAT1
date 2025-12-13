@@ -1,8 +1,3 @@
-<%-- 
-    Document   : forgot-password.jsp
-    Created on : Jul 9, 2025, 10:47:36 PM
-    Author     : pc
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

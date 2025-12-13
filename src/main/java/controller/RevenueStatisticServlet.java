@@ -16,10 +16,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import model.RevenueStatistic;
 
-/**
- *
- * @author HP
- */
 @WebServlet(name = "RevenueStatisticServlet", urlPatterns = {"/RevenueStatistic"})
 public class RevenueStatisticServlet extends HttpServlet {
 

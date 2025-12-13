@@ -19,10 +19,6 @@ import model.Brand;
 import model.Category;
 import model.Product;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 @WebServlet(name = "SearchProductServlet", urlPatterns = {"/SearchProduct"})
 public class SearchProductServlet extends HttpServlet {
 

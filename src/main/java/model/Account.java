@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author pc
- */
 public class Account {
 
     private int accountID;

@@ -12,10 +12,6 @@ import java.util.List;
 import model.OrderStatus;
 import utils.DBContext;
 
-/**
- *
- * @author VinhNTCE181630
- */
 public class OrderStatusDAO extends DBContext {
 
 

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : newProduct
-    Created on : Jun 16, 2025, 12:58:19 PM
-    Author     : HP - Gia Khiêm
---%>
 
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.Locale"%>

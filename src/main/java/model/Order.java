@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author Vinhntce181630
- */
 public class Order {
 
     private int orderID;

@@ -15,10 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Customer;
 
-/**
- *
- * @author pc
- */
 @WebServlet(name = "CustomerList", urlPatterns = {"/CustomerList"})
 public class CustomerListServlet extends HttpServlet {
 

@@ -15,10 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import model.Suppliers;
 
-/**
- *
- * @author HP
- */
 @WebServlet(name = "CreateSupplierServlet", urlPatterns = {"/CreateSupplier"})
 public class CreateSupplierServlet extends HttpServlet {
 

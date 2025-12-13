@@ -18,10 +18,6 @@ import model.Category;
 import model.CategoryDetail;
 import model.CategoryDetailGroup;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 @WebServlet(name = "CategoryDetailServlet", urlPatterns = {"/CategoryDetail"})
 public class CategoryDetailServlet extends HttpServlet {
 

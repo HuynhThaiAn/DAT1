@@ -19,10 +19,6 @@ import model.CategoryDetailGroup;
 import model.Product;
 import model.ProductDetail;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 @WebServlet(name = "StaffViewProductDetailServlet", urlPatterns = {"/AdminViewProductDetail"})
 public class AdminViewProductDetailServlet extends HttpServlet {
 

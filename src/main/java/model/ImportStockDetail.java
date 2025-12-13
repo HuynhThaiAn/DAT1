@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author HP
- */
 public class ImportStockDetail {
 
     private int ioid;

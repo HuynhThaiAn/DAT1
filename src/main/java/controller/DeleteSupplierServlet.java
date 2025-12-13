@@ -13,10 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author HP
- */
 @WebServlet(name = "DeleteSupplierServlet", urlPatterns = {"/DeleteSupplier"})
 public class DeleteSupplierServlet extends HttpServlet {
 

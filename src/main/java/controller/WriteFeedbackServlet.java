@@ -17,10 +17,6 @@ import java.io.PrintWriter;
 import model.Account;
 import model.Customer;
 
-/**
- *
- * @author VinhNTCE181630
- */
 @WebServlet(name = "WriteFeedbackServlet", urlPatterns = {"/WriteFeedback"})
 public class WriteFeedbackServlet extends HttpServlet {
 

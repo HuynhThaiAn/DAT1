@@ -28,10 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 import model.RatingReplies;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 @WebServlet(name = "ProductDetailServlet", urlPatterns = {"/ProductDetail"})
 public class ProductDetailServlet extends HttpServlet {
 

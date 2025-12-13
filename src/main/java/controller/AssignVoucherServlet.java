@@ -19,10 +19,6 @@ import java.util.List;
 import model.CustomerVoucher;
 import model.Voucher;
 
-/**
- *
- * @author HP
- */
 @WebServlet(name = "AssignVoucherServlet", urlPatterns = {"/AssignVoucher"})
 public class AssignVoucherServlet extends HttpServlet {
 

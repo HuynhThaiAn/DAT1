@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 public class ProductDetail {
     private int productDetailId;
     private int productId;

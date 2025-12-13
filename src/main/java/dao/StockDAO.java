@@ -12,10 +12,7 @@ import java.util.List;
 import model.Stock;
 import utils.DBContext;
 
-/**
- *
- * @author HP
- */
+
 public class StockDAO extends DBContext {
 
     public List<Stock> getAllStocks() throws SQLException {

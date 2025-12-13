@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 public class CategoryDetailGroup {
     private int CategoryDetailsGroupID;
     private String NameCategoryDetailsGroup;

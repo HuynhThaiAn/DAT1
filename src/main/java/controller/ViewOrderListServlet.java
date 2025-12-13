@@ -17,11 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Order;
 
-
-/**
- *
- * @author VinhNTCE181630
- */
 @WebServlet(name = "ViewOrderListServlet", urlPatterns = {"/ViewOrderList"})
 public class ViewOrderListServlet extends HttpServlet {
 

@@ -7,10 +7,6 @@ package dao;
 import java.sql.PreparedStatement;
 import utils.DBContext;
 
-/**
- *
- * @author VinhNTCE181630
- */
 public class FeedbackDAO extends DBContext {
     public int insertFeedback(int customerID, int productID, int orderID, int star, String comment) {
         int count = 0;

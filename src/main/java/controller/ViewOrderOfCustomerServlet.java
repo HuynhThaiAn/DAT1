@@ -19,10 +19,6 @@ import model.Account;
 import model.Customer;
 import model.Order;
 
-/**
- *
- * @author VinhNTCE181630
- */
 @WebServlet(name = "ViewOrderOfCustomerServlet", urlPatterns = {"/ViewOrderOfCustomer"})
 public class ViewOrderOfCustomerServlet extends HttpServlet {
 

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : save-phone
-    Created on : Jul 20, 2025, 1:44:06 PM
-    Author     : pc
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

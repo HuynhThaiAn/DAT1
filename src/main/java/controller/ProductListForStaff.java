@@ -24,10 +24,6 @@ import model.Product;
 import model.ProductDetail;
 import model.Suppliers;
 
-/**
- *
- * @author USER
- */
 @WebServlet(name = "ProductListForStaff", urlPatterns = {"/ProductListForStaff"})
 public class ProductListForStaff extends HttpServlet {
 

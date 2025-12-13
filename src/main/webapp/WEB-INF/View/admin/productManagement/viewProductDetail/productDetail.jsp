@@ -1,8 +1,3 @@
-<%-- 
-    Document   : productDetail
-    Created on : Jun 20, 2025, 3:40:35 PM
-    Author     : HP - Gia Khiêm
---%>
 
 <%@page import="model.Product"%>
 <%@page import="model.ProductDetail"%>

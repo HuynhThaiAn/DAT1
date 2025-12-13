@@ -10,10 +10,6 @@ import java.sql.SQLException;
 import model.Account;
 import utils.DBContext;
 
-/**
- *
- * @author USER
- */
 public class AccounttestDAO extends DBContext{
 
     public Account authenticate(String email, String password) {

@@ -11,10 +11,6 @@ import java.util.List;
 import model.Brand;
 import utils.DBContext;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 public class BrandDAO extends DBContext{
     
     public BrandDAO() {

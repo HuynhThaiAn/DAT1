@@ -22,10 +22,6 @@ import model.Customer;
 import model.Order;
 import model.OrderDetail;
 
-/**
- *
- * @author VinhNTCE181630
- */
 @WebServlet(name = "CancelOrderServlet", urlPatterns = {"/CancelOrder"})
 public class CancelOrderServlet extends HttpServlet {
 

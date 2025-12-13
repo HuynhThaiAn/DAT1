@@ -17,10 +17,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Calendar;
 
-/**
- *
- * @author HP
- */
 @WebServlet(name = "AdminDashboard", urlPatterns = {"/AdminDashboard"})
 public class AdminDashboard extends HttpServlet {
 

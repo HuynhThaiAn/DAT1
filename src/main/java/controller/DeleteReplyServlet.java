@@ -15,10 +15,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author VinhNTCE181630
- */
 @WebServlet(name = "DeleteReplyServlet", urlPatterns = {"/DeleteReply"})
 public class DeleteReplyServlet extends HttpServlet {
 

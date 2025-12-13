@@ -30,10 +30,6 @@ import model.Category;
 import model.Product;
 import model.Suppliers;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 @MultipartConfig
 @WebServlet(name = "AdminAddProductServlet", urlPatterns = {"/AdminCreateProduct"})
 public class AdminAddProductServlet extends HttpServlet {

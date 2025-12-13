@@ -15,10 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-/**
- *
- * @author pc
- */
 @WebServlet(name="ChangePasswordStaffServlet", urlPatterns={"/ChangePasswordStaff"})
 public class ChangePasswordStaffServlet extends HttpServlet {
    

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : login-staff
-    Created on : Jun 13, 2025, 11:09:47 PM
-    Author     : pc
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

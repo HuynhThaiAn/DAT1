@@ -1,8 +1,3 @@
-<%-- 
-    Document   : productDetail
-    Created on : Jun 19, 2025, 4:39:39 PM
-    Author     : HP - Minh
---%>
 
 
 <%@page import="model.Product"%>

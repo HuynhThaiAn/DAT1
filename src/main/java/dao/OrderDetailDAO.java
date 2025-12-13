@@ -15,10 +15,6 @@ import java.util.List;
 import model.CartItem;
 import model.Product;
 
-/**
- *
- * @author Vinh ne
- */
 public class OrderDetailDAO extends DBContext {
 
     public List<OrderDetail> getAllByOrderId(int orderId) {

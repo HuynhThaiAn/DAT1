@@ -20,10 +20,6 @@ import model.Account;
 import model.Category;
 import model.Customer;
 
-/**
- *
- * @author pc
- */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/Login"})
 public class LoginServlet extends HttpServlet {
 

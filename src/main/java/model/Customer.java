@@ -6,10 +6,6 @@ package model;
 
 import java.util.Date;
 
-/**
- *
- * @author pc
- */
 public class Customer {
     private int id;
     private String email;

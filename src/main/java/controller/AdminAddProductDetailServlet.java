@@ -27,10 +27,6 @@ import model.CategoryDetailGroup;
 import model.Product;
 import model.ProductDetail;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 @MultipartConfig
 
 @WebServlet(name = "AdminAddProductDetailServlet", urlPatterns = {"/AdminAddProductDetail"})

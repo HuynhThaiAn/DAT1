@@ -15,10 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Account;
 
-/**
- *
- * @author pc
- */
 @WebServlet(name = "LoginAdminServlet", urlPatterns = {"/LoginAdmin"})
 public class LoginAdminServlet extends HttpServlet {
 

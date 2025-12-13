@@ -19,10 +19,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.OrderStatus;
 
-/**
- *
- * @author The Vinh neee
- */
 @WebServlet(name = "ViewOrderDetailServlet", urlPatterns = {"/ViewOrderDetail"})
 public class ViewOrderDetailServlet extends HttpServlet {
 

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : view-staff-detail
-    Created on : Jun 12, 2025, 10:01:59 PM
-    Author     : pc
---%>
-
 <%@page import="model.Staff"%>
 <%
     Staff sta = (Staff) request.getAttribute("data");

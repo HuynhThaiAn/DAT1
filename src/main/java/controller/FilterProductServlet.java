@@ -20,10 +20,6 @@ import model.Brand;
 import model.Category;
 import model.Product;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 @WebServlet(name = "FilterProductServlet", urlPatterns = {"/FilterProduct"})
 public class FilterProductServlet extends HttpServlet {
 

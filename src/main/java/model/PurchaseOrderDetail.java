@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author HP
- */
 public class PurchaseOrderDetail {
     private int detailId;
     private int purchaseOrderId;

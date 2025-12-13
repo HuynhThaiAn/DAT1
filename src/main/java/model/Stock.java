@@ -6,10 +6,6 @@ package model;
 
 import java.sql.Timestamp;
 
-/**
- *
- * @author HP
- */
 public class Stock {
     private int IOID;
     private String staffName;

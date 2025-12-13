@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author VinhNTCE181630
- */
 
 
 public class OrderStatus {

@@ -22,10 +22,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import model.Account;
 
-/**
- *
- * @author USER
- */
 @WebServlet(name = "GetTargetOptionsServlet", urlPatterns = {"/GetTargetOptionsServlet"})
 public class GetTargetOptionsServlet extends HttpServlet {
 

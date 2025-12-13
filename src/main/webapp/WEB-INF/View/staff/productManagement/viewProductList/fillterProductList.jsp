@@ -1,8 +1,3 @@
-<%-- 
-    Document   : fillterProductList
-    Created on : Jun 18, 2025, 9:30:11 PM
-    Author     : HP - Gia Khiêm
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%

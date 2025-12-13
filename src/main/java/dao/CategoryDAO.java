@@ -16,10 +16,6 @@ import model.CategoryDetail;
 import model.CategoryDetailGroup;
 import utils.DBContext;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 public class CategoryDAO extends DBContext {
 
     public CategoryDAO() {

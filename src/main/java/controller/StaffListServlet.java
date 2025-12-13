@@ -16,10 +16,6 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Staff;
 
-/**
- *
- * @author pc
- */
 @WebServlet(name = "StaffListServlet", urlPatterns = {"/StaffList"})
 public class StaffListServlet extends HttpServlet {
 

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : productInfo
-    Created on : Jun 24, 2025, 10:43:34 AM
-    Author     : HP - Gia Khiêm
---%>
 
 <%@page import="model.Suppliers"%>
 <%@page import="java.text.NumberFormat"%>

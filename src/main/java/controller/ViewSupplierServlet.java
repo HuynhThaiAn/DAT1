@@ -15,10 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Suppliers;
 
-/**
- *
- * @author HP
- */
 @WebServlet(name = "ViewSupplierServlet", urlPatterns = {"/ViewSupplier"})
 public class ViewSupplierServlet extends HttpServlet {
 

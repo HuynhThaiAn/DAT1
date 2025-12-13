@@ -13,10 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Vinhntce181630
- */
 @WebServlet(name = "UpdateStatusCommentServlet", urlPatterns = {"/UpdateStatusComment"})
 public class UpdateStatusCommentServlet extends HttpServlet {
 

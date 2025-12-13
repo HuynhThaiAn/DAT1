@@ -4,10 +4,6 @@
  */
 package dao;
 
-/**
- *
- * @author VinhNTCE181630
- */
 import model.Voucher;
 
 import java.sql.*;

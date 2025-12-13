@@ -18,10 +18,6 @@ import model.Order;
 import model.OrderDetail;
 import model.OrderStatus;
 
-/**
- *
- * @author VinhNTCE181630
- */
 @WebServlet(name = "UpdateOrderStatusServlet", urlPatterns = {"/UpdateOrder"})
 public class UpdateOrderStatusServlet extends HttpServlet {
 

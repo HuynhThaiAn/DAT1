@@ -16,10 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import model.InventoryStatistic;
 
-/**
- *
- * @author HP
- */
 @WebServlet(name="ManageStatisticServlet", urlPatterns={"/ManageStatistic"})
 public class ManageStatisticServlet extends HttpServlet {
    

@@ -17,10 +17,6 @@ import java.util.ArrayList;
 import model.ImportStock;
 import model.Suppliers;
 
-/**
- *
- * @author HP
- */
 @WebServlet(name="ViewImportStockServlet", urlPatterns={"/ImportStockHistory"})
 public class ViewImportStockServlet extends HttpServlet {
    

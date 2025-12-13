@@ -6,10 +6,6 @@ package model;
 
 import java.math.BigDecimal;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 public class Product {
 
     private int productId;

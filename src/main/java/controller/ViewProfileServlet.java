@@ -17,10 +17,6 @@ import jakarta.servlet.http.HttpSession;
 import model.Account;
 import model.Customer;
 
-/**
- *
- * @author pc
- */
 @WebServlet(name = "ViewProfileServlet", urlPatterns = {"/ViewProfile"})
 public class ViewProfileServlet extends HttpServlet {
 

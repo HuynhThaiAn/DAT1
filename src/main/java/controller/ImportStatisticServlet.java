@@ -19,10 +19,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import model.InventoryStatistic;
 
-/**
- *
- * @author HP
- */
 @WebServlet(name = "ImportStatisticServlet", urlPatterns = {"/ImportStatistic"})
 public class ImportStatisticServlet extends HttpServlet {
 

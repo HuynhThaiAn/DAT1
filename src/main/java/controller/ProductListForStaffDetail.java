@@ -20,10 +20,6 @@ import model.CategoryDetailGroup;
 import model.Product;
 import model.ProductDetail;
 
-/**
- *
- * @author USER
- */
 @WebServlet(name="ProductListForStaffDetail", urlPatterns={"/ProductListForStaffDetail"})
 public class ProductListForStaffDetail extends HttpServlet {
    

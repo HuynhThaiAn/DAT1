@@ -6,10 +6,6 @@ package model;
 
 import java.sql.Date;
 
-/**
- *
- * @author HP
- */
 public class RevenueStatistic {
     private Date orderDate;
     private int orderMonth;

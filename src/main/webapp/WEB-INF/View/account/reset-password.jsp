@@ -1,8 +1,3 @@
-<%-- 
-    Document   : reset-password.jsp
-    Created on : Jul 9, 2025, 10:55:08 PM
-    Author     : pc
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

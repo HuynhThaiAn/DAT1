@@ -1,8 +1,3 @@
-<%-- 
-    Document   : verify
-    Created on : Jun 11, 2025, 4:10:00 PM
-    Author     : pc
---%>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>

@@ -12,10 +12,6 @@ import model.Account;
 import model.Customer;
 import utils.DBContext;
 
-/**
- *
- * @author pc
- */
 public class AccountDAO extends DBContext {
 
     public AccountDAO() {

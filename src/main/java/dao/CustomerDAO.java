@@ -18,10 +18,6 @@ import java.util.Scanner;
 import model.Customer;
 import utils.DBContext;
 
-/**
- *
- * @author pc
- */
 public class CustomerDAO extends DBContext {
 
     public CustomerDAO() {

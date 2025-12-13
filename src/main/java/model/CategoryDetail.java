@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 public class CategoryDetail {
     private int categoryDetailID;
     private int CategoryID;

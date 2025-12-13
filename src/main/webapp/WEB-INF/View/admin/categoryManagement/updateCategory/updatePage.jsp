@@ -1,8 +1,3 @@
-<%-- 
-    Document   : categoryDetail
-    Created on : Jun 14, 2025, 9:52:22 PM
-    Author     : HP - Gia Khiêm
---%>
 
 <%@page import="model.CategoryDetailGroup"%>
 <%@page import="model.CategoryDetail"%>

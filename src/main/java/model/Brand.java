@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 public class Brand {
     private int brandId;
     private String brandName;

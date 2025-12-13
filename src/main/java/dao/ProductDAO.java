@@ -27,10 +27,6 @@ import model.ProductVariant;
 import model.Suppliers;
 import utils.DBContext;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 public class ProductDAO extends DBContext {
 
     public List<Product> getProductIsNew() {

@@ -35,10 +35,6 @@ import model.Product;
 import model.ProductDetail;
 import model.Suppliers;
 
-/**
- *
- * @author HP - Gia Khiêm
- */
 @MultipartConfig
 @WebServlet(name = "AdminUpdateProductServlet", urlPatterns = {"/AdminUpdateProduct"})
 public class AdminUpdateProductServlet extends HttpServlet {

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : imgProductDetail
-    Created on : Jun 29, 2025, 4:57:09 PM
-    Author     : HP - Gia Khiêm
---%>
 
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

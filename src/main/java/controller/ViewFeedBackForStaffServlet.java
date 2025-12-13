@@ -21,10 +21,6 @@ import model.Product;
 import model.ProductRating;
 import model.RatingReplies;
 
-/**
- *
- * @author VinhNTCE181630
- */
 @WebServlet(name = "ViewFeedBackForStaffServlet", urlPatterns = {"/ViewFeedBackForStaff"})
 public class ViewFeedBackForStaffServlet extends HttpServlet {
 
