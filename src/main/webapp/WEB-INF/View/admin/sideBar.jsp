@@ -41,20 +41,6 @@
         </li>
 
         <li class="admin-nav-item">
-            <a href="Voucher"
-               class="admin-nav-link <%= "Voucher".equals(currentPage) ? "active" : "" %>">
-               <i class="fas fa-ticket-alt"></i><span>Voucher Management</span>
-            </a>
-        </li>
-
-        <li class="admin-nav-item">
-            <a href="ViewSupplier"
-               class="admin-nav-link <%= "ViewSupplier".equals(currentPage) ? "active" : "" %>">
-               <i class="fas fa-truck"></i><span>Supplier Management</span>
-            </a>
-        </li>
-
-        <li class="admin-nav-item">
             <a href="ManageStatistic"
                class="admin-nav-link <%= "ManageStatistic".equals(currentPage) ? "active" : "" %>">
                <i class="fa fa-bar-chart"></i><span>Statistics</span>
