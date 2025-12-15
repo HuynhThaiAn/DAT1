@@ -40,7 +40,6 @@
             </a>
         </li>
 
-
         <li class="admin-nav-item">
             <a href="ManageStatistic"
                class="admin-nav-link <%= "ManageStatistic".equals(currentPage) ? "active" : "" %>">

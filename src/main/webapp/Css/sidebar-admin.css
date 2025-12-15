@@ -1,98 +1,161 @@
-/* ===========================
-   ADMIN SIDEBAR (Soft UI)
-   ===========================*/
-.admin-sidebar {
-    width: 220px;
-    min-height: 100vh;
-    background: linear-gradient(180deg,#0b1120,#111827);
-    border-right: 1px solid #1e293b;
-    box-shadow: 5px 0 20px rgba(0,0,0,0.25);
-    position: fixed;
-    inset: 0 0 0 0;
-    display:flex;
-    flex-direction:column;
-    font-family:'Inter',sans-serif;
+/* ================================
+   ADMIN SIDEBAR – MATCH TEMPLATE
+================================ */
+
+:root{
+  --sb-bg1:#0f1b4d;
+  --sb-bg2:#1d4ed8;
+  --sb-text:rgba(255,255,255,.82);
+  --sb-text-strong:#fff;
+  --sb-hover:rgba(255,255,255,.10);
+  --sb-active:rgba(255,255,255,.16);
+  --sb-border:rgba(255,255,255,.12);
+  --sb-shadow: 0 12px 28px rgba(0,0,0,.22);
 }
 
-/* HEADER */
+.admin-sidebar{
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  width: 260px;
+  background: linear-gradient(180deg,var(--sb-bg1),var(--sb-bg2));
+  z-index: 1000;
+  box-shadow: var(--sb-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter','Segoe UI',system-ui,-apple-system,Arial,sans-serif;
+}
+
+/* ===== HEADER ===== */
 .admin-sidebar-header{
-    padding:18px;
-    border-bottom:1px solid #24324a;
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.admin-sidebar-header h2{
-    font-size:.95rem;
-    color:#f1f5f9;
-    font-weight:700;
-    letter-spacing:0.05em;
-    display:flex;
-    align-items:center;
-    gap:6px;
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid var(--sb-border);
+  display:flex;
+  align-items:center;
+  gap: 12px;
 }
 
 .admin-sidebar-header i{
-    color:#c8ddff;
-    background:#0f172a;
-    padding:6px;
-    border-radius:50%;
-    border:1px solid #2f3c53;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.14);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(0,0,0,.15);
+  flex: 0 0 42px;
+  border: none; /* bỏ border cũ */
 }
 
-/* MENU */
-.admin-nav{
-    list-style:none;
-    padding:12px 0;
-    margin:0;
-    flex:1;
+.admin-sidebar-header h2{
+  margin: 0;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: .3px;
+  font-size: 18px;
+  line-height: 1.2;
+  text-transform: none; /* giống mẫu */
 }
-.admin-nav-item{ margin:2px 0; }
+
+/* ===== MENU ===== */
+.admin-nav{
+  list-style:none;
+  padding: 14px 10px 16px;
+  margin:0;
+  flex:1;
+  overflow-y: auto;
+  display:flex;
+  flex-direction:column;
+  gap: 6px;
+}
+
+/* Scrollbar đẹp */
+.admin-nav::-webkit-scrollbar{ width: 8px; }
+.admin-nav::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,.22);
+  border-radius: 999px;
+}
+.admin-nav::-webkit-scrollbar-thumb:hover{
+  background: rgba(255,255,255,.32);
+}
+
+.admin-nav-item{ margin: 0; }
 
 .admin-nav-link{
-    display:flex;
-    gap:10px;
-    align-items:center;
-
-    margin:2px 12px;
-    padding:10px 14px;
-    font-size:.90rem;
-    color:#e2e8f0;
-    text-decoration:none;
-    border-radius:8px;
-
-    transition:.15s;
+  position: relative;
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  padding: 12px 14px;
+  margin: 0;
+  color: var(--sb-text);
+  text-decoration:none;
+  border-radius: 12px;
+  transition: .18s ease;
+  user-select: none;
+  border: 1px solid transparent; /* giữ cho hover/active đẹp */
 }
 
+/* Icon giống mẫu: nhỏ + không có box */
 .admin-nav-link i{
-    color:#94a3b8;
-    transition:.2s;
+  width: 20px;
+  text-align:center;
+  font-size: 16px;
+  opacity: .95;
+  color: inherit;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  height: auto;
 }
 
-/* HOVER (NHẸ NHÀNG) */
+/* HOVER */
 .admin-nav-link:hover{
-    background:#1e293b;
+  background: var(--sb-hover);
+  color: var(--sb-text-strong);
+  transform: translateX(2px);
 }
 
-.admin-nav-link:hover i{
-    color:#cfe6ff;
-}
-
-/* ACTIVE (GỎN GÀNG – DỄ NHÌN) */
+/* ACTIVE */
 .admin-nav-link.active{
-    background:#2563eb33; /* xanh mềm */
-    color:white;
-    border-left:4px solid #3b82f6; /* chủ đạo */
+  background: var(--sb-active);
+  color: var(--sb-text-strong);
+  font-weight: 700;
 }
 
-.admin-nav-link.active i{
-    color:#ffffff;
-    transform:translateX(2px);
+.admin-nav-link.active::before{
+  content:"";
+  position:absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
+  border-radius: 6px;
+  background: rgba(255,255,255,.92);
 }
 
-/* RESPONSIVE */
-@media(max-width:800px){
-    .admin-sidebar{ width:190px;}
-    .admin-nav-link{ font-size:.85rem;}
+.admin-nav-link.active::after{
+  content:"";
+  position:absolute;
+  inset: 0;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+  pointer-events:none;
+}
+
+/* ===== FOOTER ===== */
+.admin-sidebar-footer{
+  padding: 12px 16px 16px;
+  border-top: 1px solid var(--sb-border);
+  color: rgba(255,255,255,.65);
+  font-size: 12px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width: 800px){
+  .admin-sidebar{ width: 210px; }
+  .admin-nav-link{ padding: 10px 12px; font-size: 13px; }
 }
