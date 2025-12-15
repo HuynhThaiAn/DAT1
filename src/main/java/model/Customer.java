@@ -4,88 +4,61 @@
  */
 package model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
+
+/**
+ *
+ * @author Administrator
+ */
 public class Customer {
-    private int id;
+    private int customerID;
     private String email;
-    private String password;
+    private String passwordHash;
     private String fullName;
     private String phone;
-    private Date createAt;
-    private boolean isActive;
-    private String birthDay;
-    private String gender;
-    private String address;
+    private String avatarUrl;
+    private boolean isBlocked;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
- 
     public Customer() {
     }
 
-    public Customer(int id, String email, String fullName, String phone, Date createAt, boolean isActive) {
-        this.id = id;
+    public Customer(int customerID, String email, String passwordHash, String fullName, String phone, String avatarUrl, boolean isBlocked, Timestamp createdAt, Timestamp updatedAt) {
+        this.customerID = customerID;
         this.email = email;
+        this.passwordHash = passwordHash;
         this.fullName = fullName;
         this.phone = phone;
-        this.createAt = createAt;
-        this.isActive = isActive;
+        this.avatarUrl = avatarUrl;
+        this.isBlocked = isBlocked;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public Customer(int id, String email, String fullName, String phone, boolean isActive, String birthDay, String gender) {
-        this.id = id;
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
-        this.fullName = fullName;
-        this.phone = phone;
-        this.isActive = isActive;
-        this.birthDay = birthDay;
-        this.gender = gender;
     }
 
-    public Customer(int id, String email, String fullName, String phone, boolean active, String birthday, String gender, String address) {
-        this.id = id;
-        this.email = email;
-        this.fullName = fullName;
-        this.phone = phone;
-        this.isActive = isActive;
-        this.birthDay = birthDay;
-        this.gender = gender;
-        this.address = address;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public String getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(String birthDay) {
-        this.birthDay = birthDay;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-    
-    
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
- 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public String getFullName() {
@@ -104,39 +77,38 @@ public class Customer {
         this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public boolean isIsBlocked() {
+        return isBlocked;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setIsBlocked(boolean isBlocked) {
+        this.isBlocked = isBlocked;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     
-       public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setActive(boolean aBoolean) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }

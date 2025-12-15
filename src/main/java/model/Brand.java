@@ -4,66 +4,88 @@
  */
 package model;
 
+import java.sql.Timestamp;
+
+/**
+ *
+ * @author Administrator
+ */
 public class Brand {
-    private int brandId;
+    private int brandID;
     private String brandName;
-    private String desciptionBrand;
-    private int categoryID;
-    private String imgUrlLogo;
+    private String description;
+    private String logoUrl;
+    private boolean isDeleted;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
-    public Brand() {
-    }
+    public Brand() {}
 
-    public Brand(int brandId, String brandName, String desciptionBrand, int categoryID, String imgUrlLogo) {
-        this.brandId = brandId;
+    public Brand(int brandID, String brandName, String description, String logoUrl, boolean isDeleted, Timestamp createdAt, Timestamp updatedAt) {
+        this.brandID = brandID;
         this.brandName = brandName;
-        this.desciptionBrand = desciptionBrand;
-        this.categoryID = categoryID;
-        this.imgUrlLogo = imgUrlLogo;
+        this.description = description;
+        this.logoUrl = logoUrl;
+        this.isDeleted = isDeleted;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public Brand(int brandId, String brandName) {
-        this.brandId = brandId;
-        this.brandName = brandName;
-    }
-    
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
+    public int getBrandID() {
+        return brandID;
     }
 
-    public int getCategoryID() {
-        return categoryID;
-    }
-
-    public void setImgUrlLogo(String imgUrlLogo) {
-        this.imgUrlLogo = imgUrlLogo;
-    }
-
-    public String getImgUrlLogo() {
-        return imgUrlLogo;
-    }
-
-    public int getBrandId() {
-        return brandId;
+    public void setBrandID(int brandID) {
+        this.brandID = brandID;
     }
 
     public String getBrandName() {
         return brandName;
     }
 
-    public String getDesciptionBrand() {
-        return desciptionBrand;
-    }
-
-    public void setBrandId(int brandId) {
-        this.brandId = brandId;
-    }
-
     public void setBrandName(String brandName) {
         this.brandName = brandName;
     }
 
-    public void setDesciptionBrand(String desciptionBrand) {
-        this.desciptionBrand = desciptionBrand;
+    public String getDescription() {
+        return description;
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+    
+    
 }

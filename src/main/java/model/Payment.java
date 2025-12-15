@@ -1,33 +1,39 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
- * Represents a payment for an order.
+ *
+ * @author Administrator
  */
 public class Payment {
     private int paymentID;
     private int orderID;
-    private String paymentMethod;
-    private String paymentStatus;
-    private Date paidDate;
+    private byte method;
     private BigDecimal amount;
+    private byte status;
+    private String transactionCode;
+    private Timestamp paidAt;
+    private Timestamp createdAt;
 
-    // Constructors
-    public Payment() {
-    }
+    public Payment() {}
 
-    public Payment(int paymentID, int orderID, String paymentMethod, String paymentStatus, Date paidDate, BigDecimal amount) {
+    public Payment(int paymentID, int orderID, byte method, BigDecimal amount, byte status, String transactionCode, Timestamp paidAt, Timestamp createdAt) {
         this.paymentID = paymentID;
         this.orderID = orderID;
-        this.paymentMethod = paymentMethod;
-        this.paymentStatus = paymentStatus;
-        this.paidDate = paidDate;
+        this.method = method;
         this.amount = amount;
+        this.status = status;
+        this.transactionCode = transactionCode;
+        this.paidAt = paidAt;
+        this.createdAt = createdAt;
     }
 
-    // Getters and Setters
     public int getPaymentID() {
         return paymentID;
     }
@@ -44,28 +50,12 @@ public class Payment {
         this.orderID = orderID;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
+    public byte getMethod() {
+        return method;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
-    public Date getPaidDate() {
-        return paidDate;
-    }
-
-    public void setPaidDate(Date paidDate) {
-        this.paidDate = paidDate;
+    public void setMethod(byte method) {
+        this.method = method;
     }
 
     public BigDecimal getAmount() {
@@ -76,5 +66,37 @@ public class Payment {
         this.amount = amount;
     }
 
+    public byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(byte status) {
+        this.status = status;
+    }
+
+    public String getTransactionCode() {
+        return transactionCode;
+    }
+
+    public void setTransactionCode(String transactionCode) {
+        this.transactionCode = transactionCode;
+    }
+
+    public Timestamp getPaidAt() {
+        return paidAt;
+    }
+
+    public void setPaidAt(Timestamp paidAt) {
+        this.paidAt = paidAt;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+    
     
 }

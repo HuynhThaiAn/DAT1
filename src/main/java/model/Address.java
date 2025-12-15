@@ -4,84 +4,142 @@
  */
 package model;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
+/**
+ *
+ * @author Administrator
+ */
 public class Address {
-
-    private int addressId;
-    private int customerId;
-    private String provinceName;
-    private String districtName;
-    private String wardName;
-    private String addressDetails;
+    private int addressID;
+    private int customerID;
+    private String recipientName;
+    private String phone;
+    private String province;
+    private String district;
+    private String ward;
+    private String detailAddress;
     private boolean isDefault;
+    private boolean isActive;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public Address() {
     }
 
-    public Address(int addressId, int customerId, String provinceName, String districtName, String wardName, String addressDetails, boolean isDefault) {
-        this.addressId = addressId;
-        this.customerId = customerId;
-        this.provinceName = provinceName;
-        this.districtName = districtName;
-        this.wardName = wardName;
-        this.addressDetails = addressDetails;
+    public Address(int addressID, int customerID, String recipientName, String phone, String province, String district, String ward, String detailAddress, boolean isDefault, boolean isActive, Timestamp createdAt, Timestamp updatedAt) {
+        this.addressID = addressID;
+        this.customerID = customerID;
+        this.recipientName = recipientName;
+        this.phone = phone;
+        this.province = province;
+        this.district = district;
+        this.ward = ward;
+        this.detailAddress = detailAddress;
         this.isDefault = isDefault;
+        this.isActive = isActive;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    // Getters & Setters
-    public int getAddressId() {
-        return addressId;
+    public int getAddressID() {
+        return addressID;
     }
 
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
+    public void setAddressID(int addressID) {
+        this.addressID = addressID;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
-    public String getProvinceName() {
-        return provinceName;
+    public String getRecipientName() {
+        return recipientName;
     }
 
-    public void setProvinceName(String provinceName) {
-        this.provinceName = provinceName;
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
     }
 
-    public String getDistrictName() {
-        return districtName;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setDistrictName(String districtName) {
-        this.districtName = districtName;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getWardName() {
-        return wardName;
+    public String getProvince() {
+        return province;
     }
 
-    public void setWardName(String wardName) {
-        this.wardName = wardName;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
-    public String getAddressDetails() {
-        return addressDetails;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setAddressDetails(String addressDetails) {
-        this.addressDetails = addressDetails;
+    public void setDistrict(String district) {
+        this.district = district;
     }
 
-    public boolean isDefault() {
+    public String getWard() {
+        return ward;
+    }
+
+    public void setWard(String ward) {
+        this.ward = ward;
+    }
+
+    public String getDetailAddress() {
+        return detailAddress;
+    }
+
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
+    }
+
+    public boolean isIsDefault() {
         return isDefault;
     }
 
-    public void setDefault(boolean isDefault) {
+    public void setIsDefault(boolean isDefault) {
         this.isDefault = isDefault;
     }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    
+    
+    
 }

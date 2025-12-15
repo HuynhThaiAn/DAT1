@@ -1,55 +1,72 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package model;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.sql.Timestamp;
 
+/**
+ *
+ * @author Administrator
+ */
 public class Cart {
-    private int cartId;
-    private int accountId;
-    private LocalDateTime createdAt;
-    private List<CartItem> cartItems;
+    private int customerID;
+    private int variantID;
+    private int quantity;
+    private Timestamp addedAt;
+    private Timestamp updatedAt;
 
-    // Constructor
     public Cart() {
     }
 
-    public Cart(int cartId, int accountId, LocalDateTime createdAt, List<CartItem> cartItems) {
-        this.cartId = cartId;
-        this.accountId = accountId;
-        this.createdAt = createdAt;
-        this.cartItems = cartItems;
+    public Cart(int customerID, int variantID, int quantity, Timestamp addedAt, Timestamp updatedAt) {
+        this.customerID = customerID;
+        this.variantID = variantID;
+        this.quantity = quantity;
+        this.addedAt = addedAt;
+        this.updatedAt = updatedAt;
     }
 
-    // Getters and Setters
-    public int getCartId() {
-        return cartId;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setCartId(int cartId) {
-        this.cartId = cartId;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
-    public int getAccountId() {
-        return accountId;
+    public int getVariantID() {
+        return variantID;
     }
 
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
+    public void setVariantID(int variantID) {
+        this.variantID = variantID;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public List<CartItem> getCartItems() {
-        return cartItems;
+    public Timestamp getAddedAt() {
+        return addedAt;
     }
 
-    public void setCartItems(List<CartItem> cartItems) {
-        this.cartItems = cartItems;
+    public void setAddedAt(Timestamp addedAt) {
+        this.addedAt = addedAt;
     }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+   
 }

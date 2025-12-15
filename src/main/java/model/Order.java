@@ -4,64 +4,54 @@
  */
 package model;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
+/**
+ *
+ * @author Administrator
+ */
 public class Order {
-
     private int orderID;
-    private int accountID;
-    private int CustomerId;
-    private String fullName;
+    private int customerID;
+
+    private String receiverName;
     private String phone;
-    private long totalAmount;
-    private String orderDate;
-    private String deliveredDate;
-    private int status;
-    private int discount;
-    private String addressSnapshot;
-    private int addressID;
-    private String updatedDate;
+    private String province;
+    private String district;
+    private String ward;
+    private String detailAddress;
 
-    public Order() {
-    }
+    private BigDecimal totalAmount;
+    private byte status;
 
-    public Order(int CustomerId, String fullName, String phone, long totalAmount, String orderDate, String deliveredDate, int status, int discount, String addressSnapshot, int addressID, String updatedDate) {
-        this.CustomerId = CustomerId;
-        this.fullName = fullName;
-        this.phone = phone;
-        this.totalAmount = totalAmount;
-        this.orderDate = orderDate;
-        this.deliveredDate = deliveredDate;
-        this.status = status;
-        this.discount = discount;
-        this.addressSnapshot = addressSnapshot;
-        this.addressID = addressID;
-        this.updatedDate = updatedDate;
-    }
+    private Timestamp orderedAt;
+    private Timestamp paidAt;
+    private Timestamp shippedAt;
+    private Timestamp deliveredAt;
+    private Timestamp cancelledAt;
 
-    public Order(int CustomerId, String fullName, String phone, String orderDate, String addressSnapshot) {
-        this.CustomerId = CustomerId;
-        this.fullName = fullName;
-        this.phone = phone;
-        this.orderDate = orderDate;
-        this.addressSnapshot = addressSnapshot;
-    }
+    private String note;
 
-   
+    public Order() {}
 
-    public Order(int orderID, int accountID, String fullName, String phone, long totalAmount,
-            String orderDate, String deliveredDate, int status, int discount,
-            String addressSnapshot, int addressID, String updatedDate) {
+    public Order(int orderID, int customerID, String receiverName, String phone, String province, String district, String ward, String detailAddress, BigDecimal totalAmount, byte status, Timestamp orderedAt, Timestamp paidAt, Timestamp shippedAt, Timestamp deliveredAt, Timestamp cancelledAt, String note) {
         this.orderID = orderID;
-        this.accountID = accountID;
-        this.fullName = fullName;
+        this.customerID = customerID;
+        this.receiverName = receiverName;
         this.phone = phone;
+        this.province = province;
+        this.district = district;
+        this.ward = ward;
+        this.detailAddress = detailAddress;
         this.totalAmount = totalAmount;
-        this.orderDate = orderDate;
-        this.deliveredDate = deliveredDate;
         this.status = status;
-        this.discount = discount;
-        this.addressSnapshot = addressSnapshot;
-        this.addressID = addressID;
-        this.updatedDate = updatedDate;
+        this.orderedAt = orderedAt;
+        this.paidAt = paidAt;
+        this.shippedAt = shippedAt;
+        this.deliveredAt = deliveredAt;
+        this.cancelledAt = cancelledAt;
+        this.note = note;
     }
 
     public int getOrderID() {
@@ -72,28 +62,20 @@ public class Order {
         this.orderID = orderID;
     }
 
-    public int getAccountID() {
-        return accountID;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
-    public int getCustomerId() {
-        return CustomerId;
+    public String getReceiverName() {
+        return receiverName;
     }
 
-    public void setCustomerId(int CustomerId) {
-        this.CustomerId = CustomerId;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
     }
 
     public String getPhone() {
@@ -104,68 +86,101 @@ public class Order {
         this.phone = phone;
     }
 
-    public long getTotalAmount() {
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getWard() {
+        return ward;
+    }
+
+    public void setWard(String ward) {
+        this.ward = ward;
+    }
+
+    public String getDetailAddress() {
+        return detailAddress;
+    }
+
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
+    }
+
+    public BigDecimal getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(long totalAmount) {
+    public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public String getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public String getDeliveredDate() {
-        return deliveredDate;
-    }
-
-    public void setDeliveredDate(String deliveredDate) {
-        this.deliveredDate = deliveredDate;
-    }
-
-    public int getStatus() {
+    public byte getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(byte status) {
         this.status = status;
     }
 
-    public int getDiscount() {
-        return discount;
+    public Timestamp getOrderedAt() {
+        return orderedAt;
     }
 
-    public void setDiscount(int discount) {
-        this.discount = discount;
+    public void setOrderedAt(Timestamp orderedAt) {
+        this.orderedAt = orderedAt;
     }
 
-    public String getAddressSnapshot() {
-        return addressSnapshot;
+    public Timestamp getPaidAt() {
+        return paidAt;
     }
 
-    public void setAddressSnapshot(String addressSnapshot) {
-        this.addressSnapshot = addressSnapshot;
+    public void setPaidAt(Timestamp paidAt) {
+        this.paidAt = paidAt;
     }
 
-    public int getAddressID() {
-        return addressID;
+    public Timestamp getShippedAt() {
+        return shippedAt;
     }
 
-    public void setAddressID(int addressID) {
-        this.addressID = addressID;
+    public void setShippedAt(Timestamp shippedAt) {
+        this.shippedAt = shippedAt;
     }
 
-    public String getUpdatedDate() {
-        return updatedDate;
+    public Timestamp getDeliveredAt() {
+        return deliveredAt;
     }
 
-    public void setUpdatedDate(String updatedDate) {
-        this.updatedDate = updatedDate;
+    public void setDeliveredAt(Timestamp deliveredAt) {
+        this.deliveredAt = deliveredAt;
     }
 
+    public Timestamp getCancelledAt() {
+        return cancelledAt;
+    }
+
+    public void setCancelledAt(Timestamp cancelledAt) {
+        this.cancelledAt = cancelledAt;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+    
+    
 }

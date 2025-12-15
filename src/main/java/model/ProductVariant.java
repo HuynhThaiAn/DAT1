@@ -1,106 +1,57 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package model;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
+/**
+ *
+ * @author Administrator
+ */
 public class ProductVariant {
-
-    private int variantId;
-    private int productId;
-    private String color;
-    private String storage;
-    private int quantity;
-    private BigDecimal price;
-    private int discount;
+    private int variantID;
+    private int productID;
     private String sku;
-    private String imageUrl;
+    private String variantName;
+    private BigDecimal price;
+    private int stockQuantity;
     private boolean isActive;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public ProductVariant() {
     }
 
-    public ProductVariant(int variantId, int productId, String color, String storage, int quantity,
-            BigDecimal price, int discount, String sku, String imageUrl, boolean isActive) {
-        this.variantId = variantId;
-        this.productId = productId;
-        this.color = color;
-        this.storage = storage;
-        this.quantity = quantity;
-        this.price = price;
-        this.discount = discount;
+    public ProductVariant(int variantID, int productID, String sku, String variantName, BigDecimal price, int stockQuantity, boolean isActive, Timestamp createdAt, Timestamp updatedAt) {
+        this.variantID = variantID;
+        this.productID = productID;
         this.sku = sku;
-        this.imageUrl = imageUrl;
-        this.isActive = isActive;
-    }
-
-    public ProductVariant(int variantId, int productId, String color, String storage, int quantity,
-            BigDecimal price, int discount, String imageUrl, boolean isActive) {
-        this.variantId = variantId;
-        this.productId = productId;
-        this.color = color;
-        this.storage = storage;
-        this.quantity = quantity;
+        this.variantName = variantName;
         this.price = price;
-        this.discount = discount;
-        this.sku = null; // Giá trị mặc định cho sku
-        this.imageUrl = imageUrl;
+        this.stockQuantity = stockQuantity;
         this.isActive = isActive;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    // Getters và Setters
-    public int getVariantId() {
-        return variantId;
+    public int getVariantID() {
+        return variantID;
     }
 
-    public void setVariantId(int variantId) {
-        this.variantId = variantId;
+    public void setVariantID(int variantID) {
+        this.variantID = variantID;
     }
 
-    public int getProductId() {
-        return productId;
+    public int getProductID() {
+        return productID;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getStorage() {
-        return storage;
-    }
-
-    public void setStorage(String storage) {
-        this.storage = storage;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public int getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(int discount) {
-        this.discount = discount;
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     public String getSku() {
@@ -111,12 +62,28 @@ public class ProductVariant {
         this.sku = sku;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getVariantName() {
+        return variantName;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setVariantName(String variantName) {
+        this.variantName = variantName;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
     public boolean isIsActive() {
@@ -126,4 +93,24 @@ public class ProductVariant {
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    
+    
+    
 }

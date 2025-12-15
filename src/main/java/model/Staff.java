@@ -4,68 +4,41 @@
  */
 package model;
 
-import java.util.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+/**
+ *
+ * @author Administrator
+ */
 public class Staff {
-
     private int staffID;
     private String email;
+    private String passwordHash;
     private String fullName;
     private String phone;
-    private String gender;
-
-    private int accountId;
-    private Date birthDay;
-    private String position;
-    private Date hiredDate;
-
-    public int getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
+    private byte role; // 1=STAFF, 2=ADMIN
+    private boolean isDeleted;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public Staff() {
     }
 
-    public Staff(int staffID, String email, String fullName, Date hiredDate) {
+    public Staff(int staffID, String email, String passwordHash, String fullName, String phone, byte role, boolean isDeleted, Timestamp createdAt, Timestamp updatedAt) {
         this.staffID = staffID;
         this.email = email;
-        this.fullName = fullName;
-        this.hiredDate = hiredDate;
-    }
-
-    public Staff(int staffID, String email, String fullName, String phone, Date hiredDate, Date birthDay, String gender) {
-        this.staffID = staffID;
-        this.email = email;
+        this.passwordHash = passwordHash;
         this.fullName = fullName;
         this.phone = phone;
-        this.hiredDate = hiredDate;
-        this.birthDay = birthDay;
-        this.gender = gender;
+        this.role = role;
+        this.isDeleted = isDeleted;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
     
-     public Staff(int staffID, String email, String fullName, String phone, Date hiredDate,String position, Date birthDay, String gender) {
-        this.staffID = staffID;
-        this.email = email;
-        this.fullName = fullName;
-        this.phone = phone;
-        this.hiredDate = hiredDate;
-        this.position = position;
-        this.birthDay = birthDay;
-        this.gender = gender;
-    }
-
+    
     public int getStaffID() {
         return staffID;
     }
@@ -80,6 +53,14 @@ public class Staff {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public String getFullName() {
@@ -98,28 +79,39 @@ public class Staff {
         this.phone = phone;
     }
 
-    public Date getHiredDate() {
-        return hiredDate;
+    public byte getRole() {
+        return role;
     }
 
-    public void setHiredDate(Date hiredDate) {
-        this.hiredDate = hiredDate;
+    public void setRole(byte role) {
+        this.role = role;
     }
 
-    public Date getBirthDay() {
-        return birthDay;
+    public boolean isIsDeleted() {
+        return isDeleted;
     }
 
-    public void setBirthDay(Date birthDay) {
-        this.birthDay = birthDay;
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
-    public String getGender() {
-        return gender;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    
+    
+    
 }

@@ -10,27 +10,27 @@ import java.math.BigDecimal;
  *
  * @author Administrator
  */
-public class OrderDetail {
-    private int orderID;
+public class ImportDetail {
+    private int importID;
     private int variantID;
-    private BigDecimal unitPrice;
+    private BigDecimal unitCost;
     private int quantity;
 
-    public OrderDetail() {}
+    public ImportDetail() {}
 
-    public OrderDetail(int orderID, int variantID, BigDecimal unitPrice, int quantity) {
-        this.orderID = orderID;
+    public ImportDetail(int importID, int variantID, BigDecimal unitCost, int quantity) {
+        this.importID = importID;
         this.variantID = variantID;
-        this.unitPrice = unitPrice;
+        this.unitCost = unitCost;
         this.quantity = quantity;
     }
 
-    public int getOrderID() {
-        return orderID;
+    public int getImportID() {
+        return importID;
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
+    public void setImportID(int importID) {
+        this.importID = importID;
     }
 
     public int getVariantID() {
@@ -41,12 +41,12 @@ public class OrderDetail {
         this.variantID = variantID;
     }
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
+    public BigDecimal getUnitCost() {
+        return unitCost;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setUnitCost(BigDecimal unitCost) {
+        this.unitCost = unitCost;
     }
 
     public int getQuantity() {
@@ -56,6 +56,8 @@ public class OrderDetail {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    
+    
     
     
 }
