@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Sidebar + Category View</title>
+        <title>Category View</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/supplierList5.css">
         
         <link rel="stylesheet"
