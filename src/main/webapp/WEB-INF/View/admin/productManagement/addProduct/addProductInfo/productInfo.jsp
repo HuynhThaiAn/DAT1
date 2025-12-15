@@ -12,7 +12,6 @@
     Product product = (Product) request.getAttribute("product");
     List<Category> categoryList = (List<Category>) request.getAttribute("categoryList");
     List<Brand> brandList = (List<Brand>) request.getAttribute("brandList");
-    List<Suppliers> supList = (List<Suppliers>) request.getAttribute("supList");
 %>
 <!DOCTYPE html>
 <html>
@@ -31,16 +30,6 @@
             <div class="mb-3">
                 <label class="form-label">Description</label>
                 <input type="text" class="form-control" name="productName" required/>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Suppliers</label>
-                <select class="form-control" id="suppliers" name="suppliers" required>
-                    <option value="">-- Select suppliers --</option>
-                    <% for (Suppliers sup : supList) {%>
-                    <option value="<%= sup.getSupplierID()%>"><%= sup.getName()%></option>
-                    <% }%>
-                </select>
             </div>
 
             <div class="mb-3">
