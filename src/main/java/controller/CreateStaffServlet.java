@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Account;
 import model.Staff;
+import java.security.MessageDigest;
 
 @WebServlet(name = "CreateStaffServlet", urlPatterns = {"/CreateStaffServlet"})
 public class CreateStaffServlet extends HttpServlet {
@@ -16,7 +17,8 @@ public class CreateStaffServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/View/admin/staffManagement/createStaff.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/View/admin/staffManagement/createStaff.jsp")
+                .forward(request, response);
     }
 
     @Override
@@ -27,7 +29,7 @@ public class CreateStaffServlet extends HttpServlet {
             // Lấy dữ liệu từ form
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            
+
             String fullName = request.getParameter("fullName");
             String phone = request.getParameter("phoneNumber");
             String birthDateStr = request.getParameter("birthDate");
@@ -35,7 +37,7 @@ public class CreateStaffServlet extends HttpServlet {
             String position = request.getParameter("position");
             String hiredDateStr = request.getParameter("hiredDate");
 
-            // Chuyển đổi ngày tháng sang java.util.Date
+            // Chuyển đổi ngày tháng
             java.util.Date birthDate = null;
             java.util.Date hiredDate = null;
             if (birthDateStr != null && !birthDateStr.isEmpty()) {
@@ -45,12 +47,19 @@ public class CreateStaffServlet extends HttpServlet {
                 hiredDate = java.sql.Date.valueOf(hiredDateStr);
             }
 
+            // 🔐 HASH MD5 TRỰC TIẾP TRONG SERVLET
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] bytes = md.digest(password.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            for (byte b : bytes) {
+                sb.append(String.format("%02x", b));
+            }
+            String hashedPassword = sb.toString();
+
             // Tạo đối tượng Account
             Account account = new Account();
             account.setEmail(email);
-            account.setPasswordHash(password); // Hash password nếu cần
-//            account.setRoleID(roleID);
-           
+            account.setPasswordHash(hashedPassword);
 
             // Tạo đối tượng Staff
             Staff staff = new Staff();
@@ -61,7 +70,7 @@ public class CreateStaffServlet extends HttpServlet {
             staff.setPosition(position);
             staff.setHiredDate(hiredDate);
 
-            // Gọi DAO để thêm vào DB
+            // Gọi DAO
             StaffDAO dao = new StaffDAO();
             boolean success = dao.createStaffWithAccount(account, staff);
 
@@ -70,10 +79,12 @@ public class CreateStaffServlet extends HttpServlet {
             } else {
                 response.sendRedirect("StaffList?errorcreate=1");
             }
-} catch (Exception e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Error: " + e.getMessage());
-            request.getRequestDispatcher("/WEB-INF/View/admin/staffManagement/createStaff.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/View/admin/staffManagement/createStaff.jsp")
+                    .forward(request, response);
         }
     }
 
