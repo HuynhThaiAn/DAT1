@@ -7,7 +7,6 @@ package controller;
 import dao.ProductDAO;
 import dao.RevenueStatisticDAO;
 import dao.StaffDAO;
-import dao.SupplierDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -61,12 +60,10 @@ public class AdminDashboard extends HttpServlet {
             throws ServletException, IOException {
         StaffDAO staffDAO = new StaffDAO();
         ProductDAO productDAO = new ProductDAO();
-        SupplierDAO supplierDAO = new SupplierDAO();
         RevenueStatisticDAO revenueDAO = new RevenueStatisticDAO();
 
         int totalStaff = staffDAO.getTotalStaff();
         int totalProduct = productDAO.getTotalProducts();
-        int totalSupplier = supplierDAO.getTotalSuppliers();
 
         Calendar now = Calendar.getInstance();
         int month = now.get(Calendar.MONTH) + 1;
@@ -75,7 +72,6 @@ public class AdminDashboard extends HttpServlet {
 
         request.setAttribute("totalStaff", totalStaff);
         request.setAttribute("totalProduct", totalProduct);
-        request.setAttribute("totalSupplier", totalSupplier);
         request.setAttribute("monthlyRevenue", monthlyRevenue);
 
         request.getRequestDispatcher("/WEB-INF/View/admin/adminDashboard.jsp").forward(request, response);

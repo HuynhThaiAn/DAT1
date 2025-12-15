@@ -1,3 +1,8 @@
+<%-- 
+    Document   : productList
+    Created on : Jun 18, 2025, 1:04:12 PM
+    Author     : HP - Gia Khiêm
+--%>
 
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.Locale"%>

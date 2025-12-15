@@ -1,4 +1,3 @@
-
 <%@page import="java.util.List"%>
 <%@page import="model.Category"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -22,7 +21,7 @@
             cancelButtonText: 'Cancel'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Chuyển sang servlet xử lý
+                
                 window.location.href = 'DeleteCategory?categoryId=' + categoryId;
             }
         });

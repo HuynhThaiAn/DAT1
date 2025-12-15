@@ -40,10 +40,10 @@
             }
 
             .btn-inventory,
-.btn-revenue,
-.search-form {
-    visibility: hidden;
-}
+            .btn-revenue,
+            .search-form {
+                visibility: hidden;
+            }
 
             canvas {
                 width: 100% !important;
@@ -79,7 +79,7 @@
                         <a href="InventoryStatistic" class="btn btn-inventory me-2">INVENTORY</a>
                         <a href="RevenueStatistic" class="btn btn-revenue">REVENUE</a>
                     </div>
-                   
+
                     <form class="search-form" action="RevenueStatistic" method="get" autocomplete="off" style="margin-bottom:21.5px; margin-top:11px;">
                         <input type="text" class="form-control" name="keyword" placeholder="Search product..." />
                         <button type="submit" class="search-btn">Search</button>

@@ -9,7 +9,6 @@ import com.cloudinary.utils.ObjectUtils;
 import dao.BrandDAO;
 import dao.CategoryDAO;
 import dao.ProductDAO;
-import dao.SupplierDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -33,7 +32,6 @@ import model.CategoryDetail;
 import model.CategoryDetailGroup;
 import model.Product;
 import model.ProductDetail;
-import model.Suppliers;
 
 @MultipartConfig
 @WebServlet(name = "AdminUpdateProductServlet", urlPatterns = {"/AdminUpdateProduct"})
@@ -116,10 +114,6 @@ public class AdminUpdateProductServlet extends HttpServlet {
             request.setAttribute("categoryDetailList", categporyDetailList);
             request.setAttribute("productId", productId);
 
-            SupplierDAO supDAO = new SupplierDAO();
-            List<Suppliers> supList = supDAO.getAllSuppliers();
-
-            request.setAttribute("supList", supList);
             request.getRequestDispatcher("/WEB-INF/View/admin/productManagement/updateProduct/updateProduct.jsp").forward(request, response);
         }
 

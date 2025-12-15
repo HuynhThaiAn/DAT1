@@ -227,9 +227,9 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-            // Wait for DOM to be fully loaded
+            
             document.addEventListener('DOMContentLoaded', function () {
-                // Email validation
+                
                 const emailInput = document.querySelector('input[name="email"]');
                 if (emailInput) {
                     emailInput.addEventListener('input', function () {
@@ -248,17 +248,17 @@
                     });
                 }
 
-                // Form submission with loading state
+                
                 const form = document.querySelector('form');
                 const submitBtn = document.querySelector('button[type="submit"]');
                 
                 if (form && submitBtn) {
                     form.addEventListener('submit', function (e) {
-                        // Add loading state
+                        
                         submitBtn.disabled = true;
                         submitBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Sending...';
                         
-                        // Re-enable button after 5 seconds in case of network issues
+                        
                         setTimeout(() => {
                             submitBtn.disabled = false;
                             submitBtn.innerHTML = '<i class="bi bi-send-fill me-2"></i>Send OTP';

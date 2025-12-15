@@ -12,6 +12,7 @@
         <title>Product Management</title>
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/supplierList5.css">
+ <style>
 
         <style>
             :root{

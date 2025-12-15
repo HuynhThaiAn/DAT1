@@ -1,4 +1,3 @@
-
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.math.BigDecimal"%>

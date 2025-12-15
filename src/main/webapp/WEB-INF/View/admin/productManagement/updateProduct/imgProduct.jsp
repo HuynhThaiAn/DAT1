@@ -1,4 +1,3 @@
-
 <%@page import="java.util.List"%>
 <%@page import="model.ProductDetail"%>
 <%@page import="model.Product"%>
@@ -35,7 +34,7 @@
 
         <div class="d-flex flex-wrap gap-3 row" style="justify-content: center;">
 
-            <!-- Ảnh nhỏ 1 -->
+          
             <div class="img-thumbnail text-center" style="border: 1px solid #ccc; border-radius: 10px; max-height: 500px; width: 20%;">
                 <label for="fileInput1" style="cursor: pointer; width: 100%;">
                     <img id="previewImage1" src="<%= proDetail.getImageUrl1()%>"
@@ -47,7 +46,7 @@
                        style="display: none;" onchange="previewSelectedImage(event, 'previewImage1')">
             </div>
 
-            <!-- Ảnh nhỏ 2 -->
+            
             <div class=" img-thumbnail text-center"
                  style="border: 1px solid #ccc; border-radius: 10px; max-height: 500px; width: 20%;">
                 <label for="fileInput2" style="cursor: pointer;">
@@ -60,7 +59,7 @@
                        style="display: none;" onchange="previewSelectedImage(event, 'previewImage2')">
             </div>
 
-            <!-- Ảnh nhỏ 3 -->
+           
             <div class="img-thumbnail text-center"
                  style="border: 1px solid #ccc; border-radius: 10px; max-height: 500px; width: 20%;">
                 <label for="fileInput3" style="cursor: pointer;">
@@ -73,7 +72,7 @@
                        style="display: none;" onchange="previewSelectedImage(event, 'previewImage3')">
             </div>
 
-            <!-- Ảnh nhỏ 4 -->
+            
             <div class="img-thumbnail text-center"
                  style="border: 1px solid #ccc; border-radius: 10px; max-height: 500px; width: 20%;">
                 <label for="fileInput4" style="cursor: pointer;">

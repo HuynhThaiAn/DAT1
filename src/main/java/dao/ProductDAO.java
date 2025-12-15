@@ -24,7 +24,6 @@ import model.Product;
 import model.ProductDetail;
 import model.ProductVariant;
 
-import model.Suppliers;
 import utils.DBContext;
 
 public class ProductDAO extends DBContext {

@@ -15,7 +15,6 @@ public class ImportStock {
     private Timestamp importDate;
     private long totalAmount;
     private int isCompleted;
-    private Suppliers supplier;
     private String fullName;
     private List<ImportStockDetail> importStockDetails;
 
@@ -88,14 +87,6 @@ public class ImportStock {
 
     public void setIsCompleted(int isCompleted) {
         this.isCompleted = isCompleted;
-    }
-
-    public Suppliers getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(Suppliers supplier) {
-        this.supplier = supplier;
     }
 
     public List<ImportStockDetail> getImportStockDetails() {

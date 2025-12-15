@@ -180,7 +180,7 @@
     let matched = false;
     links.forEach(a => {
       const href = (a.getAttribute("href") || "").toLowerCase();
-      // match theo ?o?n cu?i URL (?? l?i includes b?y)
+      
       if (href && path.includes(href.toLowerCase())) {
         a.classList.add("active");
         matched = true;
@@ -189,7 +189,7 @@
       }
     });
 
-    // fallback: n?u không match ???c thì active Dashboard
+    
     if (!matched && links.length) links[0].classList.add("active");
   });
 </script>

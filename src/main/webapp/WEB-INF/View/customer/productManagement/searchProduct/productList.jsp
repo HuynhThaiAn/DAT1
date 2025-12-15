@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/filterProduct.css">
 
         <style>
-            /* 👉 GRID 5 CỘT, STYLE GIỐNG PHẦN SEARCH */
+           
             .product-grid {
                 display: grid;
                 grid-template-columns: repeat(5, 1fr);
@@ -143,7 +143,7 @@
                 if (productList != null && !productList.isEmpty()) {
                     for (Product pro : productList) {
                         if (!pro.isIsActive()) {
-                            continue;  // bỏ sản phẩm không active
+                            continue;  
                         }
 
                         BigDecimal price = pro.getPrice();
@@ -153,7 +153,7 @@
                         int discount = pro.getDiscount();
             %>
 
-            <!-- giữ class divProduct nếu chỗ khác còn dùng -->
+            
             <div class="divProduct product-card">
                 <a href="<%= request.getContextPath() %>/ProductDetail?productId=<%= pro.getProductId() %>&categoryId=<%= pro.getCategoryId() %>">
                     <div class="product-image-wrapper divHinh">

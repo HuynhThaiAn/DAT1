@@ -4,7 +4,6 @@ import dao.ImportStockDAO;
 import dao.ImportStockDetailDAO;
 import dao.ProductDAO;
 import dao.StaffDAO;
-import dao.SupplierDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,12 +21,10 @@ import model.ImportStock;
 import model.ImportStockDetail;
 import model.Product;
 import model.Staff;
-import model.Suppliers;
 
 @WebServlet(name = "ImportStockServlet", urlPatterns = {"/ImportStock"})
 public class ImportStockServlet extends HttpServlet {
 
-    SupplierDAO supplierDAO = new SupplierDAO();
     ProductDAO productDAO = new ProductDAO();
     ImportStockDAO importStockDAO = new ImportStockDAO();
     ImportStockDetailDAO importStockDetailDAO = new ImportStockDetailDAO();
@@ -71,10 +68,6 @@ public class ImportStockServlet extends HttpServlet {
             return;
         }
 
-        List<Suppliers> suppliers = supplierDAO.getAllActivatedSuppliers();
-        request.setAttribute("suppliers", suppliers);
-        session.setAttribute("suppliers", suppliers);
-
         ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");
         if (products == null) {
             products = (ArrayList<Product>) productDAO.getProductList();
@@ -104,8 +97,6 @@ public class ImportStockServlet extends HttpServlet {
         if (supplierIdRaw != null && !supplierIdRaw.trim().isEmpty()) {
             try {
                 int supplierId = Integer.parseInt(supplierIdRaw.trim());
-                Suppliers supplier = supplierDAO.getSupplierById(supplierId);
-                session.setAttribute("supplier", supplier);
 
                 ArrayList<Product> allProducts = (ArrayList<Product>) productDAO.getProductList();
                 session.setAttribute("products", allProducts);
@@ -174,7 +165,6 @@ public class ImportStockServlet extends HttpServlet {
                 session.setAttribute("selectedProducts", detailList);
                 session.setAttribute("products", products);
 
-                request.setAttribute("suppliers", supplierDAO.getAllSuppliers());
                 request.getRequestDispatcher("/WEB-INF/View/staff/stockManagement/importStock.jsp").forward(request, response);
                 return;
 
@@ -244,53 +234,7 @@ public class ImportStockServlet extends HttpServlet {
             }
         }
 
-        Suppliers supplier = (Suppliers) session.getAttribute("supplier");
         ArrayList<ImportStockDetail> selectedProducts = (ArrayList<ImportStockDetail>) session.getAttribute("selectedProducts");
 
-        if (supplier != null && selectedProducts != null && !selectedProducts.isEmpty()) {
-            long total = 0L;
-            for (ImportStockDetail detail : selectedProducts) {
-                total += detail.getQuantity() * detail.getUnitPrice();
-            }
-
-            Staff staff = (Staff) session.getAttribute("staff");
-            int staffId = 0;
-            if (staff != null) {
-                staffId = staff.getStaffID();
-            }
-
-            ImportStock importStock = new ImportStock(staffId, supplier.getSupplierID(), total);
-            int importId = importStockDAO.createImportStock(importStock);
-
-            if (importId <= 0) {
-                session.setAttribute("error", "Cannot create import stock receipt.");
-                response.sendRedirect("ImportStock");
-                return;
-            }
-
-            for (ImportStockDetail detail : selectedProducts) {
-                detail.setIoid(importId);
-                detail.setQuantityLeft(detail.getQuantity());
-                importStockDetailDAO.createImportStockDetail(detail);
-            }
-
-            importStockDAO.importStock(importId);
-
-            session.removeAttribute("selectedProducts");
-            session.removeAttribute("supplier");
-            session.removeAttribute("products");
-
-            response.sendRedirect("ImportStock?success=imported");
-            return;
-        } else {
-            response.sendRedirect("ImportStock?error=1");
-            return;
-        }
-
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Import stock controller";
     }
 }

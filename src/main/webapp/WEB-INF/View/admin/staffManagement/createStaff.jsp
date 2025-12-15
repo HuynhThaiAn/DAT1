@@ -22,7 +22,7 @@
             padding: 32px 12px;
         }
 
-        /* ===== Card chính ===== */
+       
         .card {
             border-radius: 18px;
             box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);

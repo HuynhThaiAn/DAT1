@@ -100,7 +100,6 @@ public class ImportStatisticServlet extends HttpServlet {
 
             Map<String, Integer> dailyImport = dao.getImportStocksCountByDate();
             Map<String, Integer> monthlyImport = dao.getImportStocksCountByMonth();
-            Map<String, Integer> supplierImport = dao.getStocksBySupplier();
             Map<String, Integer> topProductImport = dao.getTopImportedProducts();
 
             Map<String, Integer> top5ProductImportShort = new LinkedHashMap<>();
@@ -127,11 +126,9 @@ public class ImportStatisticServlet extends HttpServlet {
                 count++;
             }
 
-            Map<String, Integer> top5SupplierImport = getTop5ShortName(supplierImport);
             request.setAttribute("inventoryList", inventoryList);
             request.setAttribute("dailyImport", dailyImport);
             request.setAttribute("monthlyImport", monthlyImport);
-            request.setAttribute("supplierImport", top5SupplierImport);
             request.setAttribute("topProductImportShort", top5ProductImportShort);
             request.setAttribute("topProductImportFull", top5ProductImportFull);
 

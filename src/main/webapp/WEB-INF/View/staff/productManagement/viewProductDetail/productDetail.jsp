@@ -1,4 +1,3 @@
-
 <%@page import="model.Product"%>
 <%@page import="model.ProductDetail"%>
 <%@page import="model.CategoryDetail"%>

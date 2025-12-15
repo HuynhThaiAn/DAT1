@@ -72,7 +72,7 @@
 
                 if (detailGroup.classList.contains("hidden")) {
                     detailGroup.classList.remove("hidden");
-                    arrowIcon.innerText = "▲"; // hoặc dùng ▾ nếu thích
+                    arrowIcon.innerText = "▲"; 
                 } else {
                     detailGroup.classList.add("hidden");
                     arrowIcon.innerText = "▼";

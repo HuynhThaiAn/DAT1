@@ -5,7 +5,6 @@ import dao.ImportStockDetailDAO;
 import model.ImportStock;
 import model.ImportStockDetail;
 import model.Product;
-import model.Suppliers;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -84,7 +83,6 @@ public class ExportToFileExcelServlet extends HttpServlet {
         for (ImportStockDetail detail : allDetails) {
             ImportStock imp = importStockMap.get(detail.getIoid());
             Product prod = detail.getProduct();
-            Suppliers sup = (imp != null) ? imp.getSupplier() : null;
 
             cellNum = 0;
             row = sheet.createRow(rowNo++);
@@ -99,7 +97,6 @@ public class ExportToFileExcelServlet extends HttpServlet {
             cell.setCellValue(imp != null && imp.getImportDate() != null ? sdf.format(imp.getImportDate()) : "");
 
             cell = row.createCell(cellNum++);
-            cell.setCellValue(sup != null ? sup.getName() : "");
 
             cell = row.createCell(cellNum++);
             cell.setCellValue(prod != null ? String.valueOf(prod.getProductId()) : "");

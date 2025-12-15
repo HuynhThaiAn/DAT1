@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== Layout chung ===== */
+        
         body {
             background: linear-gradient(135deg, #e5edff 0%, #f9fafb 40%, #f4f6fb 100%);
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -27,7 +27,7 @@
             padding: 32px 12px;
         }
 
-        /* ===== Card chính ===== */
+        
         .card {
             border-radius: 18px;
             box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
@@ -185,7 +185,7 @@
             font-size: 0.9rem;
         }
 
-        /* Primary = xanh lá (Update) */
+        
         .btn-primary {
             background: linear-gradient(135deg, #22c55e, #16a34a);
             border: none;
@@ -209,7 +209,7 @@
             box-shadow: 0 5px 14px rgba(22, 163, 74, 0.4) !important;
         }
 
-        /* Secondary = xám cho Cancel */
+        
         .btn-secondary {
             background-color: #e5e7eb;
             border-color: #e5e7eb;
@@ -410,7 +410,7 @@
             return;
         }
 
-        // Chỉ kiểm tra trùng nếu người dùng thay đổi email
+       
         if (email !== currentEmail) {
             fetch("CheckEmailServlet?email=" + encodeURIComponent(email))
                 .then(response => response.text())
@@ -448,7 +448,7 @@
             return;
         }
 
-        // Chỉ kiểm tra nếu thay đổi số điện thoại
+       
         if (phone !== currentPhone) {
             fetch("CheckPhoneServlet?phone=" + encodeURIComponent(phone))
                 .then(response => response.text())
@@ -470,7 +470,7 @@
         submitBtn.disabled = false;
     });
 
-    // ===== BIRTHDATE (check >= 18 tuổi) =====
+    // ===== BIRTHDATE=====
     const birthInput = document.getElementById("birthDate");
     const birthError = document.getElementById("birthDateError");
 

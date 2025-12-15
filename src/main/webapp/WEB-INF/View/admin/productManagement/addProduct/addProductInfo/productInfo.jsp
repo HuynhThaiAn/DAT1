@@ -1,4 +1,3 @@
-
 <%@page import="model.Suppliers"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.Locale"%>
@@ -104,16 +103,16 @@
             const categoryId = document.getElementById("category").value;
             const brandSelect = document.getElementById("brand");
 
-            // Xóa tất cả brand cũ
+            
             brandSelect.innerHTML = '<option value="">-- Chọn thương hiệu --</option>';
 
-            // Lọc và thêm brand mới theo category
+            
             jsBrandList.forEach(brand => {
                 if (brand.categoryId.toString() === categoryId.toString()) {
                     const option = document.createElement("option");
                     option.value = brand.id;
                     option.textContent = brand.name;
-                    brandSelect.appendChild(option); // ❌ không cần .selected
+                    brandSelect.appendChild(option); 
                 }
             });
         }
