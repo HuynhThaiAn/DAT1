@@ -1,27 +1,30 @@
 /* =========================
-   DATABASE: DATShop
+   DATABASE: DATShop_v2
    ========================= */
 
-IF DB_ID('DATShop') IS NULL
-    CREATE DATABASE DATShop;
+IF DB_ID(N'DATShop_v2') IS NULL
+    CREATE DATABASE DATShop_v2;
 GO
-USE DATShop;
+USE DATShop_v2;
 GO
 
 /* =========================
    ACCOUNT
 ========================= */
-CREATE TABLE dbo.Customers (
+CREATE TABLE dbo.Customer (
     CustomerID    INT IDENTITY(1,1) PRIMARY KEY,
     Email         NVARCHAR(255) NOT NULL UNIQUE,
     PasswordHash  NVARCHAR(255) NOT NULL,
     FullName      NVARCHAR(150) NOT NULL,
     Phone         NVARCHAR(30)  NULL,
+    DateOfBirth   DATE NULL,
+    Gender        TINYINT NULL, -- 0=UNKNOWN, 1=MALE, 2=FEMALE, 3=OTHER
     AvatarUrl     NVARCHAR(500) NULL,
     IsBlocked     BIT NOT NULL DEFAULT 0,
     CreatedAt     DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     UpdatedAt     DATETIME2 NULL
 );
+GO
 
 CREATE TABLE dbo.Staff (
     StaffID       INT IDENTITY(1,1) PRIMARY KEY,
@@ -29,13 +32,16 @@ CREATE TABLE dbo.Staff (
     PasswordHash  NVARCHAR(255) NOT NULL,
     FullName      NVARCHAR(150) NOT NULL,
     Phone         NVARCHAR(30)  NULL,
+    DateOfBirth   DATE NULL,
+    Gender        TINYINT NULL, -- 0=UNKNOWN, 1=MALE, 2=FEMALE, 3=OTHER
     Role          TINYINT NOT NULL DEFAULT 1, -- 1=STAFF, 2=ADMIN
     IsDeleted     BIT NOT NULL DEFAULT 0,
     CreatedAt     DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     UpdatedAt     DATETIME2 NULL
 );
+GO
 
-CREATE TABLE dbo.Addresses (
+CREATE TABLE dbo.Address (
     AddressID      INT IDENTITY(1,1) PRIMARY KEY,
     CustomerID     INT NOT NULL,
     RecipientName  NVARCHAR(150) NOT NULL,
@@ -48,13 +54,15 @@ CREATE TABLE dbo.Addresses (
     IsActive       BIT NOT NULL DEFAULT 1,
     CreatedAt      DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     UpdatedAt      DATETIME2 NULL,
-    CONSTRAINT FK_Addresses_Customers FOREIGN KEY (CustomerID) REFERENCES dbo.Customers(CustomerID)
+    CONSTRAINT FK_Address_Customer
+        FOREIGN KEY (CustomerID) REFERENCES dbo.Customer(CustomerID)
 );
+GO
 
 /* =========================
-   PRODUCT 
+   PRODUCT
 ========================= */
-CREATE TABLE dbo.Categories (
+CREATE TABLE dbo.Category (
     CategoryID    INT IDENTITY(1,1) PRIMARY KEY,
     CategoryName  NVARCHAR(120) NOT NULL UNIQUE,
     Description   NVARCHAR(1000) NULL,
@@ -63,8 +71,9 @@ CREATE TABLE dbo.Categories (
     CreatedAt     DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     UpdatedAt     DATETIME2 NULL
 );
+GO
 
-CREATE TABLE dbo.Brands (
+CREATE TABLE dbo.Brand (
     BrandID      INT IDENTITY(1,1) PRIMARY KEY,
     BrandName    NVARCHAR(120) NOT NULL UNIQUE,
     Description  NVARCHAR(1000) NULL,
@@ -73,8 +82,9 @@ CREATE TABLE dbo.Brands (
     CreatedAt    DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     UpdatedAt    DATETIME2 NULL
 );
+GO
 
-CREATE TABLE dbo.Products (
+CREATE TABLE dbo.Product (
     ProductID    INT IDENTITY(1,1) PRIMARY KEY,
     CategoryID   INT NOT NULL,
     BrandID      INT NULL,
@@ -83,118 +93,104 @@ CREATE TABLE dbo.Products (
     IsDeleted    BIT NOT NULL DEFAULT 0,
     CreatedAt    DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     UpdatedAt    DATETIME2 NULL,
-    CONSTRAINT FK_Products_Categories FOREIGN KEY (CategoryID) REFERENCES dbo.Categories(CategoryID),
-    CONSTRAINT FK_Products_Brands     FOREIGN KEY (BrandID)     REFERENCES dbo.Brands(BrandID)
+    CONSTRAINT FK_Product_Category
+        FOREIGN KEY (CategoryID) REFERENCES dbo.Category(CategoryID),
+    CONSTRAINT FK_Product_Brand
+        FOREIGN KEY (BrandID) REFERENCES dbo.Brand(BrandID)
 );
+GO
 
-CREATE TABLE dbo.ProductVariants (
-    VariantID      INT IDENTITY(1,1) PRIMARY KEY,
-    ProductID      INT NOT NULL,
-    SKU            NVARCHAR(80)  NOT NULL UNIQUE,
-    VariantName    NVARCHAR(120) NOT NULL,
-    Price          DECIMAL(18,2) NOT NULL,
-    StockQuantity  INT NOT NULL DEFAULT 0,
-    IsActive       BIT NOT NULL DEFAULT 1,
-    CreatedAt      DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-    UpdatedAt      DATETIME2 NULL,
-    CONSTRAINT FK_Variants_Products FOREIGN KEY (ProductID) REFERENCES dbo.Products(ProductID)
+CREATE TABLE dbo.ProductVariant (
+    ProductVariantID  INT IDENTITY(1,1) PRIMARY KEY,
+    ProductID         INT NOT NULL,
+    SKU               NVARCHAR(80)  NOT NULL UNIQUE,
+    VariantName       NVARCHAR(120) NOT NULL,
+    Price             DECIMAL(18,2) NOT NULL,
+    StockQuantity     INT NOT NULL DEFAULT 0,
+    IsActive          BIT NOT NULL DEFAULT 1,
+    CreatedAt         DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    UpdatedAt         DATETIME2 NULL,
+    CONSTRAINT FK_ProductVariant_Product
+        FOREIGN KEY (ProductID) REFERENCES dbo.Product(ProductID)
 );
+GO
 
-CREATE TABLE dbo.ProductImages (
+CREATE TABLE dbo.ProductImage (
     ImageID     INT IDENTITY(1,1) PRIMARY KEY,
     ProductID   INT NOT NULL,
     ImageUrl    NVARCHAR(500) NOT NULL,
     IsMain      BIT NOT NULL DEFAULT 0,
     CreatedAt   DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-    CONSTRAINT FK_Images_Products FOREIGN KEY (ProductID) REFERENCES dbo.Products(ProductID)
+    CONSTRAINT FK_ProductImage_Product
+        FOREIGN KEY (ProductID) REFERENCES dbo.Product(ProductID)
 );
+GO
 
-CREATE TABLE dbo.CategoryAttributeGroups (
-    GroupID     INT IDENTITY(1,1) PRIMARY KEY,
-    CategoryID  INT NOT NULL,
-    GroupName   NVARCHAR(120) NOT NULL,
-    IsDeleted   BIT NOT NULL DEFAULT 0,
-    CONSTRAINT FK_CAG_Categories FOREIGN KEY (CategoryID) REFERENCES dbo.Categories(CategoryID)
+CREATE TABLE dbo.VariantAttribute (
+    VariantAttributeID INT IDENTITY(1,1) PRIMARY KEY,
+    ProductVariantID   INT NOT NULL,
+    AttributeName      NVARCHAR(150) NOT NULL,
+    AttributeValue     NVARCHAR(500) NOT NULL,
+    Unit               NVARCHAR(30)  NULL,
+    CONSTRAINT FK_VariantAttribute_ProductVariant
+        FOREIGN KEY (ProductVariantID) REFERENCES dbo.ProductVariant(ProductVariantID)
 );
+GO
 
-CREATE TABLE dbo.CategoryAttributes (
-    AttributeID    INT IDENTITY(1,1) PRIMARY KEY,
-    GroupID        INT NOT NULL,
-    AttributeName  NVARCHAR(120) NOT NULL,
-    Unit           NVARCHAR(30)  NULL,
-    DataType       TINYINT NOT NULL DEFAULT 1, -- 1=text, 2=number
-    IsDeleted      BIT NOT NULL DEFAULT 0,
-    CONSTRAINT FK_CA_Groups FOREIGN KEY (GroupID) REFERENCES dbo.CategoryAttributeGroups(GroupID)
-);
-
-CREATE TABLE dbo.ProductAttributeValues (
-    ProductID    INT NOT NULL,
-    AttributeID  INT NOT NULL,
-    Value        NVARCHAR(500) NOT NULL,
-    PRIMARY KEY (ProductID, AttributeID),
-    CONSTRAINT FK_PAV_Product   FOREIGN KEY (ProductID)   REFERENCES dbo.Products(ProductID),
-    CONSTRAINT FK_PAV_Attribute FOREIGN KEY (AttributeID) REFERENCES dbo.CategoryAttributes(AttributeID)
-);
-
-CREATE TABLE dbo.VariantAttributeValues (
-    VariantID    INT NOT NULL,
-    AttributeID  INT NOT NULL,
-    Value        NVARCHAR(500) NOT NULL,
-    PRIMARY KEY (VariantID, AttributeID),
-    CONSTRAINT FK_VAV_Variant   FOREIGN KEY (VariantID)   REFERENCES dbo.ProductVariants(VariantID),
-    CONSTRAINT FK_VAV_Attribute FOREIGN KEY (AttributeID) REFERENCES dbo.CategoryAttributes(AttributeID)
-);
 
 /* =========================
    ORDER
 ========================= */
 CREATE TABLE dbo.Cart (
-    CustomerID  INT NOT NULL,
-    VariantID   INT NOT NULL,
-    Quantity    INT NOT NULL,
-    AddedAt     DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-    UpdatedAt   DATETIME2 NULL,
-    PRIMARY KEY (CustomerID, VariantID),
-    CONSTRAINT FK_Cart_Customer FOREIGN KEY (CustomerID) REFERENCES dbo.Customers(CustomerID),
-    CONSTRAINT FK_Cart_Variant  FOREIGN KEY (VariantID)  REFERENCES dbo.ProductVariants(VariantID)
+    CustomerID        INT NOT NULL,
+    ProductVariantID  INT NOT NULL,
+    Quantity          INT NOT NULL,
+    AddedAt           DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    UpdatedAt         DATETIME2 NULL,
+    PRIMARY KEY (CustomerID, ProductVariantID),
+    CONSTRAINT FK_Cart_Customer
+        FOREIGN KEY (CustomerID) REFERENCES dbo.Customer(CustomerID),
+    CONSTRAINT FK_Cart_ProductVariant
+        FOREIGN KEY (ProductVariantID) REFERENCES dbo.ProductVariant(ProductVariantID)
 );
+GO
 
-CREATE TABLE dbo.Orders (
+
+CREATE TABLE dbo.[Order] (
     OrderID        INT IDENTITY(1,1) PRIMARY KEY,
     CustomerID     INT NOT NULL,
-
+    AddressID      INT NOT NULL,
     ReceiverName   NVARCHAR(150) NOT NULL,
     Phone          NVARCHAR(30)  NOT NULL,
-    Province       NVARCHAR(100) NOT NULL,
-    District       NVARCHAR(100) NOT NULL,
-    Ward           NVARCHAR(100) NOT NULL,
-    DetailAddress  NVARCHAR(255) NOT NULL,
-
     TotalAmount    DECIMAL(18,2) NOT NULL DEFAULT 0,
     Status         TINYINT NOT NULL DEFAULT 1,
-
     OrderedAt      DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     PaidAt         DATETIME2 NULL,
     ShippedAt      DATETIME2 NULL,
     DeliveredAt    DATETIME2 NULL,
     CancelledAt    DATETIME2 NULL,
-
     Note           NVARCHAR(500) NULL,
-
-    CONSTRAINT FK_Orders_Customers FOREIGN KEY (CustomerID) REFERENCES dbo.Customers(CustomerID)
+    CONSTRAINT FK_Order_Customer
+        FOREIGN KEY (CustomerID) REFERENCES dbo.Customer(CustomerID),
+    CONSTRAINT FK_Order_Address
+        FOREIGN KEY (AddressID) REFERENCES dbo.Address(AddressID)
 );
+GO
 
-CREATE TABLE dbo.OrderDetails (
-    OrderID    INT NOT NULL,
-    VariantID  INT NOT NULL,
-    UnitPrice  DECIMAL(18,2) NOT NULL,
-    Quantity   INT NOT NULL,
-    PRIMARY KEY (OrderID, VariantID),
-    CONSTRAINT FK_OD_Order   FOREIGN KEY (OrderID)   REFERENCES dbo.Orders(OrderID),
-    CONSTRAINT FK_OD_Variant FOREIGN KEY (VariantID) REFERENCES dbo.ProductVariants(VariantID)
+CREATE TABLE dbo.OrderDetail (
+    OrderID           INT NOT NULL,
+    ProductVariantID  INT NOT NULL,
+    UnitPrice         DECIMAL(18,2) NOT NULL,
+    Quantity          INT NOT NULL,
+    PRIMARY KEY (OrderID, ProductVariantID),
+    CONSTRAINT FK_OrderDetail_Order
+        FOREIGN KEY (OrderID) REFERENCES dbo.[Order](OrderID),
+    CONSTRAINT FK_OrderDetail_ProductVariant
+        FOREIGN KEY (ProductVariantID) REFERENCES dbo.ProductVariant(ProductVariantID)
 );
+GO
 
-CREATE TABLE dbo.Payments (
+CREATE TABLE dbo.Payment (
     PaymentID        INT IDENTITY(1,1) PRIMARY KEY,
     OrderID          INT NOT NULL UNIQUE,
     Method           TINYINT NOT NULL,
@@ -203,13 +199,15 @@ CREATE TABLE dbo.Payments (
     TransactionCode  NVARCHAR(120) NULL,
     PaidAt           DATETIME2 NULL,
     CreatedAt        DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-    CONSTRAINT FK_Payments_Orders FOREIGN KEY (OrderID) REFERENCES dbo.Orders(OrderID)
+    CONSTRAINT FK_Payment_Order
+        FOREIGN KEY (OrderID) REFERENCES dbo.[Order](OrderID)
 );
+GO
 
 /* =========================
    STOCK / IMPORT
 ========================= */
-CREATE TABLE dbo.Imports (
+CREATE TABLE dbo.Import (
     ImportID      INT IDENTITY(1,1) PRIMARY KEY,
     StaffID       INT NOT NULL,
     SupplierName  NVARCHAR(200) NULL,
@@ -218,23 +216,28 @@ CREATE TABLE dbo.Imports (
     Note          NVARCHAR(500) NULL,
     CreatedAt     DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     UpdatedAt     DATETIME2 NULL,
-    CONSTRAINT FK_Imports_Staff FOREIGN KEY (StaffID) REFERENCES dbo.Staff(StaffID)
+    CONSTRAINT FK_Import_Staff
+        FOREIGN KEY (StaffID) REFERENCES dbo.Staff(StaffID)
 );
+GO
 
-CREATE TABLE dbo.ImportDetails (
-    ImportID  INT NOT NULL,
-    VariantID INT NOT NULL,
-    UnitCost  DECIMAL(18,2) NOT NULL,
-    Quantity  INT NOT NULL,
-    PRIMARY KEY (ImportID, VariantID),
-    CONSTRAINT FK_ID_Import  FOREIGN KEY (ImportID) REFERENCES dbo.Imports(ImportID),
-    CONSTRAINT FK_ID_Variant FOREIGN KEY (VariantID) REFERENCES dbo.ProductVariants(VariantID)
+CREATE TABLE dbo.ImportDetail (
+    ImportID          INT NOT NULL,
+    ProductVariantID  INT NOT NULL,
+    UnitCost          DECIMAL(18,2) NOT NULL,
+    Quantity          INT NOT NULL,
+    PRIMARY KEY (ImportID, ProductVariantID),
+    CONSTRAINT FK_ImportDetail_Import
+        FOREIGN KEY (ImportID) REFERENCES dbo.Import(ImportID),
+    CONSTRAINT FK_ImportDetail_ProductVariant
+        FOREIGN KEY (ProductVariantID) REFERENCES dbo.ProductVariant(ProductVariantID)
 );
+GO
 
 /* =========================
    FEEDBACK
 ========================= */
-CREATE TABLE dbo.Feedbacks (
+CREATE TABLE dbo.Feedback (
     FeedbackID   INT IDENTITY(1,1) PRIMARY KEY,
     ProductID    INT NOT NULL,
     CustomerID   INT NOT NULL,
@@ -243,17 +246,23 @@ CREATE TABLE dbo.Feedbacks (
     IsVisible    BIT NOT NULL DEFAULT 1,
     CreatedAt    DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     UpdatedAt    DATETIME2 NULL,
-    CONSTRAINT FK_Feedback_Product  FOREIGN KEY (ProductID) REFERENCES dbo.Products(ProductID),
-    CONSTRAINT FK_Feedback_Customer FOREIGN KEY (CustomerID) REFERENCES dbo.Customers(CustomerID)
+    CONSTRAINT FK_Feedback_Product
+        FOREIGN KEY (ProductID) REFERENCES dbo.Product(ProductID),
+    CONSTRAINT FK_Feedback_Customer
+        FOREIGN KEY (CustomerID) REFERENCES dbo.Customer(CustomerID)
 );
+GO
 
-CREATE TABLE dbo.FeedbackReplies (
+CREATE TABLE dbo.FeedbackReply (
     ReplyID     INT IDENTITY(1,1) PRIMARY KEY,
     FeedbackID  INT NOT NULL,
     StaffID     INT NOT NULL,
     Content     NVARCHAR(1000) NOT NULL,
     IsPublic    BIT NOT NULL DEFAULT 1,
     CreatedAt   DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-    CONSTRAINT FK_FR_Feedback FOREIGN KEY (FeedbackID) REFERENCES dbo.Feedbacks(FeedbackID),
-    CONSTRAINT FK_FR_Staff    FOREIGN KEY (StaffID)    REFERENCES dbo.Staff(StaffID)
+    CONSTRAINT FK_FeedbackReply_Feedback
+        FOREIGN KEY (FeedbackID) REFERENCES dbo.Feedback(FeedbackID),
+    CONSTRAINT FK_FeedbackReply_Staff
+        FOREIGN KEY (StaffID) REFERENCES dbo.Staff(StaffID)
 );
+GO
