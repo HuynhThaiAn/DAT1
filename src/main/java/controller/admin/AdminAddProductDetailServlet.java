@@ -79,25 +79,36 @@ public class AdminAddProductDetailServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
 
-        ProductDAO proDAO = new ProductDAO();
-        int productId = Integer.parseInt(request.getParameter("productId"));
-        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-        Product product = proDAO.getProductById(productId);
-        request.setAttribute("product", product);
+    ProductDAO proDAO = new ProductDAO();
 
-        CategoryDAO cateDAO = new CategoryDAO();
-        List<CategoryDetailGroup> cateDetailGroup = cateDAO.getCategoryDetailGroupById(categoryId);
-        List<CategoryDetail> cateDetail = cateDAO.getCategoryDetailById(categoryId);
-        request.setAttribute("categoryGroupList", cateDetailGroup);
-        request.setAttribute("categoryDetailList", cateDetail);
-        request.setAttribute("categoryId", categoryId);
+    int productId = Integer.parseInt(request.getParameter("productId"));
+    int categoryId = Integer.parseInt(request.getParameter("categoryId"));
 
-        request.getRequestDispatcher("/WEB-INF/View/admin/productManagement/addProduct/addProductDetail/adminAddProductDetail.jsp").forward(request, response);
+    Product product = proDAO.getProductByID(productId); 
+
+    if (product == null) {
+        response.sendRedirect("AdminCreateProduct?error=product_not_found");
+        return;
     }
+
+    request.setAttribute("product", product);
+
+    CategoryDAO cateDAO = new CategoryDAO();
+    List<CategoryDetailGroup> cateDetailGroup = cateDAO.getCategoryDetailGroupById(categoryId);
+    List<CategoryDetail> cateDetail = cateDAO.getCategoryDetailById(categoryId);
+
+    request.setAttribute("categoryGroupList", cateDetailGroup);
+    request.setAttribute("categoryDetailList", cateDetail);
+    request.setAttribute("categoryId", categoryId);
+
+    request.getRequestDispatcher("/WEB-INF/View/admin/productManagement/addProduct/addProductDetail/adminAddProductDetail.jsp")
+           .forward(request, response);
+}
+
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -110,7 +121,7 @@ public class AdminAddProductDetailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //        <====================================== Xử lý ảnh ===========================================>
+     
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         boolean checkInsertValue = false;
@@ -126,7 +137,7 @@ public class AdminAddProductDetailServlet extends HttpServlet {
             ProductDetail productDetail = proDAO.getOneProductDetailById(productId);
             Product product = proDAO.getProductByID(productId);
             Map<String, String> imageUrlMap = new LinkedHashMap<>();
-//            imageUrlMap.put("fileMain", product.getImageUrl());
+            imageUrlMap.put("fileMain", product.getImageUrl());
             imageUrlMap.put("file1", null);
             imageUrlMap.put("file2", null);
             imageUrlMap.put("file3", null);
@@ -149,7 +160,7 @@ public class AdminAddProductDetailServlet extends HttpServlet {
 
                     String url = (String) uploadResult.get("secure_url");
                     if (url != null) {
-                        imageUrlMap.put(key, url); // ⚡ Update lại value
+                        imageUrlMap.put(key, url); 
                     } else {
                         imageUrlMap.put(key, "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
                     }
@@ -168,9 +179,9 @@ public class AdminAddProductDetailServlet extends HttpServlet {
                     String value = request.getParameter(paramName);
 
                     if (value != null && !value.trim().isEmpty()) {
-                        // Cập nhật lại DB
+                       
                         checkInsertValue = proDAO.insertProductDetail(productId, cateDetail.getCategoryDetailID(), value);
-                    } 
+                    }
 
                 }
                 if (checkInsertImg && checkInsertValue) {
@@ -180,9 +191,9 @@ public class AdminAddProductDetailServlet extends HttpServlet {
 
                 }
             }
-            //        <====================================== Xử lý ảnh ===========================================>
+            
         }
-//        response.sendRedirect("AdminCreateProduct?error=1");
+
     }
 
     /**

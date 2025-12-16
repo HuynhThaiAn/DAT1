@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/supplierList5.css">
  <style>
 
+       
             :root{
                 --bg: #f4f6fb;
                 --card: #ffffff;

@@ -27,7 +27,7 @@
         </div>
 
         <%
-            if (productDetailList != null) {
+            if (productDetailList != null && !productDetailList.isEmpty()) {
                 ProductDetail proDetail = productDetailList.get(0);
         %>
 

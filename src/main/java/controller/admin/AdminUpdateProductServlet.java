@@ -131,87 +131,165 @@ public class AdminUpdateProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+
         ProductDAO proDAO = new ProductDAO();
 
-        int id = Integer.parseInt(request.getParameter("id"));
+        // ===== 1) Read + validate basic fields =====
+        String idStr = request.getParameter("id");
+        if (idStr == null || idStr.isBlank()) {
+            response.sendRedirect("AdminProductList?error=missing_id");
+            return;
+        }
+
+        int id;
+        try {
+            id = Integer.parseInt(idStr.trim());
+        } catch (NumberFormatException e) {
+            response.sendRedirect("AdminProductList?error=invalid_id");
+            return;
+        }
+
         String productName = request.getParameter("productName");
+        if (productName == null) {
+            productName = "";
+        }
+        productName = productName.trim();
 
         String priceFormatted = request.getParameter("price");
-        priceFormatted = priceFormatted.replace(".", "") // bỏ dấu chấm ngăn cách hàng nghìn
-                .replace("₫", "") // bỏ ký tự tiền
-                .trim();
-        BigDecimal price = new BigDecimal(priceFormatted);
+        if (priceFormatted == null || priceFormatted.isBlank()) {
+            response.sendRedirect("AdminUpdateProduct?productId=" + id + "&error=missing_price");
+            return;
+        }
 
-        int Category = Integer.parseInt(request.getParameter("category"));
-        int Brand = Integer.parseInt(request.getParameter("brand"));
-        int supplier = Integer.parseInt(request.getParameter("suppliers"));
+        priceFormatted = priceFormatted.replace(".", "")
+                .replace("₫", "")
+                .replace(",", "")
+                .trim();
+
+        BigDecimal price;
+        try {
+            price = new BigDecimal(priceFormatted);
+        } catch (NumberFormatException e) {
+            response.sendRedirect("AdminUpdateProduct?productId=" + id + "&error=invalid_price");
+            return;
+        }
+
+        String catStr = request.getParameter("category");
+        String brandStr = request.getParameter("brand");
+
+        if (catStr == null || catStr.isBlank() || brandStr == null || brandStr.isBlank()) {
+
+            response.sendRedirect("AdminUpdateProduct?productId=" + id + "&error=missing_category_brand");
+            return;
+        }
+
+        int categoryId, brandId;
+        try {
+            categoryId = Integer.parseInt(catStr.trim());
+            brandId = Integer.parseInt(brandStr.trim());
+        } catch (NumberFormatException e) {
+            response.sendRedirect("AdminUpdateProduct?productId=" + id + "&error=invalid_category_brand");
+            return;
+        }
 
         boolean isFeatured = request.getParameter("isFeatured") != null;
         boolean isBestSeller = request.getParameter("isBestSeller") != null;
         boolean isNew = request.getParameter("isNew") != null;
         boolean isActive = request.getParameter("isActive") != null;
 
-//        <====================================== Xử lý ảnh ===========================================>
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
+        Product current = proDAO.getProductByID(id);
+        if (current == null) {
+            response.sendRedirect("AdminProductList?error=product_not_found");
+            return;
+        }
+        int supplierId = current.getSupplierId();
 
+        // ===== 3) Image handling  =====
         ProductDetail productDetail = proDAO.getOneProductDetailById(id);
-        Product product = proDAO.getProductByID(id);
+
         Map<String, String> imageUrlMap = new LinkedHashMap<>();
-        imageUrlMap.put("fileMain", product.getImageUrl());
-        imageUrlMap.put("file1", productDetail.getImageUrl1());
-        imageUrlMap.put("file2", productDetail.getImageUrl2());
-        imageUrlMap.put("file3", productDetail.getImageUrl3());
-        imageUrlMap.put("file4", productDetail.getImageUrl4());
+        imageUrlMap.put("fileMain", current.getImageUrl());
+        imageUrlMap.put("file1", (productDetail != null ? productDetail.getImageUrl1() : null));
+        imageUrlMap.put("file2", (productDetail != null ? productDetail.getImageUrl2() : null));
+        imageUrlMap.put("file3", (productDetail != null ? productDetail.getImageUrl3() : null));
+        imageUrlMap.put("file4", (productDetail != null ? productDetail.getImageUrl4() : null));
 
         for (String key : imageUrlMap.keySet()) {
             Part part = request.getPart(key);
             if (part != null && part.getSize() > 0) {
-                InputStream is = part.getInputStream();
-                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-                byte[] data = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = is.read(data, 0, data.length)) != -1) {
-                    buffer.write(data, 0, bytesRead);
-                }
-                byte[] fileBytes = buffer.toByteArray();
+                try ( InputStream is = part.getInputStream();  ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
 
-                Map uploadResult = cloudinary.uploader().upload(fileBytes,
-                        ObjectUtils.asMap("resource_type", "auto"));
+                    byte[] data = new byte[1024];
+                    int bytesRead;
+                    while ((bytesRead = is.read(data)) != -1) {
+                        buffer.write(data, 0, bytesRead);
+                    }
 
-                String url = (String) uploadResult.get("secure_url");
-                if (url != null) {
-                    imageUrlMap.put(key, url); // ⚡ Update lại value
+                    Map uploadResult = cloudinary.uploader().upload(
+                            buffer.toByteArray(),
+                            ObjectUtils.asMap("resource_type", "auto")
+                    );
+
+                    String url = (String) uploadResult.get("secure_url");
+                    if (url != null && !url.isBlank()) {
+                        imageUrlMap.put(key, url);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    response.sendRedirect("AdminUpdateProduct?productId=" + id + "&error=upload_failed");
+                    return;
                 }
             }
         }
-        //        <====================================== Xử lý ảnh ===========================================>
-        boolean res = proDAO.updateProductInfo(id, productName, price, supplier, Category, Brand, isFeatured, isBestSeller, isNew, isActive, imageUrlMap.get("fileMain"));
 
-        //        <====================================== Xử lý thông tin ===========================================>
+        // ===== 4) Update product info =====
+        boolean res = proDAO.updateProductInfo(
+                id,
+                productName,
+                price,
+                supplierId,
+                categoryId,
+                brandId,
+                isFeatured,
+                isBestSeller,
+                isNew,
+                isActive,
+                imageUrlMap.get("fileMain")
+        );
+
+        // ===== 5) Update product details=====
         List<ProductDetail> productDetailList = proDAO.getProductDetailById(id);
+        if (productDetailList != null) {
+            for (ProductDetail proDetail : productDetailList) {
+                String paramName = "attribute_" + proDetail.getCategoryDetailID();
+                String value = request.getParameter(paramName);
 
-        for (ProductDetail proDetail : productDetailList) {
-            String paramName = "attribute_" + proDetail.getCategoryDetailID();
-
-            String value = request.getParameter(paramName);
-
-            if (value != null && !value.trim().isEmpty()) {
-                proDetail.setAttributeValue(value.trim());
-
-                // Cập nhật lại DB
-                res = proDAO.updateProductDetail(id, proDetail.getCategoryDetailID(), value, imageUrlMap.get("file1"), imageUrlMap.get("file2"), imageUrlMap.get("file3"), imageUrlMap.get("file4"), imageUrlMap.get("fileMain")); // bạn cần có hàm này trong DAO
+                if (value != null && !value.trim().isEmpty()) {
+                    boolean ok = proDAO.updateProductDetail(
+                            id,
+                            proDetail.getCategoryDetailID(),
+                            value.trim(),
+                            imageUrlMap.get("file1"),
+                            imageUrlMap.get("file2"),
+                            imageUrlMap.get("file3"),
+                            imageUrlMap.get("file4"),
+                            imageUrlMap.get("fileMain")
+                    );
+                    res = res && ok;
+                }
             }
-
         }
 
+        // ===== 6) Redirect =====
         if (res) {
-            response.sendRedirect("AdminUpdateProduct?productId=" + id + "&success=1");
+            response.sendRedirect(request.getContextPath() + "/AdminProductList?success=update_ok");
         } else {
-            response.sendRedirect("AdminUpdateProduct?productId=" + id + "&error=1");
+            response.sendRedirect(request.getContextPath() + "/AdminUpdateProduct?productId=" + id + "&error=update_failed");
         }
+        return;
 
-        //        <====================================== Xử lý thông tin ===========================================>
     }
 
     /**

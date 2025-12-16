@@ -28,7 +28,6 @@ import model.Brand;
 import model.Category;
 import model.Product;
 
-
 @MultipartConfig
 @WebServlet(name = "AdminAddProductServlet", urlPatterns = {"/AdminCreateProduct"})
 public class AdminAddProductServlet extends HttpServlet {
@@ -39,9 +38,9 @@ public class AdminAddProductServlet extends HttpServlet {
     public void init() {
         cloudinary = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", "drhwpl5ot",
-                    "api_key", "999285875724359",
-                    "api_secret", "6cc_Lm03iup_9twNN2BSAmnJ8tA",
-                    "secure", true
+                "api_key", "999285875724359",
+                "api_secret", "6cc_Lm03iup_9twNN2BSAmnJ8tA",
+                "secure", true
         ));
     }
 
@@ -91,7 +90,7 @@ public class AdminAddProductServlet extends HttpServlet {
 
         request.setAttribute("categoryList", categoryList);
         request.setAttribute("brandList", brandList);
-        
+
         request.getRequestDispatcher("/WEB-INF/View/admin/productManagement/addProduct/addProductInfo/adminAddProduct.jsp").forward(request, response);
     }
 
@@ -106,67 +105,88 @@ public class AdminAddProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+
         ProductDAO proDAO = new ProductDAO();
 
-        String productName = request.getParameter("productName");
-        
-        String discription = request.getParameter("discription");
-        
-//        BigDecimal price = new BigDecimal(priceFormatted);
+        String productName = trimOrNull(request.getParameter("productName"));
+        String description = trimOrNull(request.getParameter("description"));
 
-        int Category = Integer.parseInt(request.getParameter("category"));
-        int Brand = Integer.parseInt(request.getParameter("brand"));
-        int Suppliers = Integer.parseInt(request.getParameter("suppliers"));
-        
-        int stock = 0;
+        Integer categoryId = parseIntOrNull(request.getParameter("category"));
+        Integer brandId = parseIntOrNull(request.getParameter("brand"));
 
         boolean isFeatured = request.getParameter("isFeatured") != null;
         boolean isBestSeller = request.getParameter("isBestSeller") != null;
         boolean isNew = request.getParameter("isNew") != null;
-        boolean isActive = request.getParameter("isActive") != null;
+        boolean isActive = true;
 
-//        <====================================== Xử lý ảnh ===========================================>
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-
-        Map<String, String> imageUrlMap = new LinkedHashMap<>();
-        imageUrlMap.put("fileMain", null);
-
-        for (String key : imageUrlMap.keySet()) {
-            Part part = request.getPart(key);
-            if (part != null && part.getSize() > 0) {
-                InputStream is = part.getInputStream();
-                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-                byte[] data = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = is.read(data, 0, data.length)) != -1) {
-                    buffer.write(data, 0, bytesRead);
-                }
-                byte[] fileBytes = buffer.toByteArray();
-
-                Map uploadResult = cloudinary.uploader().upload(fileBytes,
-                        ObjectUtils.asMap("resource_type", "auto"));
-
-                String url = (String) uploadResult.get("secure_url");
-                if (url != null) {
-                    imageUrlMap.put(key, url); // ⚡ Update lại value
-                } else {
-                    imageUrlMap.put(key, "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
-                }
-            } else {
-                imageUrlMap.put(key, "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png");
-            }
+        // Basic validate
+        if (productName == null || productName.isBlank()
+                || description == null
+                || categoryId == null || brandId == null ) {
+            response.sendRedirect("AdminCreateProduct?error=missing");
+            return;
         }
 
-//        <====================================== Xử lý anh ===========================================>
-        int productId = proDAO.insertProduct(productName, discription, Suppliers, stock, Category, Brand, isFeatured, isBestSeller, isNew, isActive, imageUrlMap.get("fileMain"));
+        // Upload main image (optional)
+        String mainImageUrl = uploadToCloudinaryOrDefault(request.getPart("fileMain"));
 
+        int productId = proDAO.insertProduct(
+                productName, description,
+                categoryId, brandId,
+                isFeatured, isBestSeller, isNew, isActive,
+                mainImageUrl
+        );
         if (productId > 0) {
-            response.sendRedirect("AdminAddProductDetail?productId=" + productId + "&categoryId=" + Category);
+            response.sendRedirect("AdminAddProductDetail?productId=" + productId + "&categoryId=" + categoryId);
         } else {
-            response.sendRedirect("AdminCreateProduct?productId=&error=1");
+            response.sendRedirect("AdminCreateProduct?error=insert_failed");
+        }
+    }
+
+    private String uploadToCloudinaryOrDefault(Part part) throws IOException {
+        final String DEFAULT_URL = "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png";
+        if (part == null || part.getSize() <= 0) {
+            return DEFAULT_URL;
         }
 
+        try ( InputStream is = part.getInputStream();  ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
+
+            byte[] data = new byte[8192];
+            int bytesRead;
+            while ((bytesRead = is.read(data)) != -1) {
+                buffer.write(data, 0, bytesRead);
+            }
+
+            @SuppressWarnings("rawtypes")
+            Map uploadResult = cloudinary.uploader().upload(
+                    buffer.toByteArray(),
+                    ObjectUtils.asMap("resource_type", "auto")
+            );
+
+            String url = (String) uploadResult.get("secure_url");
+            return (url != null && !url.isBlank()) ? url : DEFAULT_URL;
+        } catch (Exception ex) {
+            // log ex
+            return DEFAULT_URL;
+        }
+    }
+
+    private Integer parseIntOrNull(String s) {
+        try {
+            if (s == null || s.isBlank()) {
+                return null;
+            }
+            return Integer.parseInt(s.trim());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private String trimOrNull(String s) {
+        return (s == null) ? null : s.trim();
     }
 
     /**
