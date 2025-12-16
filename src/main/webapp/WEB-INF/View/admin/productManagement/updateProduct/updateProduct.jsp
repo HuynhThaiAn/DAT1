@@ -45,6 +45,9 @@
                             <jsp:include page="/WEB-INF/View/admin/productManagement/updateProduct/updateDetail.jsp" />
                             <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Save</button>
                         </div>
+                            <div style = "display: flex; margin-left: auto;">
+                                <a href="AdminProduct" class="btn btn-back" style = "text-decoration: none">Back</a>
+                            </div>
                     </div>
 
                     <div style = "width: 44%;">

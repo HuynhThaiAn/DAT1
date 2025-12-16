@@ -19,7 +19,6 @@
                 cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Chuyển sang servlet xử lý
                     window.location.href = 'StaffDeleteProduct?productId=' + productId;
                 }
             });

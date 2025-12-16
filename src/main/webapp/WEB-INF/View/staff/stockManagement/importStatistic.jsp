@@ -93,12 +93,7 @@
                         </div>
                     </div>
 
-                    <div class="chart-card">
-                        <div class="chart-title">Stock Import by Supplier</div>
-                        <div class="chart-canvas">
-                            <canvas id="supplierStockChart"></canvas>
-                        </div>
-                    </div>
+                    
 
                     <div class="chart-card">
                         <div class="chart-title">Stock Import by Product</div>
@@ -122,9 +117,7 @@
                 const monthlyLabels = [<c:forEach items="${monthlyImport}" var="entry">"${entry.key}",</c:forEach>];
                 const monthlyData = [<c:forEach items="${monthlyImport}" var="entry">${entry.value},</c:forEach>];
 
-                // Top Suppliers
-                const supplierLabels = [<c:forEach items="${supplierImport}" var="entry">"${entry.key}",</c:forEach>];
-                const supplierData = [<c:forEach items="${supplierImport}" var="entry">${entry.value},</c:forEach>];
+               
 
                 // Top Products
                 const productLabels = [<c:forEach items="${topProductImportShort}" var="entry">"${entry.key}",</c:forEach>];
@@ -154,21 +147,7 @@
                     options: { ...chartOpts }
                 });
 
-                new Chart(document.getElementById('supplierStockChart'), {
-                    type: 'pie',
-                    data: {
-                        labels: supplierLabels,
-                        datasets: [{
-                            data: supplierData,
-                            backgroundColor: ['#61a5e8', '#f58787', '#ffcd56', '#77dd77', '#a4a1ff', '#ffb366']
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: true, position: 'top' } }
-                    }
-                });
+                
 
                 new Chart(document.getElementById('productStockChart'), {
                     type: 'bar',

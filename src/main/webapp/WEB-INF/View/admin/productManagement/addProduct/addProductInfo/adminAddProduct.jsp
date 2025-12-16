@@ -37,7 +37,7 @@
             }
 
             .btn-success, .btn-back {
-                padding: 8px 16px;  
+                padding: 8px 16px;
                 font-size: 14px;
             }
 
@@ -79,21 +79,13 @@
 
     <script>
         window.onload = function () {
-        <% if ("1".equals(success)) { %>
-            Swal.fire({
-                icon: 'success',
-                title: 'Deleted!',
-                text: 'The product has been hidden.',
-                timer: 2000
-            });
-        <% } else if ("1".equals(error)) { %>
-            Swal.fire({
-                icon: 'error',
-                title: 'Failed!',
-                text: 'Could not hide the product.',
-                timer: 2000
-            });
-        <% }%>
+        <% if ("missing".equals(error)) { %>
+            Swal.fire({icon: 'error', title: 'Missing data!', text: 'Please fill all required fields.', timer: 2000});
+        <% } else if ("insert_failed".equals(error)) { %>
+            Swal.fire({icon: 'error', title: 'Failed!', text: 'Create product failed. Please try again.', timer: 2000});
+        <% } else if ("created".equals(success)) { %>
+            Swal.fire({icon: 'success', title: 'Created!', text: 'Product has been created successfully.', timer: 2000});
+        <% } %>
         };
     </script>
 
