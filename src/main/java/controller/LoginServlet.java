@@ -4,27 +4,28 @@
  */
 package controller;
 
-import dao.AccountDAO;
-import dao.CategoryDAO;
 import dao.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Account;
-import model.Category;
 import model.Customer;
+import utils.PasswordUtil;
 
-@WebServlet(name = "LoginServlet", urlPatterns = {"/Login"})
+/**
+ *
+ * @author Administrator
+ */
 public class LoginServlet extends HttpServlet {
 
+    private final CustomerDAO customerDAO = new CustomerDAO();
+
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -58,64 +59,50 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        CategoryDAO categoryDAO = new CategoryDAO();
-        List<Category> categoryList = categoryDAO.getAllCategory(); // hoặc getAllCategory()
-        request.setAttribute("categoryList", categoryList);
-        request.getRequestDispatcher("WEB-INF/View/account/login.jsp").forward(request, response);
+        req.getRequestDispatcher("/WEB-INF/views/auth/login-customer.jsp").forward(req, resp);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         String email = request.getParameter("email");
-        String pass = request.getParameter("pass");
+        String password = request.getParameter("password");
 
-        AccountDAO dao = new AccountDAO();
-        HttpSession session = request.getSession();
-        Account acc = dao.verifyMD5(email, pass);
-        if (dao.checkEmailExisted(email) == false) {
-            request.setAttribute("err", "<p style='color:yellow'>The account you entered is not registered. Please sign up first.</p>");
-            request.getRequestDispatcher("WEB-INF/View/account/login.jsp").forward(request, response);
-        } else if (acc == null || acc.getAccountID() == -1) {
-            request.setAttribute("err", "<p style='color:red'>Email or password invalid</p>");
-            request.getRequestDispatcher("WEB-INF/View/account/login.jsp").forward(request, response);
-        } else if (acc.isIsActive() == false) {
-            request.setAttribute("err", "<p style='color:red'>Your account is blocked</p>");
-            request.getRequestDispatcher("WEB-INF/View/account/login.jsp").forward(request, response);
-        } else if (acc.getRoleID() != 3) {
-            request.setAttribute("err", "<p style='color:red'>You are not allowed to login with this role</p>");
-            request.getRequestDispatcher("WEB-INF/View/account/login.jsp").forward(request, response);
-        } else {
-            CustomerDAO customerDao = new CustomerDAO();
-            Customer cus = customerDao.getCustomerByAccountId(acc.getAccountID());
-            session.setAttribute("cus", cus);
-            session.setAttribute("accountId", acc.getAccountID());
-            session.setAttribute("role", acc.getRoleID());
+        email = (email == null) ? "" : email.trim();
+        password = (password == null) ? "" : password;
 
-            session.setAttribute("user", acc);
-            response.sendRedirect("Home");
+        if (email.isBlank() || password.isBlank()) {
+            request.setAttribute("error", "Email và mật khẩu không được để trống.");
+            request.setAttribute("email", email);
+            request.getRequestDispatcher("/WEB-INF/views/auth/login-customer.jsp").forward(request, response);
+            return;
         }
 
+        try {
+            CustomerDAO dao = new CustomerDAO();
+            String hash = PasswordUtil.md5(password);
+
+            Customer customer = dao.login(email, hash);
+            if (customer == null) {
+                request.setAttribute("error", "Sai email/mật khẩu hoặc tài khoản bị khóa.");
+                request.setAttribute("email", email);
+                request.getRequestDispatcher("/WEB-INF/views/auth/login-customer.jsp").forward(request, response);
+                return;
+            }
+
+            HttpSession session = request.getSession(true);
+            session.setAttribute("customer", customer);
+
+            response.sendRedirect(request.getContextPath() + "/Home");
+
+        } catch (Exception e) {
+            throw new ServletException(e);
+        }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

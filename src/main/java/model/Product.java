@@ -12,96 +12,93 @@ import java.time.LocalDateTime;
  * @author Administrator
  */
 public class Product {
-    private int productID;
-    private int categoryID;
-    private Integer brandID; 
-    private String productName;
-    private String description;
-    private boolean isDeleted;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+
+    private Integer ProductID;
+    private Integer CategoryID;
+    private Integer BrandID;
+    private String ProductName;
+    private String Description;
+    private Boolean IsDeleted;
+    private LocalDateTime CreatedAt;
+    private LocalDateTime UpdatedAt;
 
     public Product() {
     }
 
-    public Product(int productID, int categoryID, Integer brandID, String productName, String description, boolean isDeleted, Timestamp createdAt, Timestamp updatedAt) {
-        this.productID = productID;
-        this.categoryID = categoryID;
-        this.brandID = brandID;
-        this.productName = productName;
-        this.description = description;
-        this.isDeleted = isDeleted;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public Product(Integer ProductID, Integer CategoryID, Integer BrandID, String ProductName, String Description, Boolean IsDeleted, LocalDateTime CreatedAt, LocalDateTime UpdatedAt) {
+        this.ProductID = ProductID;
+        this.CategoryID = CategoryID;
+        this.BrandID = BrandID;
+        this.ProductName = ProductName;
+        this.Description = Description;
+        this.IsDeleted = IsDeleted;
+        this.CreatedAt = CreatedAt;
+        this.UpdatedAt = UpdatedAt;
+    }
+    
+    
+
+    public Integer getProductID() {
+        return ProductID;
     }
 
-    public int getProductID() {
-        return productID;
+    public void setProductID(Integer ProductID) {
+        this.ProductID = ProductID;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public Integer getCategoryID() {
+        return CategoryID;
     }
 
-    public int getCategoryID() {
-        return categoryID;
-    }
-
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
+    public void setCategoryID(Integer CategoryID) {
+        this.CategoryID = CategoryID;
     }
 
     public Integer getBrandID() {
-        return brandID;
+        return BrandID;
     }
 
-    public void setBrandID(Integer brandID) {
-        this.brandID = brandID;
+    public void setBrandID(Integer BrandID) {
+        this.BrandID = BrandID;
     }
 
     public String getProductName() {
-        return productName;
+        return ProductName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setProductName(String ProductName) {
+        this.ProductName = ProductName;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 
-    public boolean isIsDeleted() {
-        return isDeleted;
+    public Boolean getIsDeleted() {
+        return IsDeleted;
     }
 
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setIsDeleted(Boolean IsDeleted) {
+        this.IsDeleted = IsDeleted;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(LocalDateTime CreatedAt) {
+        this.CreatedAt = CreatedAt;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getUpdatedAt() {
+        return UpdatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt(LocalDateTime UpdatedAt) {
+        this.UpdatedAt = UpdatedAt;
     }
-
-    
-    
-    
-    
-    
 }

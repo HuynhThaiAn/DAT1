@@ -6,97 +6,57 @@ package model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author Administrator
  */
 public class Payment {
-    private int paymentID;
-    private int orderID;
-    private byte method;
-    private BigDecimal amount;
-    private byte status;
-    private String transactionCode;
-    private Timestamp paidAt;
-    private Timestamp createdAt;
+    private Integer PaymentID;
+    private Integer OrderID;
+    private Integer Method;
+    private BigDecimal Amount;
+    private Integer Status;
+    private String TransactionCode;
+    private LocalDateTime PaidAt;
+    private LocalDateTime CreatedAt;
 
     public Payment() {}
 
-    public Payment(int paymentID, int orderID, byte method, BigDecimal amount, byte status, String transactionCode, Timestamp paidAt, Timestamp createdAt) {
-        this.paymentID = paymentID;
-        this.orderID = orderID;
-        this.method = method;
-        this.amount = amount;
-        this.status = status;
-        this.transactionCode = transactionCode;
-        this.paidAt = paidAt;
-        this.createdAt = createdAt;
+    public Payment(Integer PaymentID, Integer OrderID, Integer Method, BigDecimal Amount, Integer Status, String TransactionCode, LocalDateTime PaidAt, LocalDateTime CreatedAt) {
+        this.PaymentID = PaymentID;
+        this.OrderID = OrderID;
+        this.Method = Method;
+        this.Amount = Amount;
+        this.Status = Status;
+        this.TransactionCode = TransactionCode;
+        this.PaidAt = PaidAt;
+        this.CreatedAt = CreatedAt;
     }
 
-    public int getPaymentID() {
-        return paymentID;
-    }
 
-    public void setPaymentID(int paymentID) {
-        this.paymentID = paymentID;
-    }
+    public Integer getPaymentID() { return PaymentID; }
+    public void setPaymentID(Integer PaymentID) { this.PaymentID = PaymentID; }
 
-    public int getOrderID() {
-        return orderID;
-    }
+    public Integer getOrderID() { return OrderID; }
+    public void setOrderID(Integer OrderID) { this.OrderID = OrderID; }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
+    public Integer getMethod() { return Method; }
+    public void setMethod(Integer Method) { this.Method = Method; }
 
-    public byte getMethod() {
-        return method;
-    }
+    public BigDecimal getAmount() { return Amount; }
+    public void setAmount(BigDecimal Amount) { this.Amount = Amount; }
 
-    public void setMethod(byte method) {
-        this.method = method;
-    }
+    public Integer getStatus() { return Status; }
+    public void setStatus(Integer Status) { this.Status = Status; }
 
-    public BigDecimal getAmount() {
-        return amount;
-    }
+    public String getTransactionCode() { return TransactionCode; }
+    public void setTransactionCode(String TransactionCode) { this.TransactionCode = TransactionCode; }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
+    public LocalDateTime getPaidAt() { return PaidAt; }
+    public void setPaidAt(LocalDateTime PaidAt) { this.PaidAt = PaidAt; }
 
-    public byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(byte status) {
-        this.status = status;
-    }
-
-    public String getTransactionCode() {
-        return transactionCode;
-    }
-
-    public void setTransactionCode(String transactionCode) {
-        this.transactionCode = transactionCode;
-    }
-
-    public Timestamp getPaidAt() {
-        return paidAt;
-    }
-
-    public void setPaidAt(Timestamp paidAt) {
-        this.paidAt = paidAt;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-    
-    
+    public LocalDateTime getCreatedAt() { return CreatedAt; }
+    public void setCreatedAt(LocalDateTime CreatedAt) { this.CreatedAt = CreatedAt; }
 }

@@ -5,69 +5,71 @@
 package model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author Administrator
  */
 public class ProductImage {
-    private int imageID;
-    private int productID;
-    private String imageUrl;
-    private boolean isMain;
-    private Timestamp createdAt;
+
+    private Integer ImageID;
+    private Integer ProductID;
+    private String ImageUrl;
+    private Boolean IsMain;
+    private LocalDateTime CreatedAt;
 
     public ProductImage() {
     }
 
-    public ProductImage(int imageID, int productID, String imageUrl, boolean isMain, Timestamp createdAt) {
-        this.imageID = imageID;
-        this.productID = productID;
-        this.imageUrl = imageUrl;
-        this.isMain = isMain;
-        this.createdAt = createdAt;
+    public ProductImage(Integer ImageID, Integer ProductID, String ImageUrl, Boolean IsMain, LocalDateTime CreatedAt) {
+        this.ImageID = ImageID;
+        this.ProductID = ProductID;
+        this.ImageUrl = ImageUrl;
+        this.IsMain = IsMain;
+        this.CreatedAt = CreatedAt;
+    }
+    
+    
+
+    public Integer getImageID() {
+        return ImageID;
     }
 
-    public int getImageID() {
-        return imageID;
+    public void setImageID(Integer ImageID) {
+        this.ImageID = ImageID;
     }
 
-    public void setImageID(int imageID) {
-        this.imageID = imageID;
+    public Integer getProductID() {
+        return ProductID;
     }
 
-    public int getProductID() {
-        return productID;
-    }
-
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public void setProductID(Integer ProductID) {
+        this.ProductID = ProductID;
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return ImageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageUrl(String ImageUrl) {
+        this.ImageUrl = ImageUrl;
     }
 
-    public boolean isIsMain() {
-        return isMain;
+    public Boolean getIsMain() {
+        return IsMain;
     }
 
-    public void setIsMain(boolean isMain) {
-        this.isMain = isMain;
+    public void setIsMain(Boolean IsMain) {
+        this.IsMain = IsMain;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(LocalDateTime CreatedAt) {
+        this.CreatedAt = CreatedAt;
     }
-
-    
-    
 }
+

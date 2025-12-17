@@ -4,7 +4,6 @@
  */
 package model;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
@@ -12,95 +11,93 @@ import java.time.LocalDateTime;
  * @author Administrator
  */
 public class Feedback {
-    private int feedbackID;
-    private int productID;
-    private int customerID;
-    private byte rating;
-    private String comment;
-    private boolean isVisible;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
 
-    public Feedback() {}
+    private Integer FeedbackID;
+    private Integer ProductID;
+    private Integer CustomerID;
+    private Integer Rating;
+    private String Comment;
+    private Boolean IsVisible;
+    private LocalDateTime CreatedAt;
+    private LocalDateTime UpdatedAt;
 
-    public Feedback(int feedbackID, int productID, int customerID, byte rating, String comment, boolean isVisible, Timestamp createdAt, Timestamp updatedAt) {
-        this.feedbackID = feedbackID;
-        this.productID = productID;
-        this.customerID = customerID;
-        this.rating = rating;
-        this.comment = comment;
-        this.isVisible = isVisible;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public Feedback() {
     }
 
-    public int getFeedbackID() {
-        return feedbackID;
+    public Feedback(Integer FeedbackID, Integer ProductID, Integer CustomerID, Integer Rating, String Comment, Boolean IsVisible, LocalDateTime CreatedAt, LocalDateTime UpdatedAt) {
+        this.FeedbackID = FeedbackID;
+        this.ProductID = ProductID;
+        this.CustomerID = CustomerID;
+        this.Rating = Rating;
+        this.Comment = Comment;
+        this.IsVisible = IsVisible;
+        this.CreatedAt = CreatedAt;
+        this.UpdatedAt = UpdatedAt;
     }
 
-    public void setFeedbackID(int feedbackID) {
-        this.feedbackID = feedbackID;
+    public Integer getFeedbackID() {
+        return FeedbackID;
     }
 
-    public int getProductID() {
-        return productID;
+    public void setFeedbackID(Integer FeedbackID) {
+        this.FeedbackID = FeedbackID;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public Integer getProductID() {
+        return ProductID;
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public void setProductID(Integer ProductID) {
+        this.ProductID = ProductID;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public Integer getCustomerID() {
+        return CustomerID;
     }
 
-    public byte getRating() {
-        return rating;
+    public void setCustomerID(Integer CustomerID) {
+        this.CustomerID = CustomerID;
     }
 
-    public void setRating(byte rating) {
-        this.rating = rating;
+    public Integer getRating() {
+        return Rating;
+    }
+
+    public void setRating(Integer Rating) {
+        this.Rating = Rating;
     }
 
     public String getComment() {
-        return comment;
+        return Comment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setComment(String Comment) {
+        this.Comment = Comment;
     }
 
-    public boolean isIsVisible() {
-        return isVisible;
+    public Boolean getIsVisible() {
+        return IsVisible;
     }
 
-    public void setIsVisible(boolean isVisible) {
-        this.isVisible = isVisible;
+    public void setIsVisible(Boolean IsVisible) {
+        this.IsVisible = IsVisible;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(LocalDateTime CreatedAt) {
+        this.CreatedAt = CreatedAt;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getUpdatedAt() {
+        return UpdatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt(LocalDateTime UpdatedAt) {
+        this.UpdatedAt = UpdatedAt;
     }
-    
-    
-
-    
-    
-    
 }
+
+

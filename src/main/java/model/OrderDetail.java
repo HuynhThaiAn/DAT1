@@ -11,51 +11,30 @@ import java.math.BigDecimal;
  * @author Administrator
  */
 public class OrderDetail {
-    private int orderID;
-    private int variantID;
-    private BigDecimal unitPrice;
-    private int quantity;
+    private Integer OrderID;
+    private Integer ProductVariantID;
+    private BigDecimal UnitPrice;
+    private Integer Quantity;
 
     public OrderDetail() {}
 
-    public OrderDetail(int orderID, int variantID, BigDecimal unitPrice, int quantity) {
-        this.orderID = orderID;
-        this.variantID = variantID;
-        this.unitPrice = unitPrice;
-        this.quantity = quantity;
-    }
-
-    public int getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
-
-    public int getVariantID() {
-        return variantID;
-    }
-
-    public void setVariantID(int variantID) {
-        this.variantID = variantID;
-    }
-
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public OrderDetail(Integer OrderID, Integer ProductVariantID, BigDecimal UnitPrice, Integer Quantity) {
+        this.OrderID = OrderID;
+        this.ProductVariantID = ProductVariantID;
+        this.UnitPrice = UnitPrice;
+        this.Quantity = Quantity;
     }
     
-    
+
+    public Integer getOrderID() { return OrderID; }
+    public void setOrderID(Integer OrderID) { this.OrderID = OrderID; }
+
+    public Integer getProductVariantID() { return ProductVariantID; }
+    public void setProductVariantID(Integer ProductVariantID) { this.ProductVariantID = ProductVariantID; }
+
+    public BigDecimal getUnitPrice() { return UnitPrice; }
+    public void setUnitPrice(BigDecimal UnitPrice) { this.UnitPrice = UnitPrice; }
+
+    public Integer getQuantity() { return Quantity; }
+    public void setQuantity(Integer Quantity) { this.Quantity = Quantity; }
 }

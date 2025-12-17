@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -16,12 +17,12 @@ public class Brand {
     private String description;
     private String logoUrl;
     private boolean isDeleted;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Brand() {}
 
-    public Brand(int brandID, String brandName, String description, String logoUrl, boolean isDeleted, Timestamp createdAt, Timestamp updatedAt) {
+    public Brand(int brandID, String brandName, String description, String logoUrl, boolean isDeleted, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.brandID = brandID;
         this.brandName = brandName;
         this.description = description;
@@ -71,21 +72,24 @@ public class Brand {
         this.isDeleted = isDeleted;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    
+    
     
     
 }

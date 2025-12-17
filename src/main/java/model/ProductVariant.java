@@ -5,7 +5,6 @@
 package model;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
@@ -13,104 +12,103 @@ import java.time.LocalDateTime;
  * @author Administrator
  */
 public class ProductVariant {
-    private int variantID;
-    private int productID;
-    private String sku;
-    private String variantName;
-    private BigDecimal price;
-    private int stockQuantity;
-    private boolean isActive;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+
+    private Integer ProductVariantID;
+    private Integer ProductID;
+    private String SKU;
+    private String VariantName;
+    private BigDecimal Price;
+    private Integer StockQuantity;
+    private Boolean IsActive;
+    private LocalDateTime CreatedAt;
+    private LocalDateTime UpdatedAt;
 
     public ProductVariant() {
     }
 
-    public ProductVariant(int variantID, int productID, String sku, String variantName, BigDecimal price, int stockQuantity, boolean isActive, Timestamp createdAt, Timestamp updatedAt) {
-        this.variantID = variantID;
-        this.productID = productID;
-        this.sku = sku;
-        this.variantName = variantName;
-        this.price = price;
-        this.stockQuantity = stockQuantity;
-        this.isActive = isActive;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public ProductVariant(Integer ProductVariantID, Integer ProductID, String SKU, String VariantName, BigDecimal Price, Integer StockQuantity, Boolean IsActive, LocalDateTime CreatedAt, LocalDateTime UpdatedAt) {
+        this.ProductVariantID = ProductVariantID;
+        this.ProductID = ProductID;
+        this.SKU = SKU;
+        this.VariantName = VariantName;
+        this.Price = Price;
+        this.StockQuantity = StockQuantity;
+        this.IsActive = IsActive;
+        this.CreatedAt = CreatedAt;
+        this.UpdatedAt = UpdatedAt;
+    }
+    
+    
+
+    public Integer getProductVariantID() {
+        return ProductVariantID;
     }
 
-    public int getVariantID() {
-        return variantID;
+    public void setProductVariantID(Integer ProductVariantID) {
+        this.ProductVariantID = ProductVariantID;
     }
 
-    public void setVariantID(int variantID) {
-        this.variantID = variantID;
+    public Integer getProductID() {
+        return ProductID;
     }
 
-    public int getProductID() {
-        return productID;
+    public void setProductID(Integer ProductID) {
+        this.ProductID = ProductID;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public String getSKU() {
+        return SKU;
     }
 
-    public String getSku() {
-        return sku;
-    }
-
-    public void setSku(String sku) {
-        this.sku = sku;
+    public void setSKU(String SKU) {
+        this.SKU = SKU;
     }
 
     public String getVariantName() {
-        return variantName;
+        return VariantName;
     }
 
-    public void setVariantName(String variantName) {
-        this.variantName = variantName;
+    public void setVariantName(String VariantName) {
+        this.VariantName = VariantName;
     }
 
     public BigDecimal getPrice() {
-        return price;
+        return Price;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPrice(BigDecimal Price) {
+        this.Price = Price;
     }
 
-    public int getStockQuantity() {
-        return stockQuantity;
+    public Integer getStockQuantity() {
+        return StockQuantity;
     }
 
-    public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = stockQuantity;
+    public void setStockQuantity(Integer StockQuantity) {
+        this.StockQuantity = StockQuantity;
     }
 
-    public boolean isIsActive() {
-        return isActive;
+    public Boolean getIsActive() {
+        return IsActive;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setIsActive(Boolean IsActive) {
+        this.IsActive = IsActive;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(LocalDateTime CreatedAt) {
+        this.CreatedAt = CreatedAt;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getUpdatedAt() {
+        return UpdatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt(LocalDateTime UpdatedAt) {
+        this.UpdatedAt = UpdatedAt;
     }
-
-    
-    
-    
 }

@@ -4,111 +4,131 @@
  */
 package model;
 
-import java.sql.Timestamp;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author Administrator
  */
 public class Customer {
-    private int customerID;
-    private String email;
-    private String passwordHash;
-    private String fullName;
-    private String phone;
-    private String avatarUrl;
-    private boolean isBlocked;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+
+    private Integer CustomerID;
+    private String Email;
+    private String PasswordHash;
+    private String FullName;
+    private String Phone;
+    private LocalDate DateOfBirth;
+    private Integer Gender;
+    private String AvatarUrl;
+    private Boolean IsBlocked;
+    private LocalDateTime CreatedAt;
+    private LocalDateTime UpdatedAt;
 
     public Customer() {
     }
 
-    public Customer(int customerID, String email, String passwordHash, String fullName, String phone, String avatarUrl, boolean isBlocked, Timestamp createdAt, Timestamp updatedAt) {
-        this.customerID = customerID;
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.fullName = fullName;
-        this.phone = phone;
-        this.avatarUrl = avatarUrl;
-        this.isBlocked = isBlocked;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public Customer(Integer CustomerID, String Email, String PasswordHash, String FullName, String Phone, LocalDate DateOfBirth, Integer Gender, String AvatarUrl, Boolean IsBlocked, LocalDateTime CreatedAt, LocalDateTime UpdatedAt) {
+        this.CustomerID = CustomerID;
+        this.Email = Email;
+        this.PasswordHash = PasswordHash;
+        this.FullName = FullName;
+        this.Phone = Phone;
+        this.DateOfBirth = DateOfBirth;
+        this.Gender = Gender;
+        this.AvatarUrl = AvatarUrl;
+        this.IsBlocked = IsBlocked;
+        this.CreatedAt = CreatedAt;
+        this.UpdatedAt = UpdatedAt;
+    }
+    
+    
+
+    public Integer getCustomerID() {
+        return CustomerID;
     }
 
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public void setCustomerID(Integer CustomerID) {
+        this.CustomerID = CustomerID;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public String getPasswordHash() {
-        return passwordHash;
+        return PasswordHash;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPasswordHash(String PasswordHash) {
+        this.PasswordHash = PasswordHash;
     }
 
     public String getFullName() {
-        return fullName;
+        return FullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFullName(String FullName) {
+        this.FullName = FullName;
     }
 
     public String getPhone() {
-        return phone;
+        return Phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone(String Phone) {
+        this.Phone = Phone;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return DateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate DateOfBirth) {
+        this.DateOfBirth = DateOfBirth;
+    }
+
+    public Integer getGender() {
+        return Gender;
+    }
+
+    public void setGender(Integer Gender) {
+        this.Gender = Gender;
     }
 
     public String getAvatarUrl() {
-        return avatarUrl;
+        return AvatarUrl;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+    public void setAvatarUrl(String AvatarUrl) {
+        this.AvatarUrl = AvatarUrl;
     }
 
-    public boolean isIsBlocked() {
-        return isBlocked;
+    public Boolean getIsBlocked() {
+        return IsBlocked;
     }
 
-    public void setIsBlocked(boolean isBlocked) {
-        this.isBlocked = isBlocked;
+    public void setIsBlocked(Boolean IsBlocked) {
+        this.IsBlocked = IsBlocked;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(LocalDateTime CreatedAt) {
+        this.CreatedAt = CreatedAt;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getUpdatedAt() {
+        return UpdatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt(LocalDateTime UpdatedAt) {
+        this.UpdatedAt = UpdatedAt;
     }
-
-    
-    
 }

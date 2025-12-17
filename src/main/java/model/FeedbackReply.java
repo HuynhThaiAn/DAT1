@@ -4,80 +4,74 @@
  */
 package model;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-/**
- *
- * @author Administrator
- */
 public class FeedbackReply {
-     private int replyID;
-    private int feedbackID;
-    private int staffID;
-    private String content;
-    private boolean isPublic;
-    private Timestamp createdAt;
 
-    public FeedbackReply() {}
+    private Integer ReplyID;
+    private Integer FeedbackID;
+    private Integer StaffID;
+    private String Content;
+    private Boolean IsPublic;
+    private LocalDateTime CreatedAt;
 
-    public FeedbackReply(int replyID, int feedbackID, int staffID, String content, boolean isPublic, Timestamp createdAt) {
-        this.replyID = replyID;
-        this.feedbackID = feedbackID;
-        this.staffID = staffID;
-        this.content = content;
-        this.isPublic = isPublic;
-        this.createdAt = createdAt;
+    public FeedbackReply() {
     }
 
-    public int getReplyID() {
-        return replyID;
+    public FeedbackReply(Integer ReplyID, Integer FeedbackID, Integer StaffID, String Content, Boolean IsPublic, LocalDateTime CreatedAt) {
+        this.ReplyID = ReplyID;
+        this.FeedbackID = FeedbackID;
+        this.StaffID = StaffID;
+        this.Content = Content;
+        this.IsPublic = IsPublic;
+        this.CreatedAt = CreatedAt;
     }
 
-    public void setReplyID(int replyID) {
-        this.replyID = replyID;
+    public Integer getReplyID() {
+        return ReplyID;
     }
 
-    public int getFeedbackID() {
-        return feedbackID;
+    public void setReplyID(Integer ReplyID) {
+        this.ReplyID = ReplyID;
     }
 
-    public void setFeedbackID(int feedbackID) {
-        this.feedbackID = feedbackID;
+    public Integer getFeedbackID() {
+        return FeedbackID;
     }
 
-    public int getStaffID() {
-        return staffID;
+    public void setFeedbackID(Integer FeedbackID) {
+        this.FeedbackID = FeedbackID;
     }
 
-    public void setStaffID(int staffID) {
-        this.staffID = staffID;
+    public Integer getStaffID() {
+        return StaffID;
+    }
+
+    public void setStaffID(Integer StaffID) {
+        this.StaffID = StaffID;
     }
 
     public String getContent() {
-        return content;
+        return Content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContent(String Content) {
+        this.Content = Content;
     }
 
-    public boolean isIsPublic() {
-        return isPublic;
+    public Boolean getIsPublic() {
+        return IsPublic;
     }
 
-    public void setIsPublic(boolean isPublic) {
-        this.isPublic = isPublic;
+    public void setIsPublic(Boolean IsPublic) {
+        this.IsPublic = IsPublic;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(LocalDateTime CreatedAt) {
+        this.CreatedAt = CreatedAt;
     }
-
-    
-    
 }

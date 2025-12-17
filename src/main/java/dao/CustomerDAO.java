@@ -1,178 +1,142 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
 import model.Customer;
 import utils.DBContext;
 
-public class CustomerDAO extends DBContext {
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Timestamp;
 
-    public CustomerDAO() {
-        super();
-    }
+public class CustomerDAO {
 
-    public List<Customer> getCustomerList() {
-        List<Customer> list = new ArrayList<>();
-        String sql = "Select CustomerID, a.Email, FullName, PhoneNumber,a.CreatedAt, a.IsActive from Customers c JOIN Accounts a on c.AccountID = a.AccountID";
-
-        try ( PreparedStatement ps = conn.prepareStatement(sql);  ResultSet rs = ps.executeQuery()) {
-
-            while (rs.next()) {
-                int id = rs.getInt("CustomerID");
-                String email = rs.getString("Email");
-                String fullName = rs.getString("FullName");
-                String phone = rs.getString("PhoneNumber");
-                Date createdAt = rs.getTimestamp("CreatedAt");
-                boolean isActive = rs.getBoolean("IsActive");
-
-                list.add(new Customer(id, email, fullName, phone, createdAt, isActive));
+    public boolean existsByEmail(String email) throws Exception {
+        String sql = "SELECT 1 FROM Customer WHERE Email = ?";
+        DBContext db = new DBContext();
+        try (PreparedStatement ps = db.conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } finally {
+            if (db.conn != null) db.conn.close();
         }
-        return list;
     }
 
-   public Customer getCustomerbyID(int customerID) {
-    Customer cus = null;
+    public Customer login(String email, String passwordHash) throws Exception {
+        String sql = "SELECT CustomerID, Email, PasswordHash, FullName, Phone, DateOfBirth, Gender, AvatarUrl, IsBlocked, CreatedAt, UpdatedAt "
+                   + "FROM Customer "
+                   + "WHERE Email = ? AND PasswordHash = ? AND IsBlocked = 0";
 
-    String sql =
-        "SELECT c.CustomerID, a.Email, c.FullName, c.PhoneNumber, a.IsActive, " +
-        "       c.BirthDate, c.Gender, d.AddressDetails " +
-        "FROM Customers c " +
-        "JOIN Accounts a ON c.AccountID = a.AccountID " +
-        "LEFT JOIN Addresses d ON c.CustomerID = d.CustomerID " +
-        "WHERE c.CustomerID = ?";
+        DBContext db = new DBContext();
+        try (PreparedStatement ps = db.conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ps.setString(2, passwordHash);
 
-    try (PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setInt(1, customerID);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) return null;
 
-        try (ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                cus = new Customer();              
-                cus.setId(rs.getInt("CustomerID"));
-                cus.setEmail(rs.getString("Email"));
-                cus.setFullName(rs.getString("FullName"));
-                cus.setPhone(rs.getString("PhoneNumber"));
-                cus.setActive(rs.getBoolean("IsActive")); 
+                Customer c = new Customer();
+                c.setCustomerID(rs.getInt("CustomerID"));
+                c.setEmail(rs.getString("Email"));
+                c.setPasswordHash(rs.getString("PasswordHash"));
+                c.setFullName(rs.getString("FullName"));
+                c.setPhone(rs.getString("Phone"));
 
-                cus.setBirthDay(rs.getString("BirthDate"));
-                cus.setGender(rs.getString("Gender"));
-                cus.setAddress(rs.getString("AddressDetails")); // nếu có field này
+                Date dob = rs.getDate("DateOfBirth");
+                if (dob != null) c.setDateOfBirth(dob.toLocalDate());
+
+                int gender = rs.getInt("Gender");
+                if (!rs.wasNull()) c.setGender(gender);
+                else c.setGender(null);
+
+                c.setAvatarUrl(rs.getString("AvatarUrl"));
+                c.setIsBlocked(rs.getBoolean("IsBlocked"));
+
+                Timestamp created = rs.getTimestamp("CreatedAt");
+                if (created != null) c.setCreatedAt(created.toLocalDateTime());
+
+                Timestamp updated = rs.getTimestamp("UpdatedAt");
+                if (updated != null) c.setUpdatedAt(updated.toLocalDateTime());
+
+                return c;
             }
+        } finally {
+            if (db.conn != null) db.conn.close();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
     }
 
-    return cus;
-}
+    public int insertAndGetId(Customer c) throws Exception {
+        String sql = "INSERT INTO Customer(Email, PasswordHash, FullName, Phone, DateOfBirth, Gender, AvatarUrl, IsBlocked) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, 0)";
 
+        DBContext db = new DBContext();
+        try (PreparedStatement ps = db.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, c.getEmail());
+            ps.setString(2, c.getPasswordHash());
+            ps.setString(3, c.getFullName());
+            ps.setString(4, c.getPhone());
 
-    public boolean updateStatus(int customerID) {
-        String sqlUpdate = "UPDATE Accounts SET isActive = CASE WHEN isActive = 1 THEN 0 ELSE 1 END WHERE AccountID = (SELECT AccountID FROM Customers WHERE CustomerID = ?)";
+            if (c.getDateOfBirth() != null) ps.setDate(5, Date.valueOf(c.getDateOfBirth()));
+            else ps.setNull(5, java.sql.Types.DATE);
 
-        try ( PreparedStatement psUpdate = conn.prepareStatement(sqlUpdate)) {
-            psUpdate.setInt(1, customerID);
-            int rowsAffected = psUpdate.executeUpdate();
+            if (c.getGender() != null) ps.setInt(6, c.getGender());
+            else ps.setNull(6, java.sql.Types.TINYINT);
 
-            return rowsAffected > 0;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+            ps.setString(7, c.getAvatarUrl());
 
-        return false;
-    }
+            ps.executeUpdate();
 
-    public List<Customer> searchCustomerByName(String keyword) {
-        List<Customer> list = new ArrayList<>();
-        String sql = "Select CustomerID, a.Email, FullName, PhoneNumber,a.CreatedAt, a.IsActive from Customers c JOIN Accounts a on c.AccountID = a.AccountID WHERE LOWER(FullName) LIKE ?";
-        try ( PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, "%" + keyword.toLowerCase() + "%");  // tìm theo tên gần đúng
-
-            try ( ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    int id = rs.getInt("CustomerID");
-                    String email = rs.getString("Email");
-                    String fullName = rs.getString("FullName");
-                    String phone = rs.getString("PhoneNumber");
-                    Date createdAt = rs.getTimestamp("CreatedAt");
-                    boolean isActive = rs.getBoolean("IsActive");
-
-                    list.add(new Customer(id, email, fullName, phone, createdAt, isActive));
-                }
+            try (ResultSet keys = ps.getGeneratedKeys()) {
+                if (keys.next()) return keys.getInt(1);
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+            return 0;
 
-        return list;
+        } finally {
+            if (db.conn != null) db.conn.close();
+        }
     }
 
-    public Customer getCustomerByAccountId(int accountId) {
-        Customer cus = null;
-        String sql = "SELECT CustomerID, a.Email, FullName, PhoneNumber, a.IsActive, BirthDate, Gender "
-                + "FROM Customers c JOIN Accounts a ON c.AccountID = a.AccountID "
-                + "WHERE c.AccountID = ?";
-        try ( PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, accountId);
-            try ( ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    int id = rs.getInt("CustomerID");
-                    String email = rs.getString("Email");
-                    String fullName = rs.getString("FullName");
-                    String phone = rs.getString("PhoneNumber");
-                    boolean isActive = rs.getBoolean("IsActive");
-                    String birthday = rs.getString("BirthDate");
-                    String gender = rs.getString("Gender");
-                    cus = new Customer(id, email, fullName, phone, isActive, birthday, gender);
-                }
+    public Customer getById(int id) throws Exception {
+        String sql = "SELECT CustomerID, Email, PasswordHash, FullName, Phone, DateOfBirth, Gender, AvatarUrl, IsBlocked, CreatedAt, UpdatedAt "
+                   + "FROM Customer WHERE CustomerID = ?";
+
+        DBContext db = new DBContext();
+        try (PreparedStatement ps = db.conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) return null;
+
+                Customer c = new Customer();
+                c.setCustomerID(rs.getInt("CustomerID"));
+                c.setEmail(rs.getString("Email"));
+                c.setPasswordHash(rs.getString("PasswordHash"));
+                c.setFullName(rs.getString("FullName"));
+                c.setPhone(rs.getString("Phone"));
+
+                Date dob = rs.getDate("DateOfBirth");
+                if (dob != null) c.setDateOfBirth(dob.toLocalDate());
+
+                int gender = rs.getInt("Gender");
+                if (!rs.wasNull()) c.setGender(gender);
+                else c.setGender(null);
+
+                c.setAvatarUrl(rs.getString("AvatarUrl"));
+                c.setIsBlocked(rs.getBoolean("IsBlocked"));
+
+                Timestamp created = rs.getTimestamp("CreatedAt");
+                if (created != null) c.setCreatedAt(created.toLocalDateTime());
+
+                Timestamp updated = rs.getTimestamp("UpdatedAt");
+                if (updated != null) c.setUpdatedAt(updated.toLocalDateTime());
+
+                return c;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return cus;
-    }
-    //-----TAI-----//
 
-    public int countTotalCustomers() {
-        String sql = "SELECT COUNT(*) FROM Customers";
-        try ( PreparedStatement ps = conn.prepareStatement(sql);  ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    public static void main(String[] args) {
-        CustomerDAO dao = new CustomerDAO(); // giả sử bạn đã có class này
-        List<Customer> accounts = dao.getCustomerList();
-
-        for (Customer acc : accounts) {
-            System.out.println("ID: " + acc.getId());
-            System.out.println("Email: " + acc.getEmail());
-            System.out.println("Password: " + acc.getPassword());
-            System.out.println("Full Name: " + acc.getFullName());
-            System.out.println("Phone: " + acc.getPhone());
-            System.out.println("Created At: " + acc.getCreateAt());
-            System.out.println("Is Active: " + acc.isActive());
-            System.out.println("------------------------------");
+        } finally {
+            if (db.conn != null) db.conn.close();
         }
     }
 }

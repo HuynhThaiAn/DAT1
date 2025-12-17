@@ -4,7 +4,6 @@
  */
 package model;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -13,105 +12,123 @@ import java.time.LocalDateTime;
  * @author Administrator
  */
 public class Staff {
-    private int staffID;
-    private String email;
-    private String passwordHash;
-    private String fullName;
-    private String phone;
-    private byte role; // 1=STAFF, 2=ADMIN
-    private boolean isDeleted;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+
+    private Integer StaffID;
+    private String Email;
+    private String PasswordHash;
+    private String FullName;
+    private String Phone;
+    private LocalDate DateOfBirth;
+    private Integer Gender;
+    private Integer Role;
+    private Boolean IsDeleted;
+    private LocalDateTime CreatedAt;
+    private LocalDateTime UpdatedAt;
 
     public Staff() {
     }
 
-    public Staff(int staffID, String email, String passwordHash, String fullName, String phone, byte role, boolean isDeleted, Timestamp createdAt, Timestamp updatedAt) {
-        this.staffID = staffID;
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.fullName = fullName;
-        this.phone = phone;
-        this.role = role;
-        this.isDeleted = isDeleted;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public Staff(Integer StaffID, String Email, String PasswordHash, String FullName, String Phone, LocalDate DateOfBirth, Integer Gender, Integer Role, Boolean IsDeleted, LocalDateTime CreatedAt, LocalDateTime UpdatedAt) {
+        this.StaffID = StaffID;
+        this.Email = Email;
+        this.PasswordHash = PasswordHash;
+        this.FullName = FullName;
+        this.Phone = Phone;
+        this.DateOfBirth = DateOfBirth;
+        this.Gender = Gender;
+        this.Role = Role;
+        this.IsDeleted = IsDeleted;
+        this.CreatedAt = CreatedAt;
+        this.UpdatedAt = UpdatedAt;
     }
     
     
-    public int getStaffID() {
-        return staffID;
+
+    public Integer getStaffID() {
+        return StaffID;
     }
 
-    public void setStaffID(int staffID) {
-        this.staffID = staffID;
+    public void setStaffID(Integer StaffID) {
+        this.StaffID = StaffID;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public String getPasswordHash() {
-        return passwordHash;
+        return PasswordHash;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPasswordHash(String PasswordHash) {
+        this.PasswordHash = PasswordHash;
     }
 
     public String getFullName() {
-        return fullName;
+        return FullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFullName(String FullName) {
+        this.FullName = FullName;
     }
 
     public String getPhone() {
-        return phone;
+        return Phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone(String Phone) {
+        this.Phone = Phone;
     }
 
-    public byte getRole() {
-        return role;
+    public LocalDate getDateOfBirth() {
+        return DateOfBirth;
     }
 
-    public void setRole(byte role) {
-        this.role = role;
+    public void setDateOfBirth(LocalDate DateOfBirth) {
+        this.DateOfBirth = DateOfBirth;
     }
 
-    public boolean isIsDeleted() {
-        return isDeleted;
+    public Integer getGender() {
+        return Gender;
     }
 
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setGender(Integer Gender) {
+        this.Gender = Gender;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public Integer getRole() {
+        return Role;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setRole(Integer Role) {
+        this.Role = Role;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public Boolean getIsDeleted() {
+        return IsDeleted;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setIsDeleted(Boolean IsDeleted) {
+        this.IsDeleted = IsDeleted;
     }
 
-    
-    
-    
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(LocalDateTime CreatedAt) {
+        this.CreatedAt = CreatedAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return UpdatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime UpdatedAt) {
+        this.UpdatedAt = UpdatedAt;
+    }
 }

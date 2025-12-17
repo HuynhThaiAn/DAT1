@@ -4,7 +4,6 @@
  */
 package model;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
@@ -12,134 +11,133 @@ import java.time.LocalDateTime;
  * @author Administrator
  */
 public class Address {
-    private int addressID;
-    private int customerID;
-    private String recipientName;
-    private String phone;
-    private String province;
-    private String district;
-    private String ward;
-    private String detailAddress;
-    private boolean isDefault;
-    private boolean isActive;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+
+    private Integer AddressID;
+    private Integer CustomerID;
+    private String RecipientName;
+    private String Phone;
+    private String Province;
+    private String District;
+    private String Ward;
+    private String DetailAddress;
+    private Boolean IsDefault;
+    private Boolean IsActive;
+    private LocalDateTime CreatedAt;
+    private LocalDateTime UpdatedAt;
 
     public Address() {
     }
 
-    public Address(int addressID, int customerID, String recipientName, String phone, String province, String district, String ward, String detailAddress, boolean isDefault, boolean isActive, Timestamp createdAt, Timestamp updatedAt) {
-        this.addressID = addressID;
-        this.customerID = customerID;
-        this.recipientName = recipientName;
-        this.phone = phone;
-        this.province = province;
-        this.district = district;
-        this.ward = ward;
-        this.detailAddress = detailAddress;
-        this.isDefault = isDefault;
-        this.isActive = isActive;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public Address(Integer AddressID, Integer CustomerID, String RecipientName, String Phone, String Province, String District, String Ward, String DetailAddress, Boolean IsDefault, Boolean IsActive, LocalDateTime CreatedAt, LocalDateTime UpdatedAt) {
+        this.AddressID = AddressID;
+        this.CustomerID = CustomerID;
+        this.RecipientName = RecipientName;
+        this.Phone = Phone;
+        this.Province = Province;
+        this.District = District;
+        this.Ward = Ward;
+        this.DetailAddress = DetailAddress;
+        this.IsDefault = IsDefault;
+        this.IsActive = IsActive;
+        this.CreatedAt = CreatedAt;
+        this.UpdatedAt = UpdatedAt;
+    }
+    
+    
+
+    public Integer getAddressID() {
+        return AddressID;
     }
 
-    public int getAddressID() {
-        return addressID;
+    public void setAddressID(Integer AddressID) {
+        this.AddressID = AddressID;
     }
 
-    public void setAddressID(int addressID) {
-        this.addressID = addressID;
+    public Integer getCustomerID() {
+        return CustomerID;
     }
 
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public void setCustomerID(Integer CustomerID) {
+        this.CustomerID = CustomerID;
     }
 
     public String getRecipientName() {
-        return recipientName;
+        return RecipientName;
     }
 
-    public void setRecipientName(String recipientName) {
-        this.recipientName = recipientName;
+    public void setRecipientName(String RecipientName) {
+        this.RecipientName = RecipientName;
     }
 
     public String getPhone() {
-        return phone;
+        return Phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone(String Phone) {
+        this.Phone = Phone;
     }
 
     public String getProvince() {
-        return province;
+        return Province;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
+    public void setProvince(String Province) {
+        this.Province = Province;
     }
 
     public String getDistrict() {
-        return district;
+        return District;
     }
 
-    public void setDistrict(String district) {
-        this.district = district;
+    public void setDistrict(String District) {
+        this.District = District;
     }
 
     public String getWard() {
-        return ward;
+        return Ward;
     }
 
-    public void setWard(String ward) {
-        this.ward = ward;
+    public void setWard(String Ward) {
+        this.Ward = Ward;
     }
 
     public String getDetailAddress() {
-        return detailAddress;
+        return DetailAddress;
     }
 
-    public void setDetailAddress(String detailAddress) {
-        this.detailAddress = detailAddress;
+    public void setDetailAddress(String DetailAddress) {
+        this.DetailAddress = DetailAddress;
     }
 
-    public boolean isIsDefault() {
-        return isDefault;
+    public Boolean getIsDefault() {
+        return IsDefault;
     }
 
-    public void setIsDefault(boolean isDefault) {
-        this.isDefault = isDefault;
+    public void setIsDefault(Boolean IsDefault) {
+        this.IsDefault = IsDefault;
     }
 
-    public boolean isIsActive() {
-        return isActive;
+    public Boolean getIsActive() {
+        return IsActive;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setIsActive(Boolean IsActive) {
+        this.IsActive = IsActive;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(LocalDateTime CreatedAt) {
+        this.CreatedAt = CreatedAt;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getUpdatedAt() {
+        return UpdatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt(LocalDateTime UpdatedAt) {
+        this.UpdatedAt = UpdatedAt;
     }
-
-    
-    
-    
 }

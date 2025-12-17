@@ -11,19 +11,24 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author DAT
+ */
 public class DBContext {
 
     public Connection conn = null;
 
-
     public DBContext() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL = "jdbc:sqlserver://localhost:1433;"
-                    + "databaseName=DATShop;"
+            String dbURL
+                    = "jdbc:sqlserver://TABZ;instanceName=SQLEXPRESS;"
+                    + "databaseName=DATShop_v2;"
                     + "user=sa;"
                     + "password=123456;"
                     + "encrypt=true;trustServerCertificate=true;";
+
             conn = DriverManager.getConnection(dbURL);
             if (conn != null) {
                 DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();

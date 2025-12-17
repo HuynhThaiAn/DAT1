@@ -13,96 +13,93 @@ import java.time.LocalDateTime;
  * @author Administrator
  */
 public class Import {
-    private int importID;
-    private int staffID;
-    private String supplierName;
-    private BigDecimal totalCost;
-    private byte status;
-    private String note;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
 
-    public Import() {}
+    private Integer ImportID;
+    private Integer StaffID;
+    private String SupplierName;
+    private BigDecimal TotalCost;
+    private Integer Status;
+    private String Note;
+    private LocalDateTime CreatedAt;
+    private LocalDateTime UpdatedAt;
 
-    public Import(int importID, int staffID, String supplierName, BigDecimal totalCost, byte status, String note, Timestamp createdAt, Timestamp updatedAt) {
-        this.importID = importID;
-        this.staffID = staffID;
-        this.supplierName = supplierName;
-        this.totalCost = totalCost;
-        this.status = status;
-        this.note = note;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public Import() {
     }
 
-    public int getImportID() {
-        return importID;
+    public Import(Integer ImportID, Integer StaffID, String SupplierName, BigDecimal TotalCost, Integer Status, String Note, LocalDateTime CreatedAt, LocalDateTime UpdatedAt) {
+        this.ImportID = ImportID;
+        this.StaffID = StaffID;
+        this.SupplierName = SupplierName;
+        this.TotalCost = TotalCost;
+        this.Status = Status;
+        this.Note = Note;
+        this.CreatedAt = CreatedAt;
+        this.UpdatedAt = UpdatedAt;
     }
 
-    public void setImportID(int importID) {
-        this.importID = importID;
+    public Integer getImportID() {
+        return ImportID;
     }
 
-    public int getStaffID() {
-        return staffID;
+    public void setImportID(Integer ImportID) {
+        this.ImportID = ImportID;
     }
 
-    public void setStaffID(int staffID) {
-        this.staffID = staffID;
+    public Integer getStaffID() {
+        return StaffID;
+    }
+
+    public void setStaffID(Integer StaffID) {
+        this.StaffID = StaffID;
     }
 
     public String getSupplierName() {
-        return supplierName;
+        return SupplierName;
     }
 
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;
+    public void setSupplierName(String SupplierName) {
+        this.SupplierName = SupplierName;
     }
 
     public BigDecimal getTotalCost() {
-        return totalCost;
+        return TotalCost;
     }
 
-    public void setTotalCost(BigDecimal totalCost) {
-        this.totalCost = totalCost;
+    public void setTotalCost(BigDecimal TotalCost) {
+        this.TotalCost = TotalCost;
     }
 
-    public byte getStatus() {
-        return status;
+    public Integer getStatus() {
+        return Status;
     }
 
-    public void setStatus(byte status) {
-        this.status = status;
+    public void setStatus(Integer Status) {
+        this.Status = Status;
     }
 
     public String getNote() {
-        return note;
+        return Note;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setNote(String Note) {
+        this.Note = Note;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(LocalDateTime CreatedAt) {
+        this.CreatedAt = CreatedAt;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getUpdatedAt() {
+        return UpdatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt(LocalDateTime UpdatedAt) {
+        this.UpdatedAt = UpdatedAt;
     }
-
-
-    
-
-    
-    
-    
 }
+
+

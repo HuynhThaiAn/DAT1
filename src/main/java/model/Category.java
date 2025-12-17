@@ -4,88 +4,90 @@
  */
 package model;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author Administrator
  */
 public class Category {
-    private int categoryID;
-    private String categoryName;
-    private String description;
-    private String imgUrlLogo;
-    private boolean isDeleted;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
 
-    public Category() {}
+    private Integer CategoryID;
+    private String CategoryName;
+    private String Description;
+    private String ImgUrlLogo;
+    private Boolean IsDeleted;
+    private LocalDateTime CreatedAt;
+    private LocalDateTime UpdatedAt;
 
-    public Category(int categoryID, String categoryName, String description, String imgUrlLogo, boolean isDeleted, Timestamp createdAt, Timestamp updatedAt) {
-        this.categoryID = categoryID;
-        this.categoryName = categoryName;
-        this.description = description;
-        this.imgUrlLogo = imgUrlLogo;
-        this.isDeleted = isDeleted;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public Category() {
     }
 
-    public int getCategoryID() {
-        return categoryID;
+    public Category(Integer CategoryID, String CategoryName, String Description, String ImgUrlLogo, Boolean IsDeleted, LocalDateTime CreatedAt, LocalDateTime UpdatedAt) {
+        this.CategoryID = CategoryID;
+        this.CategoryName = CategoryName;
+        this.Description = Description;
+        this.ImgUrlLogo = ImgUrlLogo;
+        this.IsDeleted = IsDeleted;
+        this.CreatedAt = CreatedAt;
+        this.UpdatedAt = UpdatedAt;
+    }
+    
+    
+
+    public Integer getCategoryID() {
+        return CategoryID;
     }
 
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
+    public void setCategoryID(Integer CategoryID) {
+        this.CategoryID = CategoryID;
     }
 
     public String getCategoryName() {
-        return categoryName;
+        return CategoryName;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryName(String CategoryName) {
+        this.CategoryName = CategoryName;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 
     public String getImgUrlLogo() {
-        return imgUrlLogo;
+        return ImgUrlLogo;
     }
 
-    public void setImgUrlLogo(String imgUrlLogo) {
-        this.imgUrlLogo = imgUrlLogo;
+    public void setImgUrlLogo(String ImgUrlLogo) {
+        this.ImgUrlLogo = ImgUrlLogo;
     }
 
-    public boolean isIsDeleted() {
-        return isDeleted;
+    public Boolean getIsDeleted() {
+        return IsDeleted;
     }
 
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setIsDeleted(Boolean IsDeleted) {
+        this.IsDeleted = IsDeleted;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(LocalDateTime CreatedAt) {
+        this.CreatedAt = CreatedAt;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getUpdatedAt() {
+        return UpdatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt(LocalDateTime UpdatedAt) {
+        this.UpdatedAt = UpdatedAt;
     }
-    
-    
 }

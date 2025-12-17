@@ -11,53 +11,51 @@ import java.math.BigDecimal;
  * @author Administrator
  */
 public class ImportDetail {
-    private int importID;
-    private int variantID;
-    private BigDecimal unitCost;
-    private int quantity;
 
-    public ImportDetail() {}
+    private Integer ImportID;
+    private Integer ProductVariantID;
+    private BigDecimal UnitCost;
+    private Integer Quantity;
 
-    public ImportDetail(int importID, int variantID, BigDecimal unitCost, int quantity) {
-        this.importID = importID;
-        this.variantID = variantID;
-        this.unitCost = unitCost;
-        this.quantity = quantity;
+    public ImportDetail() {
     }
 
-    public int getImportID() {
-        return importID;
+    public ImportDetail(Integer ImportID, Integer ProductVariantID, BigDecimal UnitCost, Integer Quantity) {
+        this.ImportID = ImportID;
+        this.ProductVariantID = ProductVariantID;
+        this.UnitCost = UnitCost;
+        this.Quantity = Quantity;
     }
 
-    public void setImportID(int importID) {
-        this.importID = importID;
+    public Integer getImportID() {
+        return ImportID;
     }
 
-    public int getVariantID() {
-        return variantID;
+    public void setImportID(Integer ImportID) {
+        this.ImportID = ImportID;
     }
 
-    public void setVariantID(int variantID) {
-        this.variantID = variantID;
+    public Integer getProductVariantID() {
+        return ProductVariantID;
+    }
+
+    public void setProductVariantID(Integer ProductVariantID) {
+        this.ProductVariantID = ProductVariantID;
     }
 
     public BigDecimal getUnitCost() {
-        return unitCost;
+        return UnitCost;
     }
 
-    public void setUnitCost(BigDecimal unitCost) {
-        this.unitCost = unitCost;
+    public void setUnitCost(BigDecimal UnitCost) {
+        this.UnitCost = UnitCost;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public Integer getQuantity() {
+        return Quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuantity(Integer Quantity) {
+        this.Quantity = Quantity;
     }
-    
-    
-    
-    
 }

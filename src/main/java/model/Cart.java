@@ -5,68 +5,70 @@
 package model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author Administrator
  */
 public class Cart {
-    private int customerID;
-    private int variantID;
-    private int quantity;
-    private Timestamp addedAt;
-    private Timestamp updatedAt;
+
+    private Integer CustomerID;
+    private Integer ProductVariantID;
+    private Integer Quantity;
+    private LocalDateTime AddedAt;
+    private LocalDateTime UpdatedAt;
 
     public Cart() {
     }
 
-    public Cart(int customerID, int variantID, int quantity, Timestamp addedAt, Timestamp updatedAt) {
-        this.customerID = customerID;
-        this.variantID = variantID;
-        this.quantity = quantity;
-        this.addedAt = addedAt;
-        this.updatedAt = updatedAt;
+    public Cart(Integer CustomerID, Integer ProductVariantID, Integer Quantity, LocalDateTime AddedAt, LocalDateTime UpdatedAt) {
+        this.CustomerID = CustomerID;
+        this.ProductVariantID = ProductVariantID;
+        this.Quantity = Quantity;
+        this.AddedAt = AddedAt;
+        this.UpdatedAt = UpdatedAt;
+    }
+    
+    
+
+    public Integer getCustomerID() {
+        return CustomerID;
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public void setCustomerID(Integer CustomerID) {
+        this.CustomerID = CustomerID;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public Integer getProductVariantID() {
+        return ProductVariantID;
     }
 
-    public int getVariantID() {
-        return variantID;
+    public void setProductVariantID(Integer ProductVariantID) {
+        this.ProductVariantID = ProductVariantID;
     }
 
-    public void setVariantID(int variantID) {
-        this.variantID = variantID;
+    public Integer getQuantity() {
+        return Quantity;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public void setQuantity(Integer Quantity) {
+        this.Quantity = Quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public LocalDateTime getAddedAt() {
+        return AddedAt;
     }
 
-    public Timestamp getAddedAt() {
-        return addedAt;
+    public void setAddedAt(LocalDateTime AddedAt) {
+        this.AddedAt = AddedAt;
     }
 
-    public void setAddedAt(Timestamp addedAt) {
-        this.addedAt = addedAt;
+    public LocalDateTime getUpdatedAt() {
+        return UpdatedAt;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public void setUpdatedAt(LocalDateTime UpdatedAt) {
+        this.UpdatedAt = UpdatedAt;
     }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-   
 }

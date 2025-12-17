@@ -1,112 +1,149 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package controller;
 
-import dao.AccountDAO;
-import dao.CategoryDAO;
+import dao.CustomerDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-import model.Category;
-//import utils.EmailService;
-//import utils.OTPManager;
+import java.time.LocalDate;
+import model.Customer;
+import utils.PasswordUtil;
 
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/Register"})
+/**
+ *
+ * @author Administrator
+ */
 public class RegisterServlet extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    private final CustomerDAO customerDAO = new CustomerDAO();
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryDAO categoryDAO = new CategoryDAO();
-        List<Category> categoryList = categoryDAO.getAllCategory();
-        request.setAttribute("categoryList", categoryList);
-        request.getRequestDispatcher("WEB-INF/View/account/register.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet RegisterServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.getRequestDispatcher("/WEB-INF/views/auth/register.jsp").forward(req, resp);
     }
 
     @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
-        String fullName = request.getParameter("fullName");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        String email = val(request.getParameter("email"));
+        String fullName = val(request.getParameter("fullName"));
+        String phone = val(request.getParameter("phone"));
+        String dobStr = val(request.getParameter("dateOfBirth"));
+        String genderStr = val(request.getParameter("gender"));
         String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirmPassword");
+        String confirm = request.getParameter("confirm");
 
-        // 1. Validate password
-        if (password == null || password.length() < 9) {
-            request.setAttribute("error", "Password must be at least 9 characters long.");
-            forwardBack(request, response, phone, fullName, email);
+        // giữ lại input khi lỗi
+        request.setAttribute("email", email);
+        request.setAttribute("fullName", fullName);
+        request.setAttribute("phone", phone);
+        request.setAttribute("dateOfBirth", dobStr);
+        request.setAttribute("gender", genderStr);
+
+        if (email.isBlank() || fullName.isBlank() || password == null || password.isBlank()) {
+            request.setAttribute("error", "Vui lòng nhập đầy đủ Email, Họ tên, Mật khẩu.");
+            request.getRequestDispatcher("/WEB-INF/views/auth/register.jsp").forward(request, response);
             return;
         }
 
-        if (!password.equals(confirmPassword)) {
-            request.setAttribute("error", "Password and Confirm Password do not match.");
-            forwardBack(request, response, phone, fullName, email);
+        if (confirm == null || !password.equals(confirm)) {
+            request.setAttribute("error", "Xác nhận mật khẩu không khớp.");
+            request.getRequestDispatcher("/WEB-INF/views/auth/register.jsp").forward(request, response);
             return;
         }
 
-        AccountDAO dao = new AccountDAO();
+        try {
+            CustomerDAO dao = new CustomerDAO();
 
-        // 2. Check email tồn tại
-        if (dao.checkEmailExisted(email)) {
-            request.setAttribute("error", "This email is already registered.");
-            forwardBack(request, response, phone, fullName, email);
-            return;
+            if (dao.existsByEmail(email)) {
+                request.setAttribute("error", "Email đã tồn tại.");
+                request.getRequestDispatcher("/WEB-INF/views/auth/register.jsp").forward(request, response);
+                return;
+            }
+
+            Customer c = new Customer();
+            c.setEmail(email);
+            c.setFullName(fullName);
+            c.setPhone(phone);
+            c.setPasswordHash(PasswordUtil.md5(password));
+
+            if (!dobStr.isBlank()) {
+                try {
+                    c.setDateOfBirth(LocalDate.parse(dobStr));
+                } catch (Exception ignored) {
+                }
+            }
+
+            if (!genderStr.isBlank()) {
+                try {
+                    c.setGender(Integer.parseInt(genderStr));
+                } catch (Exception ignored) {
+                }
+            }
+
+            int newId = dao.insertAndGetId(c);
+            Customer customer = dao.getById(newId);
+
+            HttpSession session = request.getSession(true);
+            session.setAttribute("customer", customer);
+
+            response.sendRedirect(request.getContextPath() + "/Home");
+
+        } catch (Exception e) {
+            throw new ServletException(e);
         }
-
-//        // 3. Tạo OTP, lưu session + gửi mail
-//        HttpSession session = request.getSession();
-//
-//        // Sinh mã OTP 6 số
-//        int code = EmailService.generateVerificationCode();
-//
-//        // Tạo OTPManager, OTP hết hạn sau 5 phút
-//        OTPManager otpManager = new OTPManager(code, 5);
-//
-//        // Lưu vào session để VerifyOTPServlet dùng
-//        session.setAttribute("otpManager", otpManager);
-//        session.setAttribute("otpPurpose", "register");
-//        session.setAttribute("tempEmail", email);
-//        session.setAttribute("tempPassword", password);  // sẽ hash trong Verify
-//        session.setAttribute("tempFullName", fullName);
-//        session.setAttribute("tempPhone", phone);
-
-//        // Gửi email OTP
-//        boolean sent = false;
-//        try {
-//            sent = EmailService.sendOTPEmail(email, code, "REGISTER");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//
-//        if (!sent) {
-//            request.setAttribute("error", "Cannot send OTP email. Please try again later.");
-//            forwardBack(request, response, phone, fullName, email);
-//            return;
-//        }
-//
-//        // 4. Chuyển sang trang nhập OTP
-//        response.sendRedirect("Verify");
-}
-
-    // Hàm giữ lại data khi lỗi
-    private void forwardBack(HttpServletRequest req, HttpServletResponse res,
-                             String phone, String fullName, String email)
-            throws ServletException, IOException {
-
-        req.setAttribute("phone", phone);
-        req.setAttribute("fullName", fullName);
-        req.setAttribute("email", email);
-        req.getRequestDispatcher("WEB-INF/View/account/register.jsp").forward(req, res);
     }
 
-//    @Override
-//    public String getServletInfo() {
-//        return "Register with OTP verification";
-//    }
+    private String val(String s) {
+        return s == null ? "" : s.trim();
+    }
+
 }
