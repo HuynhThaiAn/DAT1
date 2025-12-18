@@ -175,42 +175,45 @@
         <jsp:include page="/WEB-INF/View/customer/homePage/header.jsp" />
         <div class="login-container">
             <div class="login-card">
+
                 <h2 class="login-title">
                     <i class="bi bi-key-fill me-2"></i>
                     Forgot Password
                 </h2>
 
                 <p class="description-text">
-                    Enter your email address and we'll send you an OTP code to reset your password.
+                    Enter your email address to reset your password.
                 </p>
 
                 <% String error = (String) request.getAttribute("error");
                    if (error != null) { %>
-                    <div class="error-message">
-                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                        <%= error %>
-                    </div>
+                <div class="error-message">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <%= error %>
+                </div>
                 <% } %>
 
                 <% String message = (String) request.getAttribute("message");
                    if (message != null) { %>
-                    <div class="success-message">
-                        <i class="bi bi-check-circle-fill me-2"></i>
-                        <%= message %>
-                    </div>
+                <div class="success-message">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    <%= message %>
+                </div>
                 <% } %>
 
                 <form method="post" action="ForgotPassword">
                     <div class="input-group">
                         <i class="bi bi-envelope-fill input-icon"></i>
-                        <input type="email" name="email" class="form-control with-icon"
-                               placeholder="Enter your email address" required
-                               value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : ""%>">
+                        <input type="email" name="email"
+                               class="form-control with-icon"
+                               placeholder="Enter your email address"
+                               required
+                               value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : "" %>">
                     </div>
 
                     <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-send-fill me-2"></i>
-                        Send OTP
+                        <i class="bi bi-arrow-right-circle-fill me-2"></i>
+                        Continue
                     </button>
 
                     <div class="divider">
@@ -222,51 +225,41 @@
                         Back to Login
                     </a>
                 </form>
+
             </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
         <script>
-            
             document.addEventListener('DOMContentLoaded', function () {
-                
+
                 const emailInput = document.querySelector('input[name="email"]');
                 if (emailInput) {
                     emailInput.addEventListener('input', function () {
-                        const email = this.value;
                         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                        
-                        if (email.length > 0) {
-                            if (emailRegex.test(email)) {
-                                this.style.borderColor = '#28a745';
-                            } else {
-                                this.style.borderColor = '#dc3545';
-                            }
+                        if (this.value.length > 0) {
+                            this.style.borderColor = emailRegex.test(this.value) ? '#28a745' : '#dc3545';
                         } else {
                             this.style.borderColor = '#e9ecef';
                         }
                     });
                 }
 
-                
                 const form = document.querySelector('form');
                 const submitBtn = document.querySelector('button[type="submit"]');
-                
+
                 if (form && submitBtn) {
-                    form.addEventListener('submit', function (e) {
-                        
+                    form.addEventListener('submit', function () {
                         submitBtn.disabled = true;
-                        submitBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Sending...';
-                        
-                        
-                        setTimeout(() => {
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = '<i class="bi bi-send-fill me-2"></i>Send OTP';
-                        }, 5000);
+                        submitBtn.innerHTML =
+                                '<i class="bi bi-hourglass-split me-2"></i>Processing...';
                     });
                 }
             });
         </script>
+
         <jsp:include page="/WEB-INF/View/customer/homePage/footer.jsp" />
+
     </body>
 </html>
