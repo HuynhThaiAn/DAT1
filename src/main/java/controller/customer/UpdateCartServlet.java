@@ -13,16 +13,15 @@ public class UpdateCartServlet extends HttpServlet {
         resp.setContentType("text/plain;charset=UTF-8");
 
         try {
-            String action = req.getParameter("action");
-            String idRaw  = req.getParameter("cartItemId");
+            String idRaw = req.getParameter("cartItemId");
             String qtyRaw = req.getParameter("quantity");
 
-            if (action == null || !"update".equals(action) || idRaw == null || qtyRaw == null) {
+            if (idRaw == null || qtyRaw == null) {
                 resp.getWriter().write("error");
                 return;
             }
 
-            int id  = Integer.parseInt(idRaw);
+            int id = Integer.parseInt(idRaw);
             int qty = Math.max(1, Integer.parseInt(qtyRaw)); // không cho < 1
 
             CartDAO dao = new CartDAO();

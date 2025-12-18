@@ -42,7 +42,7 @@ public class CheckoutServlet extends HttpServlet {
             return;
         }
 
-        // ✅ Chỉ cho phép checkout, bỏ voucher
+      
         if (!action.equalsIgnoreCase("checkout")) {
             response.sendRedirect("CheckoutServlet?action=checkout");
             return;

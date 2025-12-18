@@ -457,13 +457,13 @@
                                     itemTotal = BigDecimal.ZERO;
                                 }
                         %>
-                        <tr data-unit-price="<%= discountedPrice.setScale(0, BigDecimal.ROUND_HALF_UP).toString()%>"
+                        <tr data-unit-price="<%= discountedPrice.setScale(0, BigDecimal.ROUND_HALF_UP).longValue()%>"
                             data-cart-item-id="<%= item.getCartItemID()%>"
-                            data-item-total="<%= itemTotal.setScale(0, BigDecimal.ROUND_HALF_UP).toString()%>">
+                            data-item-total="<%= itemTotal.setScale(0, BigDecimal.ROUND_HALF_UP).longValue()%>">
                             <td>
                                 <input type="checkbox"
                                        class="selectItem"
-                                       data-item-total="<%= itemTotal.setScale(0, BigDecimal.ROUND_HALF_UP).toString()%>"
+                                       data-item-total="<%= itemTotal.setScale(0, BigDecimal.ROUND_HALF_UP).longValue()%>"
                                        onclick="updateCartTotal(); saveSelectedItems();">
                             </td>
                             <td>
@@ -491,11 +491,13 @@
                                         <button type="button" class="quantity-btn"
                                                 onclick="changeQuantity(this, -1)">−</button>
                                         <input type="number"
+                                               id="quantity-<%= item.getCartItemID()%>"
                                                name="quantity"
                                                class="quantity-value"
                                                value="<%= item.getQuantity()%>"
                                                min="1"
                                                onchange="changeQuantity(this, 0)">
+
                                         <button type="button" class="quantity-btn"
                                                 onclick="changeQuantity(this, 1)">+</button>
                                     </div>
@@ -611,9 +613,9 @@
 
                                 function updateCartTotal() {
                                     let total = 0;
-                                    document.querySelectorAll('.selectItem:checked').forEach(item => {
-                                        const itemTotal = parseInt(item.getAttribute('data-item-total') || 0);
-                                        total += itemTotal;
+                                    document.querySelectorAll('.selectItem:checked').forEach(cb => {
+                                        const v = cb.getAttribute('data-item-total');
+                                        total += parseInt(v || "0", 10);
                                     });
                                     document.getElementById('cartTotal').textContent = formatNumber(total) + ' VND';
                                 }
@@ -624,9 +626,11 @@
                                         console.error("Row not found for cartItemId:", cartItemId);
                                         return;
                                     }
-                                    const unitPrice = parseFloat(row.getAttribute('data-unit-price')) || 0;
+
+                                    const unitPrice = parseInt(row.getAttribute('data-unit-price') || "0", 10);
                                     const quantityInput = document.getElementById(`quantity-${cartItemId}`);
-                                    const quantity = parseInt(quantityInput.value) || 0;
+                                    const quantity = parseInt(quantityInput?.value || "0", 10);
+
                                     const newTotal = unitPrice * quantity;
 
                                     // update UI
@@ -636,14 +640,19 @@
                                     }
 
                                     // update data attributes for row + checkbox
-                                    row.setAttribute('data-item-total', newTotal.toString());
+                                    row.setAttribute('data-item-total', String(newTotal));
                                     const checkbox = row.querySelector('.selectItem');
                                     if (checkbox) {
-                                        checkbox.setAttribute('data-item-total', newTotal.toString());
+                                        checkbox.setAttribute('data-item-total', String(newTotal));
                                     }
 
+                                    // update tổng giỏ (chỉ các item đang tick)
                                     updateCartTotal();
+
+                                    // optional: lưu lại selected items (nếu anh muốn giữ state)
+                                    saveSelectedItems();
                                 }
+
 
                                 function saveSelectedItems() {
                                     const selected = Array.from(document.querySelectorAll('.selectItem:checked'))
@@ -690,9 +699,8 @@
                                     return true;
                                 }
 
-// Hàm thay đổi số lượng + gọi UpdateCart (dựa theo nút được bấm)
+
                                 function changeQuantity(elem, delta) {
-                                    // Nếu elem là input (onchange) thì dùng chính nó, nếu là button (onclick) thì tìm input trong form
                                     let form, input;
 
                                     if (elem.tagName === 'INPUT') {
@@ -709,44 +717,66 @@
                                     }
 
                                     const cartItemId = form.querySelector('input[name="cartItemId"]').value;
-
                                     let currentQuantity = parseInt(input.value) || 1;
 
-                                    if (delta !== 0) {
-                                        currentQuantity += delta;
+                                    // Nếu bấm "-" khi đang là 1 => hỏi có xoá item không
+                                    if (delta === -1 && currentQuantity === 1) {
+                                        Swal.fire({
+                                            title: 'Remove this item?',
+                                            text: 'Quantity is 1. Do you want to remove it from cart?',
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#d33',
+                                            cancelButtonColor: '#3085d6',
+                                            confirmButtonText: 'Remove',
+                                            cancelButtonText: 'Cancel'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.location.href =
+                                                        '${pageContext.request.contextPath}/RemoveCartItem?action=remove&id='
+                                                        + cartItemId + '&accountId=' + ACCOUNT_ID;
+                                            }
+                                        });
+                                        return;
                                     }
 
-                                    if (currentQuantity < 1) {
-                                        currentQuantity = 1;
-                                    }
+                                    // Tính quantity mới
+                                    let newQuantity = currentQuantity;
+                                    if (delta !== 0)
+                                        newQuantity += delta;
+                                    if (newQuantity < 1)
+                                        newQuantity = 1;
 
-                                    input.value = currentQuantity;
+                                    // Cập nhật UI trước
+                                    input.value = newQuantity;
 
+                                    // Gọi server update
                                     $.ajax({
                                         url: "${pageContext.request.contextPath}/UpdateCart",
                                         type: "POST",
-                                        data: $(form).serialize(),
+                                        data: {
+                                            action: "update",
+                                            cartItemId: cartItemId,
+                                            quantity: newQuantity
+                                        },
                                         success: function (res) {
-                                            res = res.trim();
+                                            res = (res || "").trim();
                                             if (res === "success") {
                                                 updateItemTotal(cartItemId);
                                             } else if (res === "out_of_stock") {
                                                 Swal.fire("⚠ Out Of Stock", "Not enough quantity in warehouse", "warning");
-                                                // rollback 1 bước nếu vừa + bị quá kho
-                                                if (delta !== 0) {
-                                                    let rollback = currentQuantity - delta;
-                                                    if (rollback < 1)
-                                                        rollback = 1;
-                                                    input.value = rollback;
-                                                }
+                                                input.value = currentQuantity; // rollback
                                             } else {
                                                 Swal.fire("❌ Failed to update");
+                                                input.value = currentQuantity; // rollback
                                             }
                                         },
                                         error: function () {
                                             Swal.fire("❌ Failed to update");
+                                            input.value = currentQuantity; // rollback
                                         }
                                     });
+
                                 }
 
                                 // Tự check item mới thêm vào cart
