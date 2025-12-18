@@ -167,7 +167,7 @@ public class CartDAO extends DBContext {
     }
 
     public boolean updateCartItemQuantity(int cartItemId, int quantity) {
-        String sql = "UPDATE CartItems SET Quantity = ? WHERE cartItemID = ?";
+        String sql = "UPDATE CartItems SET Quantity = ? WHERE CartItemID = ?";
         try ( PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, quantity);
             ps.setInt(2, cartItemId);
