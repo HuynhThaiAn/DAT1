@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Add Product</title>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <style>
             .btn-success {
@@ -88,6 +88,5 @@
         <% } %>
         };
     </script>
-
 
 </html>
