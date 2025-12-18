@@ -24,4 +24,4 @@
                 <jsp:include page="/WEB-INF/View/admin/categoryManagement/updateCategory/updatePage.jsp" />
             </div>
         </div>
-    </bo
+    </body>

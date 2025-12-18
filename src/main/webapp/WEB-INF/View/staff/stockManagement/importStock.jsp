@@ -142,42 +142,6 @@
                 </div>
             </div>
 
-            <!-- Selected Supplier -->
-            <c:set value="${sessionScope.supplier}" var="sup" />
-            <div class="card-table mb-3">
-                <div class="card-head">
-                    <div class="card-head-title">
-                        <i class="fa-solid fa-building"></i> Selected Supplier
-                    </div>
-                    <button id="openModalBtn" class="btn-detail" type="button">
-                        <i class="fa-solid fa-hand-pointer"></i> Select Supplier
-                    </button>
-                </div>
-
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0" aria-label="Selected Supplier">
-                        <thead>
-                        <tr>
-                            <th>Tax ID</th>
-                            <th>Company Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Address</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>${sup.taxId}</td>
-                            <td class="fw-bold">${sup.name}</td>
-                            <td>${sup.email}</td>
-                            <td>${sup.phoneNumber}</td>
-                            <td>${sup.address}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
             <!-- Selected Products -->
             <div class="card-table">
                 <div class="card-head">
