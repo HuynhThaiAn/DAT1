@@ -10,8 +10,7 @@
 
 <div class="form-wrapper" style="width: 100%">
 
-         
-
+        
     <div class="mb-3">
         <label class="form-label">Product Name</label>
         <input type="text" class="form-control" name="productName" required/>
