@@ -58,40 +58,6 @@ public class RegisterServlet extends HttpServlet {
             forwardBack(request, response, phone, fullName, email);
             return;
         }
-
-//        // 3. Tạo OTP, lưu session + gửi mail
-//        HttpSession session = request.getSession();
-//
-//        // Sinh mã OTP 6 số
-//        int code = EmailService.generateVerificationCode();
-//
-//        // Tạo OTPManager, OTP hết hạn sau 5 phút
-//        OTPManager otpManager = new OTPManager(code, 5);
-//
-//        // Lưu vào session để VerifyOTPServlet dùng
-//        session.setAttribute("otpManager", otpManager);
-//        session.setAttribute("otpPurpose", "register");
-//        session.setAttribute("tempEmail", email);
-//        session.setAttribute("tempPassword", password);  // sẽ hash trong Verify
-//        session.setAttribute("tempFullName", fullName);
-//        session.setAttribute("tempPhone", phone);
-
-//        // Gửi email OTP
-//        boolean sent = false;
-//        try {
-//            sent = EmailService.sendOTPEmail(email, code, "REGISTER");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//
-//        if (!sent) {
-//            request.setAttribute("error", "Cannot send OTP email. Please try again later.");
-//            forwardBack(request, response, phone, fullName, email);
-//            return;
-//        }
-//
-//        // 4. Chuyển sang trang nhập OTP
-//        response.sendRedirect("Verify");
 }
 
     // Hàm giữ lại data khi lỗi
@@ -105,8 +71,4 @@ public class RegisterServlet extends HttpServlet {
         req.getRequestDispatcher("WEB-INF/View/account/register.jsp").forward(req, res);
     }
 
-//    @Override
-//    public String getServletInfo() {
-//        return "Register with OTP verification";
-//    }
 }
