@@ -16,39 +16,93 @@
 %>
 
 <style>
-    .user-dropdown { position: relative; display: inline-block; }
+    .user-dropdown {
+        position: relative;
+        display: inline-block;
+    }
     .user-dropdown .btn {
-        background: #f3f4f6; border-radius: 12px; height: 42px; padding: 0 16px;
-        border: 1px solid #d1d5db; color: #374151; display: flex; align-items: center; gap: 8px;
+        background: #f3f4f6;
+        border-radius: 12px;
+        height: 42px;
+        padding: 0 16px;
+        border: 1px solid #d1d5db;
+        color: #374151;
+        display: flex;
+        align-items: center;
+        gap: 8px;
         transition: 0.25s ease;
     }
-    .user-dropdown .btn:hover { background: #e5e7eb; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .user-dropdown .btn:hover {
+        background: #e5e7eb;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
     .user-dropdown-menu{
-        position:absolute; right:0; top:calc(100% + 3px); width:240px;
-        background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:8px 0;
+        position:absolute;
+        right:0;
+        top:calc(100% + 3px);
+        width:240px;
+        background:#fff;
+        border:1px solid #e5e7eb;
+        border-radius:14px;
+        padding:8px 0;
         box-shadow:0 8px 28px rgba(0,0,0,0.18);
-        display:none; opacity:0; transform:translateY(-6px); transition:0.18s ease; z-index:9999;
+        display:none;
+        opacity:0;
+        transform:translateY(-6px);
+        transition:0.18s ease;
+        z-index:9999;
     }
     .user-dropdown-item{
-        padding:12px 18px; display:flex; align-items:center; gap:12px;
-        color:#374151; font-size:14px; text-decoration:none; transition:all 0.2s ease;
+        padding:12px 18px;
+        display:flex;
+        align-items:center;
+        gap:12px;
+        color:#374151;
+        font-size:14px;
+        text-decoration:none;
+        transition:all 0.2s ease;
     }
-    .user-dropdown-item i{ font-size:18px; width:24px; text-align:center; color:#6b7280; }
-    .user-dropdown-item span{ flex:1; }
-    .user-dropdown-item:hover{ background:#f3f4f6; padding-left:26px; color:#111827; }
-    .user-dropdown-item:hover i{ color:#111827; }
-    .user-dropdown-item.text-danger{ color:#dc3545 !important; }
-    .user-dropdown-item.text-danger i{ color:#dc3545 !important; }
-    .user-dropdown-item.text-danger:hover{ background:#dc3545; color:#fff !important; }
-    .user-dropdown-item.text-danger:hover i{ color:#fff !important; }
-    .user-dropdown-divider{ border-top:1px solid #e5e7eb; margin:6px 0; }
+    .user-dropdown-item i{
+        font-size:18px;
+        width:24px;
+        text-align:center;
+        color:#6b7280;
+    }
+    .user-dropdown-item span{
+        flex:1;
+    }
+    .user-dropdown-item:hover{
+        background:#f3f4f6;
+        padding-left:26px;
+        color:#111827;
+    }
+    .user-dropdown-item:hover i{
+        color:#111827;
+    }
+    .user-dropdown-item.text-danger{
+        color:#dc3545 !important;
+    }
+    .user-dropdown-item.text-danger i{
+        color:#dc3545 !important;
+    }
+    .user-dropdown-item.text-danger:hover{
+        background:#dc3545;
+        color:#fff !important;
+    }
+    .user-dropdown-item.text-danger:hover i{
+        color:#fff !important;
+    }
+    .user-dropdown-divider{
+        border-top:1px solid #e5e7eb;
+        margin:6px 0;
+    }
 </style>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/homepage.css">
-  
+
 
 <div class="main-header">
     <div class="header-top d-flex align-items-center justify-content-between">
@@ -102,39 +156,45 @@
 
         <div class="header-right d-flex align-items-center gap-2">
             <% if (customer == null) { %>
-                <a style="border-radius: 15px;"
-                   href="${pageContext.request.contextPath}/Login"
-                   class="btn btn-outline-dark me-2" title="Tài khoản">
-                    <i class="bi bi-person"></i>
-                </a>
+            <a style="border-radius: 15px;"
+               href="${pageContext.request.contextPath}/Login"
+               class="btn btn-outline-dark me-2" title="Tài khoản">
+                <i class="bi bi-person"></i>
+            </a>
             <% } else { %>
-                <div class="user-dropdown">
-                    <button type="button" style="border-radius: 15px;"
-                            class="btn btn-outline-dark me-2" title="Tài khoản">
-                        <i class="bi bi-person"></i>
-                    </button>
-                    <ul class="user-dropdown-menu">
-                        <li>
-                            <a class="user-dropdown-item" href="${pageContext.request.contextPath}/ViewProfile">
-                                <i class="bi bi-person-circle"></i>
-                                <span>Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="user-dropdown-item" href="${pageContext.request.contextPath}/ViewOrderOfCustomer">
-                                <i class="bi bi-cart"></i>
-                                <span>Order</span>
-                            </a>
-                        </li>
-                        <li><hr class="user-dropdown-divider"></li>
-                        <li>
-                            <a class="user-dropdown-item text-danger" href="${pageContext.request.contextPath}/Logout">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Logout</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="user-dropdown">
+                <button type="button" style="border-radius: 15px;"
+                        class="btn btn-outline-dark me-2" title="Tài khoản">
+                    <i class="bi bi-person"></i>
+                </button>
+                <ul class="user-dropdown-menu">
+                    <li>
+                        <a class="user-dropdown-item" href="<%=request.getContextPath()%>/Profile?action=view">
+                            <i class="bi bi-person-circle"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="user-dropdown-item" href="<%=request.getContextPath()%>/Order?action=list">
+                            <i class="bi bi-cart"></i>
+                            <span>Order</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="user-dropdown-item" href="<%=request.getContextPath()%>/Address?action=list">
+                            <i class="bi bi-geo-alt"></i>
+                            <span>Addresses</span>
+                        </a>
+                    </li>
+                    <li><hr class="user-dropdown-divider"></li>
+                    <li>
+                        <a class="user-dropdown-item text-danger" href="${pageContext.request.contextPath}/Logout">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <% } %>
 
             <a href="${pageContext.request.contextPath}/CartList?accountId=<%= (customer != null ? customer.getCustomerID() : 0) %>"
@@ -147,37 +207,42 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const userDropdown = document.querySelector(".user-dropdown");
-    if (!userDropdown) return;
+    document.addEventListener("DOMContentLoaded", function () {
+        const userDropdown = document.querySelector(".user-dropdown");
+        if (!userDropdown)
+            return;
 
-    const btn = userDropdown.querySelector(".btn");
-    const menu = userDropdown.querySelector(".user-dropdown-menu");
+        const btn = userDropdown.querySelector(".btn");
+        const menu = userDropdown.querySelector(".user-dropdown-menu");
 
-    btn.addEventListener("click", function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
 
-        const isOpen = menu.style.display === "block";
-        if (isOpen) {
-            menu.style.opacity = "0";
-            menu.style.transform = "translateY(-6px)";
-            setTimeout(() => { menu.style.display = "none"; }, 180);
-        } else {
-            menu.style.display = "block";
-            setTimeout(() => {
-                menu.style.opacity = "1";
-                menu.style.transform = "translateY(0)";
-            }, 10);
-        }
+            const isOpen = menu.style.display === "block";
+            if (isOpen) {
+                menu.style.opacity = "0";
+                menu.style.transform = "translateY(-6px)";
+                setTimeout(() => {
+                    menu.style.display = "none";
+                }, 180);
+            } else {
+                menu.style.display = "block";
+                setTimeout(() => {
+                    menu.style.opacity = "1";
+                    menu.style.transform = "translateY(0)";
+                }, 10);
+            }
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!userDropdown.contains(e.target)) {
+                menu.style.opacity = "0";
+                menu.style.transform = "translateY(-6px)";
+                setTimeout(() => {
+                    menu.style.display = "none";
+                }, 180);
+            }
+        });
     });
-
-    document.addEventListener("click", function(e) {
-        if (!userDropdown.contains(e.target)) {
-            menu.style.opacity = "0";
-            menu.style.transform = "translateY(-6px)";
-            setTimeout(() => { menu.style.display = "none"; }, 180);
-        }
-    });
-});
 </script>

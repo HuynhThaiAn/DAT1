@@ -22,8 +22,9 @@
             <h2>Freshly Launched Products</h2>
             <p>Stay ahead with the latest releases and limited-time launch deals.</p>
         </div>
-        <a class="section-link" href="${pageContext.request.contextPath}/SortProduct?sort=latest">View All</a>
-    </div>
+        <a href="${pageContext.request.contextPath}/Product">
+            View all products
+        </a>    </div>
 
     <div class="product-scroll-wrapper">
         <button class="carousel-btn prev" data-target="product-scroll-new" data-direction="prev">
@@ -48,18 +49,18 @@
                 <span class="badge-pill"><i class="bi bi-lightning-charge-fill"></i> New Launch</span>
 
                 <% if (imgUrl != null && !imgUrl.isBlank()) { %>
-                    <img src="<%= imgUrl %>" alt="<%= name %>" onerror="this.style.display='none'">
+                <img src="<%= imgUrl %>" alt="<%= name %>" onerror="this.style.display='none'">
                 <% } else { %>
-                    <!-- fallback khi chưa có ảnh -->
-                    <div style="width:100%;aspect-ratio:1/1;background:#f3f4f6;border-radius:12px;"></div>
+                <!-- fallback khi chưa có ảnh -->
+                <div style="width:100%;aspect-ratio:1/1;background:#f3f4f6;border-radius:12px;"></div>
                 <% } %>
 
                 <p class="product-name"><%= name %></p>
 
                 <% if (!desc.isBlank()) { %>
-                    <p class="text-muted" style="margin:0;font-size:12px;line-height:1.3;max-height:2.6em;overflow:hidden;">
-                        <%= desc %>
-                    </p>
+                <p class="text-muted" style="margin:0;font-size:12px;line-height:1.3;max-height:2.6em;overflow:hidden;">
+                    <%= desc %>
+                </p>
                 <% } %>
             </a>
 
@@ -78,18 +79,19 @@
 </section>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const buttons = document.querySelectorAll('[data-target="product-scroll-new"]');
-    const container = document.getElementById('product-scroll-new');
-    if (!container) return;
+    document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll('[data-target="product-scroll-new"]');
+        const container = document.getElementById('product-scroll-new');
+        if (!container)
+            return;
 
-    const step = () => Math.max(container.clientWidth * 0.8, 320);
+        const step = () => Math.max(container.clientWidth * 0.8, 320);
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const direction = btn.dataset.direction === 'prev' ? -1 : 1;
-            container.scrollBy({left: step() * direction, behavior: 'smooth'});
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const direction = btn.dataset.direction === 'prev' ? -1 : 1;
+                container.scrollBy({left: step() * direction, behavior: 'smooth'});
+            });
         });
     });
-});
 </script>

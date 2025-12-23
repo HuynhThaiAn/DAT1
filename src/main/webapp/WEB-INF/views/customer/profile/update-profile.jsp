@@ -1,12 +1,27 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="model.Customer"%>
-<%@page import="model.Account"%>
-<%@page import="model.Staff"%>
 
 <%
+    // ===== CHECK LOGIN =====
+    Customer customer = (Customer) session.getAttribute("customer");
+    if (customer == null) {
+        response.sendRedirect(request.getContextPath() + "/Login");
+        return;
+    }
+
+    // nếu servlet set cus/customer để edit thì ưu tiên lấy request
     Customer cus = (Customer) request.getAttribute("cus");
-    Integer accountId = (Integer) session.getAttribute("accountId");
+    if (cus == null) cus = (Customer) request.getAttribute("customer");
+    if (cus == null) cus = customer;
+
+    String dobVal = "";
+    if (cus.getDateOfBirth() != null) {
+        dobVal = cus.getDateOfBirth().toString(); // yyyy-MM-dd cho input type=date
+    }
+
+    String error = (String) request.getAttribute("error");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,111 +31,69 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/profile.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/Css/profile.css">
 </head>
+
 <body>
-    <jsp:include page="/WEB-INF/View/customer/homePage/header.jsp" />
+    <jsp:include page="/WEB-INF/views/customer/homePage/header.jsp" />
 
-    <div class="main-account container-fluid">
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-3">Update Profile</h5>
 
-        <!-- Sidebar -->
-        <jsp:include page="/WEB-INF/View/customer/sideBar.jsp" />
-        
-        <!-- Profile Editor -->
-        <div class="profile-card">
-            <div class="profile-header">
-                <h4 class="mb-0 d-flex align-items-center gap-2">
-                    <i class="bi bi-pencil-square"></i>
-                    Update Profile
-                </h4>
-            </div>
+                        <% if (error != null) { %>
+                            <div class="alert alert-danger"><%= error %></div>
+                        <% } %>
 
-            <div class="profile-body">
-                <% if (cus == null) { %>
-                    <div class="alert alert-danger">
-                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                        Customer information not found.
+                        <form method="post" action="<%=request.getContextPath()%>/Profile?action=update">
+                            <input type="hidden" name="customerId" value="<%= cus.getCustomerID() %>"/>
+
+                            <div class="mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" name="fullName"
+                                       value="<%= cus.getFullName() %>" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Phone</label>
+                                <input type="text" class="form-control" name="phone"
+                                       value="<%= (cus.getPhone() == null ? "" : cus.getPhone()) %>">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" name="dateOfBirth" value="<%= dobVal %>">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Gender</label>
+                                <select class="form-select" name="gender">
+                                    <%
+                                        Integer g = cus.getGender();
+                                        int gv = (g == null) ? 0 : g;
+                                    %>
+                                    <option value="0" <%= (gv==0?"selected":"") %>>Unknown</option>
+                                    <option value="1" <%= (gv==1?"selected":"") %>>Male</option>
+                                    <option value="2" <%= (gv==2?"selected":"") %>>Female</option>
+                                    <option value="3" <%= (gv==3?"selected":"") %>>Other</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex justify-content-end gap-2">
+                                <a class="btn btn-light" href="<%=request.getContextPath()%>/Profile?action=view">Cancel</a>
+                                <button class="btn btn-primary" type="submit">Save</button>
+                            </div>
+                        </form>
+
                     </div>
-                <% } else { %>
-                <form method="post" action="UpdateProfile">
-                    <input type="hidden" name="id" value="<%= cus.getId() %>">
-
-                    <!-- Full Name -->
-                    <div class="form-group">
-                        <label class="form-label">
-                            <i class="bi bi-person profile-icon"></i>
-                            Full Name
-                        </label>
-                        <input type="text" name="fullname"
-                               value="<%= cus.getFullName() != null ? cus.getFullName() : "" %>"
-                               class="form-control"
-                               placeholder="Enter your full name"
-                               required>
-                    </div>
-
-                    <!-- Phone -->
-                    <div class="form-group">
-                        <label class="form-label">
-                            <i class="bi bi-telephone profile-icon"></i>
-                            Phone Number
-                        </label>
-                        <input type="tel" name="phone"
-                               value="<%= cus.getPhone() != null ? cus.getPhone() : "" %>"
-                               class="form-control"
-                               pattern="[0-9]{10,11}"
-                               placeholder="Enter phone number (10–11 digits)"
-                               title="Phone number must contain 10–11 digits.">
-                    </div>
-
-                    <!-- Date of Birth -->
-                    <div class="form-group">
-                        <label class="form-label">
-                            <i class="bi bi-calendar profile-icon"></i>
-                            Date of Birth
-                        </label>
-                        <input type="date" name="dob"
-                               value="<%= cus.getBirthDay() != null ? cus.getBirthDay() : "" %>"
-                               class="form-control"
-                               max="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>">
-                    </div>
-
-                    <!-- Gender -->
-                    <div class="form-group">
-                        <label class="form-label">
-                            <i class="bi bi-gender-ambiguous profile-icon"></i>
-                            Gender
-                        </label>
-                        <div class="gender-options">
-                            <label class="gender-option">
-                                <input type="radio" class="form-check-input" name="gender" value="male"
-                                       <%= "male".equalsIgnoreCase(cus.getGender()) ? "checked" : "" %>>
-                                Male
-                            </label>
-
-                            <label class="gender-option">
-                                <input type="radio" class="form-check-input" name="gender" value="female"
-                                       <%= "female".equalsIgnoreCase(cus.getGender()) ? "checked" : "" %>>
-                                Female
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="profile-actions">
-                        <a href="ViewProfile" class="btn-cancel">
-                            <i class="bi bi-x-circle me-1"></i> Back
-                        </a>
-                        <button type="submit" class="btn-update">
-                            <i class="bi bi-check-circle me-1"></i> Save Changes
-                        </button>
-                    </div>
-                </form>
-                <% } %>
+                </div>
             </div>
         </div>
     </div>
 
-    <jsp:include page="/WEB-INF/View/customer/homePage/footer.jsp" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

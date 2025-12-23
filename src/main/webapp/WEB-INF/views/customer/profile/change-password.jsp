@@ -1,210 +1,87 @@
-
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="model.Customer"%>
-<%@page import="model.Account"%>
-<%@page import="model.Staff"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
-    Integer accountId = (Integer) session.getAttribute("accountId");
+    // ===== CHECK LOGIN =====
+    Customer customer = (Customer) session.getAttribute("customer");
+    if (customer == null) {
+        response.sendRedirect(request.getContextPath() + "/Login");
+        return;
+    }
+
+    String error = (String) request.getAttribute("error");
+    String success = (String) request.getAttribute("success");
 %>
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Change Password</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="UTF-8">
+    <title>Change Password</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <!-- CSS chung (profile layout) -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/Css/profile.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/Css/profile.css">
+</head>
 
-        <style>
-            .password-hint {
-                font-size: 0.85rem;
-                color: #64748b;
-                margin-top: 4px;
-            }
-            .error-message {
-                margin-top: 6px;
-            }
-            .toggle-password {
-                position: absolute;
-                right: 12px;
-                top: 50%;
-                transform: translateY(-50%);
-                cursor: pointer;
-                color: #94a3b8;
-                font-size: 0.9rem;
-            }
-            .password-wrapper {
-                position: relative;
-            }
-        </style>
-    </head>
-    <body>
-        <jsp:include page="/WEB-INF/View/customer/homePage/header.jsp" />
+<body>
+    <jsp:include page="/WEB-INF/views/customer/homePage/header.jsp" />
 
-        <div class="main-account container-fluid">
-            <!-- Sidebar -->
-            <jsp:include page="/WEB-INF/View/customer/sideBar.jsp" />
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-3">Change Password</h5>
 
-            <!-- Card ??i m?t kh?u -->
-            <div class="profile-card">
-                <div class="profile-header">
-                    <h4 class="mb-0 d-flex align-items-center gap-2">
-                        <i class="bi bi-shield-lock"></i>
-                        Change Password
-                    </h4>
-                </div>
+                        <% if (error != null) { %>
+                            <div class="alert alert-danger"><%= error %></div>
+                        <% } %>
+                        <% if (success != null) { %>
+                            <div class="alert alert-success"><%= success %></div>
+                        <% } %>
 
-                <div class="profile-body">
-                    <!-- Thông báo server-side -->
-                    <c:if test="${not empty success}">
-                        <div class="alert alert-success" role="alert">
-                            <i class="bi bi-check-circle me-2"></i>${success}
-                        </div>
-                    </c:if>
-
-                    <c:if test="${not empty error}">
-                        <div class="alert alert-danger" role="alert">
-                            <i class="bi bi-exclamation-triangle me-2"></i>${error}
-                        </div>
-                    </c:if>
-
-                    <p class="mb-3" style="font-size:0.9rem; color:#64748b;">
-                        For your account security, please use a strong password that you have not used before.
-                    </p>
-
-                    <form method="post" action="ChangePassword" id="changePasswordForm">
-                        <!-- Old password -->
-                        <div class="form-group">
-                            <label for="oldPassword" class="form-label">
-                                <i class="bi bi-lock me-2 profile-icon"></i>Old Password
-                            </label>
-                            <div class="password-wrapper">
-                                <input type="password"
-                                       class="form-control"
-                                       name="oldPassword"
-                                       id="oldPassword"
-                                       required
-                                       placeholder="Enter your current password">
-                                <span class="toggle-password" data-target="oldPassword">
-                                    <i class="bi bi-eye-slash"></i>
-                                </span>
+                        <form method="post" action="<%=request.getContextPath()%>/Profile?action=changePassword" id="changePasswordForm">
+                            <div class="mb-3">
+                                <label class="form-label">Current Password</label>
+                                <input type="password" class="form-control" name="currentPassword" required>
                             </div>
-                        </div>
 
-                        <!-- New password -->
-                        <div class="form-group">
-                            <label for="newPassword" class="form-label">
-                                <i class="bi bi-key me-2 profile-icon"></i>New Password
-                            </label>
-                            <div class="password-wrapper">
-                                <input type="password"
-                                       class="form-control"
-                                       name="newPassword"
-                                       id="newPassword"
-                                       required
-                                       placeholder="Enter your new password">
-                                <span class="toggle-password" data-target="newPassword">
-                                    <i class="bi bi-eye-slash"></i>
-                                </span>
+                            <div class="mb-3">
+                                <label class="form-label">New Password</label>
+                                <input type="password" class="form-control" name="newPassword" id="newPassword" required>
                             </div>
-                            <div class="password-hint">
-                                Minimum 8 characters, include letters and numbers.
-                            </div>
-                            <div id="newPasswordError" class="error-message" style="display:none;"></div>
-                        </div>
 
-                        <!-- Confirm new password -->
-                        <div class="form-group">
-                            <label for="confirmPassword" class="form-label">
-                                <i class="bi bi-key-fill me-2 profile-icon"></i>Confirm New Password
-                            </label>
-                            <div class="password-wrapper">
-                                <input type="password"
-                                       class="form-control"
-                                       name="confirmPassword"
-                                       id="confirmPassword"
-                                       required
-                                       placeholder="Confirm your new password">
-                                <span class="toggle-password" data-target="confirmPassword">
-                                    <i class="bi bi-eye-slash"></i>
-                                </span>
+                            <div class="mb-3">
+                                <label class="form-label">Confirm New Password</label>
+                                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" required>
+                                <div class="small text-muted mt-1" id="pwHint"></div>
                             </div>
-                            <div id="confirmPasswordError" class="error-message" style="display:none;"></div>
-                        </div>
 
-                        <!-- Actions -->
-                        <div class="profile-actions">
-                            <a href="ViewProfile" class="btn-cancel">
-                                <i class="bi bi-arrow-left me-1"></i>Back
-                            </a>
-                            <button type="submit" class="btn-update">
-                                <i class="bi bi-shield-check me-2"></i>
-                                Change Password
-                            </button>
-                        </div>
-                    </form>
+                            <div class="d-flex justify-content-end gap-2">
+                                <a class="btn btn-light" href="<%=request.getContextPath()%>/Profile?action=view">Cancel</a>
+                                <button class="btn btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <jsp:include page="/WEB-INF/View/customer/homePage/footer.jsp" />
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            // Toggle show/hide password
-            document.querySelectorAll('.toggle-password').forEach(function (toggle) {
-                toggle.addEventListener('click', function () {
-                    const targetId = this.getAttribute('data-target');
-                    const input = document.getElementById(targetId);
-                    const icon = this.querySelector('i');
-
-                    if (input.type === 'password') {
-                        input.type = 'text';
-                        icon.classList.remove('bi-eye-slash');
-                        icon.classList.add('bi-eye');
-                    } else {
-                        input.type = 'password';
-                        icon.classList.remove('bi-eye');
-                        icon.classList.add('bi-eye-slash');
-                    }
-                });
-            });
-
-            // Simple client-side validation
-            const form = document.getElementById('changePasswordForm');
-            const newPassword = document.getElementById('newPassword');
-            const confirmPassword = document.getElementById('confirmPassword');
-            const newPasswordError = document.getElementById('newPasswordError');
-            const confirmPasswordError = document.getElementById('confirmPasswordError');
-
-            form.addEventListener('submit', function (e) {
-                let valid = true;
-                newPasswordError.style.display = 'none';
-                confirmPasswordError.style.display = 'none';
-
-                const newPw = newPassword.value.trim();
-                const confirmPw = confirmPassword.value.trim();
-
-                if (newPw.length < 8) {
-                    newPasswordError.textContent = 'Password must be at least 8 characters.';
-                    newPasswordError.style.display = 'block';
-                    valid = false;
-                }
-
-                if (newPw !== confirmPw) {
-                    confirmPasswordError.textContent = 'New password and confirmation do not match.';
-                    confirmPasswordError.style.display = 'block';
-                    valid = false;
-                }
-
-                if (!valid) {
-                    e.preventDefault();
-                }
-            });
-        </script>
-    </body>
+    <script>
+        const newPw = document.getElementById("newPassword");
+        const cfPw = document.getElementById("confirmPassword");
+        const hint = document.getElementById("pwHint");
+        function validate() {
+            if (!newPw.value || !cfPw.value) { hint.textContent = ""; return; }
+            hint.textContent = (newPw.value === cfPw.value) ? "Passwords match" : "Passwords do not match";
+        }
+        newPw.addEventListener("input", validate);
+        cfPw.addEventListener("input", validate);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

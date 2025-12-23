@@ -17,10 +17,11 @@
 
 <div class="d-flex">
   <jsp:include page="/WEB-INF/views/admin/common/sideBar.jsp" />
+  <div class="flex-grow-1">
   <jsp:include page="/WEB-INF/views/admin/common/header.jsp" />
 
 
-  <main class="flex-grow-1 p-4">
+  <main class="p-4">
     <div class="d-flex align-items-center justify-content-between">
       <h3 class="mb-0">Staff Management</h3>
       <a class="btn btn-primary" href="<%=ctx%>/Admin/StaffManagement?action=create">+ Create Staff</a>
@@ -92,6 +93,7 @@
       </div>
     </div>
   </main>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

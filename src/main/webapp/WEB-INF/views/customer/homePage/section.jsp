@@ -12,7 +12,10 @@
             from leading global brands. Enjoy daily deals, 0% installment plans, and nationwide warranty support.
         </p>
         <div class="hero-cta">
-            <a class="btn-primary" href="${pageContext.request.contextPath}/FilterProduct?categoryId=1">Discover Products</a>
+            <a class="btn-primary" href="${pageContext.request.contextPath}/Product">
+                Discover Products
+            </a>
+
 <!--            <a class="btn-secondary" href="${pageContext.request.contextPath}/VoucherServlet">View Current Offers</a>-->
         </div>
         <div class="hero-stats">

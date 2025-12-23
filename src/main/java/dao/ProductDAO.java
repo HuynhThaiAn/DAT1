@@ -235,4 +235,70 @@ public class ProductDAO {
         }
     }
 
+    public List<Product> filter(Integer categoryId, Integer brandId, String keyword) throws Exception {
+        List<Product> list = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder(
+                "SELECT ProductID, CategoryID, BrandID, ProductName, Description, IsDeleted, CreatedAt, UpdatedAt "
+                + "FROM Product WHERE IsDeleted = 0 "
+        );
+
+        if (categoryId != null && categoryId > 0) {
+            sql.append(" AND CategoryID = ? ");
+        }
+        if (brandId != null && brandId > 0) {
+            sql.append(" AND BrandID = ? ");
+        }
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            sql.append(" AND ProductName LIKE ? ");
+        }
+
+        sql.append(" ORDER BY ProductID DESC");
+
+        DBContext db = new DBContext();
+        try ( PreparedStatement ps = db.conn.prepareStatement(sql.toString())) {
+
+            int i = 1;
+            if (categoryId != null && categoryId > 0) {
+                ps.setInt(i++, categoryId);
+            }
+            if (brandId != null && brandId > 0) {
+                ps.setInt(i++, brandId);
+            }
+
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                ps.setString(i++, "%" + keyword.trim() + "%");
+            }
+
+            try ( ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Product p = new Product();
+                    p.setProductID(rs.getInt("ProductID"));
+                    p.setCategoryID(rs.getInt("CategoryID"));
+
+                    int bid = rs.getInt("BrandID");
+                    p.setBrandID(rs.wasNull() ? null : bid);
+
+                    p.setProductName(rs.getString("ProductName"));
+                    p.setDescription(rs.getString("Description"));
+
+                    Timestamp created = rs.getTimestamp("CreatedAt");
+                    p.setCreatedAt(created == null ? null : created.toLocalDateTime());
+
+                    Timestamp updated = rs.getTimestamp("UpdatedAt");
+                    p.setUpdatedAt(updated == null ? null : updated.toLocalDateTime());
+
+                    list.add(p);
+                }
+            }
+            return list;
+
+        } finally {
+            if (db.conn != null) {
+                db.conn.close();
+            }
+        }
+    }
+
 }
